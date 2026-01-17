@@ -1,25 +1,29 @@
 local UseCases = require(script.UseCases)
 local Services = require(script.Services)
----@class ServerApplication
+local Controllers = require(script.Controllers)
+---@class ServerApp
 ---@field diContainer DIContainer
 ---@field services ServerAppServices
 ---@field useCases ServerUseCases
+---@field controllers ServerControllers
 local Application = {}
 Application.__index = Application
 
 ---@param diContainer DIContainer
----@return ServerApplication
+---@return ServerApp
 function Application.new(diContainer)
 	local self = setmetatable({}, Application)
 	self.diContainer = diContainer
 	self.services = Services.new(diContainer)
 	self.useCases = UseCases.new(diContainer)
+	self.controllers = Controllers.new(diContainer)
 	return self
 end
 
 function Application:init()
 	self.services:init()
 	self.useCases:init()
+	self.controllers:init()
 end
 
 return Application

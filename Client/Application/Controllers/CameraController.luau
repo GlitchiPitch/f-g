@@ -10,7 +10,7 @@ function CameraController.new(diContainer)
 	local self = setmetatable({}, CameraController)
 	self.diContainer = diContainer
 	self.zoom = 140
-	self.fieldOfView = 7
+	self.fieldOfView = 8
 
 	--//Do not edit unless you know what you're doing//--
 	self.player = game.Players.LocalPlayer
@@ -20,7 +20,7 @@ function CameraController.new(diContainer)
 	-- Occlusion transparency properties
 	self.transparentParts = {} -- Parts currently made transparent
 	self.lastTransparencyCheck = 0
-	self.transparencyCheckInterval = 0.1 -- Check every 100ms for performance
+	self.transparencyCheckInterval = 0.3 -- Check every 100ms for performance
 
 	return self
 end
@@ -96,14 +96,11 @@ function CameraController:_handleOcclusionTransparency(cameraPos, targetPos)
 						lastOccludingTime = currentTime,
 					}
 					-- Make part semitransparent
-					part.Transparency = 0.5
+					part.Transparency = 1
 				else
 					-- Update last occluding time
 					self.transparentParts[part].lastOccludingTime = currentTime
-					-- Ensure it stays semitransparent while occluding
-					if part.Transparency > 0.5 then
-						part.Transparency = 0.5
-					end
+					
 				end
 			end
 

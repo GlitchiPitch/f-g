@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.2.0] - 2026-01-17
+
+### Added
+
+* Complete hunting game system with HuntingService and HuntingController
+* Server Controllers layer architecture
+* EventBus for client-side event communication
+* UI notification system for hunting events
+* Remote event broadcasting (fireAllClients method)
+* Assets directory structure
+* Random target bird selection system (Chicken, Turkey, Duck, etc.)
+* Hunter model spawning/despawning mechanics
+
+### Changed
+
+* Enhanced RemoteEventService with broadcast capabilities
+* Client Application and Presentation layers now handle hunting events
+* Server Application architecture expanded with Controllers layer
+* Improved type annotations across client and server applications
+
+### Technical
+
+* Added Heartbeat-based controller updates (10-second intervals)
+* Implemented event-driven UI notifications with auto-cleanup
+* Enhanced dependency injection with new service registrations
+* Added comprehensive type definitions for hunting system components
+
 ## \[1.1.0] - 2026-01-17
 
 ### Added

@@ -10,13 +10,20 @@
 - [x] Camera controller with occlusion transparency
 - [x] Client PlayerService implementation
 - [x] Client Infrastructure layer
+- [x] Complete hunting game system
+- [x] Server Controllers layer
+- [x] Event-driven UI notifications
+- [x] Remote event broadcasting
 
-## Immediate Tasks (v1.2.0)
+## Immediate Tasks (v1.3.0)
 - [ ] Implement Player data persistence
 - [ ] Add Player statistics tracking
 - [ ] Create Player leaderboard system
 - [ ] Add input validation for Player operations
 - [ ] Implement error handling and logging
+- [ ] Add hunting score system
+- [ ] Implement bird spawning mechanics
+- [ ] Add hunting success/failure feedback
 
 ## Medium Priority (v1.3.0)
 - [ ] Add unit tests for core services

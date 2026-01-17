@@ -9,7 +9,7 @@ local ServerApplication = require(script.Application)
 ---@class Server
 ---@field shared Shared
 ---@field infrastructure ServerInfrastructure
----@field application ServerApplication
+---@field application ServerApp
 local Server = {}
 Server.__index = Server
 

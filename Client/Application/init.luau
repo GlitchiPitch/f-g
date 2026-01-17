@@ -1,7 +1,7 @@
 local Controllers = require(script.Controllers)
 local Services = require(script.Services)
 local UseCases = require(script.UseCases)
----@class ClientApplication
+---@class ClientApp
 ---@field controllers ClientControllers
 ---@field services ClientAppServices
 ---@field useCases ClientUseCases
@@ -10,7 +10,7 @@ local Application = {}
 Application.__index = Application
 
 ---@param diContainer DIContainer
----@return ClientApplication
+---@return ClientApp
 function Application.new(diContainer)
 	local self = setmetatable({}, Application)
 	self.diContainer = diContainer
@@ -24,6 +24,13 @@ function Application:init()
 	self.services:init()
 	self.useCases:init()
 	self.controllers:init()
-end
 
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	shared.remoteEventService:connectToEvents({
+		[shared.constants.REMOTE_EVENTS.HUNTING_STARTED] = function(eventData)
+			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.HUNTING_STARTED, eventData)
+		end,
+	})
+end
 return Application

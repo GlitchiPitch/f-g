@@ -1,3 +1,4 @@
+local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 
 ---@class RemoteEventService
@@ -48,6 +49,12 @@ if RunService:IsServer() then
 	---@param eventData eventData
 	function RemoteEventService:fireClient(player, eventData)
 		self.remoteEvent:FireClient(player, eventData)
+	end
+
+	function RemoteEventService:fireAllClients(eventData)
+		for _, player in Players:GetPlayers() do
+			self:fireClient(player, eventData)
+		end
 	end
 else
 	---@param eventData eventData

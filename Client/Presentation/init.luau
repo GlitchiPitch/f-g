@@ -17,6 +17,12 @@ end
 
 function Presentation:init()
 	self.ui:init()
+
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.HUNTING_STARTED, function(eventData)
+		self.ui:showNotification(eventData.data.targetBird)
+	end)
 end
 
 return Presentation
