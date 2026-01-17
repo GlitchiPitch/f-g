@@ -5,7 +5,7 @@
 ## Action Sequence
 
 ### 1. Documentation Update
-
+* Analyze git changes
 * Check and update .dev/CHANGELOG.md
 * Update .dev/TODO.md
 * Verify other documents in .dev/ are up to date

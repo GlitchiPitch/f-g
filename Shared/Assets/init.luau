@@ -1,6 +1,9 @@
 ---@class Assets
 local Assets = {
-    Hunter = script:FindFirstChild("Hunter"),
+	Animations = require(script.Animations),
+	Hunter = script:FindFirstChild("Hunter"),
+	PeckHitbox = script:FindFirstChild("PeckHitbox"),
+	Food = script:FindFirstChild("Food"),
 }
 
 return Assets

@@ -31,6 +31,12 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.HUNTING_STARTED] = function(eventData)
 			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.HUNTING_STARTED, eventData)
 		end,
+		[shared.constants.REMOTE_EVENTS.FOOD_SPAWNED] = function(eventData)
+			self.services.farmService:onFoodSpawned(eventData)
+		end,
+		[shared.constants.REMOTE_EVENTS.FOOD_EATEN] = function(eventData)
+			self.services.farmService:onFoodEaten(eventData)
+		end,
 	})
 end
 return Application

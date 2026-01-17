@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.3.0] - 2026-01-17
+
+### Added
+
+* Complete movement and controls system with SprintController
+* Stamina-based running mechanics with player stats integration
+* Advanced targeting system with TargetController for crosshair-based selection
+* InputService for comprehensive user input handling (main action, run key, second action)
+* ActionService for state-based player actions (idle, weapon, NPC interactions)
+* AnimationService with peck animation and animation track management
+* Farming system with ServerFarmController and ClientFarmService
+* Food spawning mechanics with 10-second intervals
+* New animation assets (Peck, OneHandednSlash1, EquipOneHanded)
+* Visual targeting feedback system with UI billboards and humanoid display
+
+### Changed
+
+* Enhanced client controllers architecture with SprintController and TargetController
+* Expanded client services layer with ActionService, AnimationService, InputService, and FarmService
+* Server controllers now include FarmController alongside HuntingController
+* Improved player state management with targeting integration
+* Enhanced dependency injection with new service registrations
+
+### Technical
+
+* Added RenderStepped-based controller updates for real-time targeting
+* Implemented range-based target detection with line-of-sight raycasting
+* Added event-driven action system with use case integration
+* Enhanced animation loading and management system
+* Added Heartbeat-based food spawning system
+
 ## \[1.2.0] - 2026-01-17
 
 ### Added

@@ -14,23 +14,30 @@
 - [x] Server Controllers layer
 - [x] Event-driven UI notifications
 - [x] Remote event broadcasting
+- [x] SprintController with stamina-based running
+- [x] TargetController for crosshair-based targeting
+- [x] InputService for comprehensive input handling
+- [x] ActionService and AnimationService for player actions
+- [x] FarmController and FarmService for food spawning
+- [x] New animation assets (Peck, OneHandednSlash1, EquipOneHanded)
 
-## Immediate Tasks (v1.3.0)
-- [ ] Implement Player data persistence
-- [ ] Add Player statistics tracking
+## Immediate Tasks (v1.4.0)
+- [ ] Implement Player data persistence system
+- [ ] Add Player statistics tracking and scoring
 - [ ] Create Player leaderboard system
+- [ ] Add hunting score system with success/failure feedback
+- [ ] Implement bird spawning mechanics for hunting
 - [ ] Add input validation for Player operations
-- [ ] Implement error handling and logging
-- [ ] Add hunting score system
-- [ ] Implement bird spawning mechanics
-- [ ] Add hunting success/failure feedback
+- [ ] Implement comprehensive error handling and logging
+- [ ] Add food consumption mechanics
 
-## Medium Priority (v1.3.0)
+## Medium Priority (v1.4.0)
 - [ ] Add unit tests for core services
 - [ ] Implement game state management
-- [x] Create UI components for player interface (Camera controller implemented)
-- [ ] Add network synchronization
-- [ ] Implement save/load functionality
+- [ ] Create UI components for player interface
+- [ ] Add network synchronization for multiplayer elements
+- [ ] Implement save/load functionality for player progress
+- [ ] Add equipment and weapon system
 
 ## Future Features (v2.0.0)
 - [ ] Multiplayer functionality

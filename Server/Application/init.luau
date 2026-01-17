@@ -24,6 +24,14 @@ function Application:init()
 	self.services:init()
 	self.useCases:init()
 	self.controllers:init()
+
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	shared.remoteEventService:connectToEvents({
+		[shared.constants.REMOTE_EVENTS.PECK] = function(player, eventData)
+			self.useCases:peck(player)
+		end,
+	})
 end
 
 return Application

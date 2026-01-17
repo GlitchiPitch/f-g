@@ -23,6 +23,12 @@ function Presentation:init()
 	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.HUNTING_STARTED, function(eventData)
 		self.ui:showNotification(eventData.data.targetBird)
 	end)
+	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.FOOD_SPAWNED, function(eventData)
+		self.ui:showNotification(eventData.data.message)
+	end)
+	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.FOOD_EATEN, function(eventData)
+		self.ui:showFoodEaten()
+	end)
 end
 
 return Presentation

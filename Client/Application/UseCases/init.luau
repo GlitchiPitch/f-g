@@ -1,5 +1,7 @@
 ---@class ClientUseCases
 ---@field diContainer DIContainer
+---@field remoteEventService RemoteEventService
+---@field constants Constants
 local UseCases = {}
 UseCases.__index = UseCases
 
@@ -12,6 +14,16 @@ function UseCases.new(diContainer)
 end
 
 function UseCases:init()
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	self.remoteEventService = shared.remoteEventService
+	self.constants = shared.constants
+end
+
+function UseCases:peck()
+	self.remoteEventService:fireServer({
+		eventName = self.constants.REMOTE_EVENTS.PECK,
+	})
 end
 
 return UseCases
