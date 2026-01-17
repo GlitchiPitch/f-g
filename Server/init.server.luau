@@ -23,6 +23,22 @@ function Server.new()
 end
 
 function Server:init()
+	self.shared.diContainer:singleton("Infrastructure", function()
+		return self.infrastructure
+	end)
+
+	self.shared.diContainer:singleton("Application", function()
+		return self.application
+	end)
+
+	self.shared.diContainer:singleton("Shared", function()
+		return self.shared
+	end)
+
+	self.shared.diContainer:singleton("Domain", function()
+		return self.shared.domain
+	end)
+
 	self.shared:init()
 	self.infrastructure:init()
 	self.application:init()
@@ -36,8 +52,10 @@ function Server:init()
 	end
 
 	Players.PlayerAdded:Connect(onPlayerAdded)
-
 	Players.PlayerRemoving:Connect(onPlayerRemoving)
+
+	ReplicatedStorage:SetAttribute(self.shared.constants.INIT_SERVER, true)
 end
 
-return Server
+local server = Server.new()
+server:init()

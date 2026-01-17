@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.1.0] - 2026-01-17
+
+### Added
+
+* Controllers layer implementation with CameraController
+* Third-person camera system with occlusion transparency
+* Client PlayerService for character management
+* Client Infrastructure layer setup
+* Enhanced DI container with singleton registrations
+* Automatic server initialization
+
+### Changed
+
+* Domain Entities refactored to class-based structure
+* Client application architecture expanded with Controllers and Infrastructure layers
+* Server initialization now automatic on module load
+
+### Technical
+
+* Added occlusion transparency handling for camera system
+* Implemented RenderStepped camera updates
+* Enhanced dependency injection setup
+
 ## \[1.0.0] - 2026-01-15
 
 ### Added

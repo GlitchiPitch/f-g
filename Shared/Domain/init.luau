@@ -7,7 +7,7 @@ Domain.__index = Domain
 ---@return Domain
 function Domain.new()
     local self = setmetatable({}, Domain)
-    self.Entities = Entities
+    self.Entities = Entities.new()
     return self
 end
 

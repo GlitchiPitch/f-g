@@ -6,18 +6,22 @@
 - [x] Infrastructure components (DIContainer, RemoteEventService)
 - [x] Repository pattern implementation
 - [x] Service layer foundation
+- [x] Controllers layer implementation
+- [x] Camera controller with occlusion transparency
+- [x] Client PlayerService implementation
+- [x] Client Infrastructure layer
 
-## Immediate Tasks (v1.1.0)
+## Immediate Tasks (v1.2.0)
 - [ ] Implement Player data persistence
 - [ ] Add Player statistics tracking
 - [ ] Create Player leaderboard system
 - [ ] Add input validation for Player operations
 - [ ] Implement error handling and logging
 
-## Medium Priority (v1.2.0)
+## Medium Priority (v1.3.0)
 - [ ] Add unit tests for core services
 - [ ] Implement game state management
-- [ ] Create UI components for player interface
+- [x] Create UI components for player interface (Camera controller implemented)
 - [ ] Add network synchronization
 - [ ] Implement save/load functionality
 
