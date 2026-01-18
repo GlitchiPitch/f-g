@@ -35,4 +35,9 @@ function PlayerRepository:removePlayerEntity(player)
 	self.playerEntities[player.UserId] = nil
 end
 
+---@return table<number, PlayerEntity>
+function PlayerRepository:getPlayers()
+	return self.playerEntities
+end
+
 return PlayerRepository

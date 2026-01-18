@@ -20,16 +20,25 @@
 - [x] ActionService and AnimationService for player actions
 - [x] FarmController and FarmService for food spawning
 - [x] New animation assets (Peck, OneHandednSlash1, EquipOneHanded)
+- [x] Player statistics system (level and seeds tracking)
+- [x] Farmer entity for AI-controlled characters
+- [x] Enhanced hunting system with real-time hunter AI
+- [x] Hunter targeting and attack mechanics
+- [x] Level-based difficulty scaling for hunting
+- [x] Handlers layer in Server Application architecture
+- [x] Managers layer with DeadlyGameManager and game modes
+- [x] TeleportHandler for player teleportation
 
-## Immediate Tasks (v1.4.0)
+## Immediate Tasks (v1.5.0)
 - [ ] Implement Player data persistence system
-- [ ] Add Player statistics tracking and scoring
-- [ ] Create Player leaderboard system
+- [ ] Add Player leaderboard system
 - [ ] Add hunting score system with success/failure feedback
 - [ ] Implement bird spawning mechanics for hunting
 - [ ] Add input validation for Player operations
 - [ ] Implement comprehensive error handling and logging
 - [ ] Add food consumption mechanics
+- [ ] Implement deadly game modes functionality
+- [ ] Add player teleportation mechanics
 
 ## Medium Priority (v1.4.0)
 - [ ] Add unit tests for core services

@@ -1,9 +1,12 @@
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
 ---@class ServerHuntingService
 ---@field isActive boolean
 ---@field targetBird string
 ---@field remoteEventService RemoteEventService
 ---@field constants Constants
+---@field playerRepository ServerPlayerRepository
 ---@field hunter Model
 ---@field hunterSpawn Part
 local HuntingService = {}
@@ -22,9 +25,12 @@ end
 function HuntingService:init()
 	---@type Shared
 	local shared = self.diContainer:resolve("Shared")
-	self.remoteEventService = shared.infrastructure.services.remoteEventService
+	---@type ServerInfrastructure
+	local infrastructure = self.diContainer:resolve("Infrastructure")
+	self.playerRepository = infrastructure.repositories.playerRepository
+	self.remoteEventService = shared.remoteEventService
 	self.constants = shared.constants
-	self.hunter = shared.assets.Hunter
+	self.hunter = shared.domain.Entities.Farmer.new(shared.assets.Hunter)
 	self.hunterSpawn = workspace.HunterSpawn
 end
 
@@ -34,7 +40,7 @@ function HuntingService:start()
 	end
 
 	self.isActive = true
-	self.hunter.Parent = workspace
+	self.hunter:setState(true)
 	self.hunter:PivotTo(self.hunterSpawn.CFrame)
 	self:_chooseTargetBirdType()
 	self:_notifyPlayers()
@@ -42,7 +48,7 @@ end
 
 function HuntingService:stop()
 	self.isActive = false
-	self.hunter.Parent = ReplicatedStorage
+	self.hunter:setState(false)
 end
 
 function HuntingService:_chooseTargetBirdType()
@@ -56,7 +62,29 @@ function HuntingService:_chooseTargetBirdType()
 		"Vulture",
 	}
 
-	self.targetBird = birdTypes[math.random(#birdTypes)]
+	local players = {}
+
+	---@param i number
+	---@param v PlayerEntity
+	for _, v in self.playerRepository:getPlayers() do
+		local playerData = v:getData()
+		players[playerData.stats.level] = (players[playerData.stats.level] or 0) + 1
+	end
+
+	local _players = {}
+	for level, count in players do
+		table.insert(_players, {
+			level = level,
+			count = count,
+		})
+	end
+
+	table.sort(_players, function(a, b)
+		return a.count > b.count
+	end)
+
+	local targetLevel = _players[1].level
+	self.targetBird = birdTypes[targetLevel]
 end
 
 function HuntingService:_notifyPlayers()

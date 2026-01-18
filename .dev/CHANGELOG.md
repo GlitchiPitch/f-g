@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.4.0] - 2026-01-18
+
+### Added
+
+* Player statistics system with level and seeds tracking
+* Farmer entity for AI-controlled characters in hunting mechanics
+* Enhanced hunting system with real-time hunter AI (0.3s update intervals)
+* Hunter spawning/despawning mechanics with 10-second intervals
+* Hunter targeting system that pursues closest players
+* Hunter attack mechanics with distance-based behavior
+* Level-based target bird selection system
+* Handlers layer in Server Application architecture
+* Managers layer with DeadlyGameManager containing multiple game modes
+* Deadly game modes: DeadOrAlive, Tag, HideAndSeek, Bingo, Lamp
+* TeleportHandler for player teleportation mechanics
+* PlayerRepository:getPlayers() method for accessing all player entities
+
+### Changed
+
+* HuntingController now uses real-time updates instead of 10-second intervals
+* HuntingService target selection now considers player levels for difficulty scaling
+* CameraController transparency reduced from fully transparent (1.0) to semi-transparent (0.5)
+* PlayerEntity enhanced with stats persistence and data serialization methods
+* Server Application now includes Handlers and Managers layers
+
+### Technical
+
+* Added RenderStepped-based hunter AI updates
+* Implemented player proximity detection for hunter targeting
+* Enhanced dependency injection with new service and handler registrations
+* Added comprehensive type definitions for Player stats and Farmer entity
+* Improved hunting mechanics with state-based hunter management
+
 ## \[1.3.0] - 2026-01-17
 
 ### Added

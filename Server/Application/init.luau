@@ -1,11 +1,13 @@
 local UseCases = require(script.UseCases)
 local Services = require(script.Services)
 local Controllers = require(script.Controllers)
+local Handlers = require(script.Handlers)
 ---@class ServerApp
 ---@field diContainer DIContainer
 ---@field services ServerAppServices
 ---@field useCases ServerUseCases
 ---@field controllers ServerControllers
+---@field handlers ServerHandlers
 local Application = {}
 Application.__index = Application
 
@@ -17,6 +19,7 @@ function Application.new(diContainer)
 	self.services = Services.new(diContainer)
 	self.useCases = UseCases.new(diContainer)
 	self.controllers = Controllers.new(diContainer)
+	self.handlers = Handlers.new(diContainer)
 	return self
 end
 
@@ -24,6 +27,7 @@ function Application:init()
 	self.services:init()
 	self.useCases:init()
 	self.controllers:init()
+	self.handlers:init()
 
 	---@type Shared
 	local shared = self.diContainer:resolve("Shared")

@@ -26,6 +26,7 @@ function CameraController.new(diContainer)
 end
 
 function CameraController:init()
+	--@param deltaTime number
 	local function onRender()
 		self:_onRender()
 	end
@@ -59,13 +60,16 @@ function CameraController:_handleOcclusionTransparency(cameraPos, targetPos)
 	if currentTime - self.lastTransparencyCheck < self.transparencyCheckInterval then
 		return
 	end
+
 	self.lastTransparencyCheck = currentTime
 
 	-- Cast ray from camera to player
 	local direction = (targetPos - cameraPos).Unit
 	local distance = (targetPos - cameraPos).Magnitude
 	local raycastParams = RaycastParams.new()
-	raycastParams.FilterDescendantsInstances = { self.character } -- Ignore player's own character
+	local ignoreInstances = { self.character }
+	--@TODO: add farmers and hell to ignore
+	raycastParams.FilterDescendantsInstances = ignoreInstances -- Ignore player's own character
 	raycastParams.FilterType = Enum.RaycastFilterType.Exclude
 
 	local raycastResult = workspace:Raycast(cameraPos, direction * distance, raycastParams)
@@ -96,7 +100,7 @@ function CameraController:_handleOcclusionTransparency(cameraPos, targetPos)
 						lastOccludingTime = currentTime,
 					}
 					-- Make part semitransparent
-					part.Transparency = 1
+					part.Transparency = .5
 				else
 					-- Update last occluding time
 					self.transparentParts[part].lastOccludingTime = currentTime
