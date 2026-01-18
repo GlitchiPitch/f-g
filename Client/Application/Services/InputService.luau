@@ -43,6 +43,7 @@ function InputService:init()
 	self.sprintController = application.controllers.sprintController
 	self.cameraController = application.controllers.cameraController
 
+	self.toolService = application.services.toolService
 	self._inputBeganConn = UserInputService.InputBegan:Connect(onInputBegan)
 	self._inputEndedConn = UserInputService.InputEnded:Connect(onInputEnded)
 	self._inputChangedConn = UserInputService.InputChanged:Connect(onInputChanged)
@@ -59,7 +60,7 @@ function InputService:_inputBegan(input, gameProccessed)
 		if playerState == "Idle" then
 			self.actionService:idleAction()
 		elseif playerState == "Weapon" then
-			self.actionService:weaponAction()
+			self.toolService:activated()
 		end
 	elseif input.UserInputType == self.config.Client.Control.SecondAction then
 		-- TODO: Implement second action
@@ -92,7 +93,6 @@ function InputService:_inputChanged(input, gameProccessed)
 	if gameProccessed then
 		return
 	end
-
 end
 
 function InputService:destroy()

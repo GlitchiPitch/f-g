@@ -28,8 +28,15 @@
 - [x] Handlers layer in Server Application architecture
 - [x] Managers layer with DeadlyGameManager and game modes
 - [x] TeleportHandler for player teleportation
+- [x] Complete weapon system with ToolService
+- [x] Combo attack mechanics with sequential animations
+- [x] Day/night cycle system with DayNightController
+- [x] TeleportService with enhanced teleportation mechanics
+- [x] Food asset system with multiple food types
+- [x] Weapons asset system with one-handed and two-handed categories
+- [x] Player teleportation mechanics with anti-spam protection
 
-## Immediate Tasks (v1.5.0)
+## Immediate Tasks (v1.6.0)
 - [ ] Implement Player data persistence system
 - [ ] Add Player leaderboard system
 - [ ] Add hunting score system with success/failure feedback
@@ -38,7 +45,8 @@
 - [ ] Implement comprehensive error handling and logging
 - [ ] Add food consumption mechanics
 - [ ] Implement deadly game modes functionality
-- [ ] Add player teleportation mechanics
+- [ ] Add weapon durability and damage systems
+- [ ] Implement inventory management for weapons and food
 
 ## Medium Priority (v1.4.0)
 - [ ] Add unit tests for core services

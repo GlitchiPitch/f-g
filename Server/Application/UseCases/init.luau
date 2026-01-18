@@ -29,4 +29,11 @@ function UseCases:peck(player)
 	self.actionService:peck(playerEntity)
 end
 
+---@param player Player
+function UseCases:toolActivated(player)
+	print(`Tool activated by {player.Name}`)
+	local playerEntity = self.playerRepository:getPlayerEntity(player)
+	self.actionService:toolActivated(playerEntity)
+end
+
 return UseCases

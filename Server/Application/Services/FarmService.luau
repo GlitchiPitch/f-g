@@ -22,8 +22,8 @@ function FarmService:init()
 	local shared = self.diContainer:resolve("Shared")
 	self.remoteEventService = shared.remoteEventService
 	self.constants = shared.constants
-	self.foodZone = workspace.FeedSpawn
-	self.foodAsset = shared.assets.Food
+	self.foodZone = workspace.Worlds.MainWorld.FeedSpawn
+	self.foodAsset = shared.assets.Seed
 end
 
 function FarmService:spawnFood()

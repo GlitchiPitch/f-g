@@ -31,7 +31,7 @@ function HuntingService:init()
 	self.remoteEventService = shared.remoteEventService
 	self.constants = shared.constants
 	self.hunter = shared.domain.Entities.Farmer.new(shared.assets.Hunter)
-	self.hunterSpawn = workspace.HunterSpawn
+	self.hunterSpawn = workspace.Worlds.MainWorld.HunterSpawn
 end
 
 function HuntingService:start()

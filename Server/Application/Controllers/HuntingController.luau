@@ -25,7 +25,7 @@ function HuntingController:init()
 	---@type ServerApp
 	local application = self.diContainer:resolve("Application")
 	self.huntingService = application.services.huntingService
-	self.mainWorld = workspace.MainWorld
+	self.mainWorld = workspace.Worlds.MainWorld
 end
 
 ---@param deltaTime number

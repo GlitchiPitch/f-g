@@ -21,10 +21,6 @@ function ActionService:init()
     self.animationService = application.services.animationService
 end
 
-function ActionService:weaponAction()
-    
-end
-
 function ActionService:npcAction()
 end
 

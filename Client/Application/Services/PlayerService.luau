@@ -5,6 +5,7 @@ local Players = game:GetService("Players")
 ---@field _currentState "Idle" | "Weapon" | "NPC"
 ---@field _weapon Tool
 ---@field _npc Model
+---@field toolService ClientToolService
 ---@field _connections table<string, RBXScriptSignal>
 ---@field animationService ClientAnimationService
 local PlayerService = {}
@@ -27,6 +28,7 @@ function PlayerService:init()
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
 	self.animationService = application.services.animationService
+	self.toolService = application.services.toolService
 	---@param character Model
 	local function onCharacterAdded(character)
 		self:_onCharacterAdded(character)
@@ -39,25 +41,9 @@ function PlayerService:init()
 	end
 end
 
----@param character Model
-function PlayerService:_onCharacterAdded(character)
+function PlayerService:_onCharacterAdded(_)
 	self.animationService:init()
-	local function _onChildAdded(child)
-		if child:IsA("Tool") and child:HasTag("Weapon") then
-			self:setPlayerState("Weapon")
-			self._weapon = child
-		end
-	end
-
-	local function _onChildRemoved(child)
-		if child:IsA("Tool") and child:HasTag("Weapon") then
-			self:setPlayerState("Idle")
-			self._weapon = nil
-		end
-	end
-
-	self._connections.childAdded = character.ChildAdded:Connect(_onChildAdded)
-	self._connections.childRemoved = character.ChildRemoved:Connect(_onChildRemoved)
+	self.toolService:checkCharacterTool()
 end
 
 function PlayerService:getPlayerState()

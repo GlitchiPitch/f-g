@@ -26,4 +26,10 @@ function UseCases:peck()
 	})
 end
 
+function UseCases:toolActivated()
+	self.remoteEventService:fireServer({
+		eventName = self.constants.REMOTE_EVENTS.TOOL_ACTIVATED,
+	})
+end
+
 return UseCases

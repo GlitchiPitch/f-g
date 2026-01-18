@@ -1,12 +1,12 @@
 local Animations = {
 	-- OneHandedIdle2 = "rbxassetid://128930183986958",
 	-- TwoHandedIdle = "rbxassetid://106578561265820",
-	-- OneHandedIdle = "rbxassetid://91227783134589",
-	-- OneHandednSlash2 = "rbxassetid://81267510004041",
-	-- OneHandednSlash3 = "rbxassetid://91203262263459",
-	-- OneHandednSlash4 = "rbxassetid://124580953562436",
+	OneHandedIdle = "rbxassetid://100181506747690",
 	-- OneHandedBlock = "rbxassetid://136984402984617",
-
+	
+	OneHandednSlash4 = "rbxassetid://126196507780353",
+	OneHandednSlash3 = "rbxassetid://81015824428875",
+	OneHandednSlash2 = "rbxassetid://104768333882922",
 	OneHandednSlash1 = "rbxassetid://139584385828298", -- old "rbxassetid://75685844155538",
 	EquipOneHanded = "rbxassetid://87631037703929",
 	Peck = "rbxassetid://89696184559939",

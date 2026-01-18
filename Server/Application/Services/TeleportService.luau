@@ -1,24 +1,30 @@
 local Players = game:GetService("Players")
 ---@class TeleportHandler
-local TeleportHandler = {}
-TeleportHandler.__index = TeleportHandler
+local TeleportService = {}
+TeleportService.__index = TeleportService
 
 ---@param diContainer DIContainer
 ---@return TeleportHandler
-function TeleportHandler.new(diContainer)
-	local self = setmetatable({}, TeleportHandler)
+function TeleportService.new(diContainer)
+	local self = setmetatable({}, TeleportService)
 	self.diContainer = diContainer
 	return self
 end
 
-function TeleportHandler:init()
+function TeleportService:init()
 	local lobbyTeleports = workspace.Lobby.Teleports
 	self:setupTeleport(lobbyTeleports.Enter.PrimaryPart, lobbyTeleports.Exit.PrimaryPart)
+
+	for _, world in workspace.Worlds:GetChildren() do
+		if world:FindFirstChild("Teleports") then
+			self:setupTeleport(world.Teleports.Enter.PrimaryPart, world.Teleports.Exit.PrimaryPart)
+		end
+	end
 end
 
 ---@param a1 BasePart
 ---@param a2 BasePart
-function TeleportHandler:setupTeleport(a1, a2)
+function TeleportService:setupTeleport(a1, a2)
 	local function onTouch(otherPart, targetPart)
 		local player = Players:GetPlayerFromCharacter(otherPart.Parent)
 		if player and not player:GetAttribute("Teleported") then
@@ -38,4 +44,4 @@ function TeleportHandler:setupTeleport(a1, a2)
 	end)
 end
 
-return TeleportHandler
+return TeleportService

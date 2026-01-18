@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.5.0] - 2026-01-18
+
+### Added
+
+* Complete weapon system with ToolService for player weapon management
+* Combo attack mechanics with sequential animation playback
+* Day/night cycle system with DayNightController for game time management
+* TeleportService with enhanced teleportation mechanics for lobby and world transitions
+* Food asset system with multiple food types (Meat, Banana, Ham, Rice, Fish, Apple)
+* Weapons asset system with one-handed and two-handed weapon categories
+* Weapon animation support for one-handed and two-handed combat
+* Tool state management with equipped/unequipped states
+* Player teleportation mechanics with anti-spam protection
+
+### Changed
+
+* TeleportHandler migrated to TeleportService in Services layer architecture
+* Handlers layer removed from Server Application architecture
+* Enhanced asset management with modular Food and Weapons systems
+* AnimationService updated with weapon-specific animation support
+* PlayerService enhanced with weapon state management
+
+### Removed
+
+* Server/Application/Handlers/TeleportHandler.luau (migrated to TeleportService)
+* Server/Application/Handlers/init.luau (Handlers layer removed)
+
+### Technical
+
+* Added weapon type detection and animation mapping
+* Implemented combo attack timing system with reset mechanics
+* Enhanced teleportation with world-based teleport setup
+* Added asset cloning system for dynamic tool/weapon spawning
+* Implemented day/night cycle with configurable parameters
+
 ## \[1.4.0] - 2026-01-18
 
 ### Added
