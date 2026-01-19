@@ -9,11 +9,11 @@ local enemyTemplates = {
 		attackRange = 5,
 		sightRange = 50,
 		respawnTime = 20, -- To prevent it from respawning, remove this line
-		--attackAnimation = 115067823846471, (Uncomment this an add your own attack aninamation)
-		
-		model = enemyFolder.Dummy
+		attackAnimation = 115067823846471,
+
+		model = enemyFolder.Dummy,
 	},
-	
+
 	Orc = {
 		health = 80,
 		speed = 12,
@@ -21,11 +21,11 @@ local enemyTemplates = {
 		attackRange = 5,
 		sightRange = 50,
 		respawnTime = 20, -- To prevent it from respawning, remove this line
-		--attackAnimation = 115067823846471, (Uncomment this an add your own attack aninamation)
+		attackAnimation = 115067823846471,
 
-		model = enemyFolder.Orc
+		model = enemyFolder.Orc,
 	},
-	
+
 	StrongOrc = {
 		health = 80,
 		speed = 12,
@@ -33,11 +33,11 @@ local enemyTemplates = {
 		attackRange = 5,
 		sightRange = 50,
 		respawnTime = 20, -- To prevent it from respawning, remove this line
-		--attackAnimation = 115067823846471, (Uncomment this an add your own attack aninamation)
+		attackAnimation = 115067823846471,
 
 		model = enemyFolder["Strong Orc"],
 	},
-	
+
 	Goblin = {
 		health = 80,
 		speed = 12,
@@ -45,11 +45,11 @@ local enemyTemplates = {
 		attackRange = 5,
 		sightRange = 50,
 		respawnTime = 20, -- To prevent it from respawning, remove this line
-		--attackAnimation = 115067823846471, (Uncomment this an add your own attack aninamation)
+		attackAnimation = 115067823846471,
 
 		model = enemyFolder.Goblin,
 	},
-	
+
 	GoblinCommander = {
 		health = 80,
 		speed = 12,
@@ -57,7 +57,7 @@ local enemyTemplates = {
 		attackRange = 5,
 		sightRange = 50,
 		respawnTime = 20, -- To prevent it from respawning, remove this line
-		--attackAnimation = 115067823846471, (Uncomment this an add your own attack aninamation)
+		attackAnimation = 115067823846471,
 
 		model = enemyFolder["Goblin Commander"],
 	},

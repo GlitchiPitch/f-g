@@ -94,8 +94,6 @@ function ToolService:activated()
 	local weaponType = self._currentTool:GetAttribute("WeaponType")
 	if weaponType == "OneHanded" or weaponType == "TwoHanded" then
 		self:_activeWeapon(weaponType)
-		-- elseif self._currentTool:HasTag("Food") then
-		-- 	self:_activeFood()
 	end
 
 	self.debounce = false

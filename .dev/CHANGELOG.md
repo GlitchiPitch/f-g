@@ -5,6 +5,41 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.10.0] - 2026-01-19
+
+### Added
+
+* Complete enemy AI system with behavior tree architecture
+* Enemy entity with spawning, attacking, death handling, and respawn mechanics
+* EnemyController for managing enemy updates and lifecycle
+* EnemyService for comprehensive enemy management and coordination
+* Multiple enemy templates: Dummy, Orc, StrongOrc, Goblin, GoblinCommander with unique stats
+* Behavior tree modules: Attack, CanSeePlayer, MoveTo, FaceTarget, Idle, Sequence, Selector
+* Enemy attack animations and damage mechanics with cooldown systems
+* Enemy sight range and attack range detection systems
+* Automatic enemy respawning with configurable respawn times
+
+### Changed
+
+* Refactored enemy handling from Handlers layer to Controllers/Services architecture
+* Enhanced server application architecture with EnemyController integration
+* Updated shared domain entities with Enemy entity class
+* Modified ToolService for enemy system compatibility
+* Updated server controllers initialization for enemy management
+
+### Removed
+
+* Server/Application/Handlers/EnemyHandler.luau (migrated to EnemyController)
+* Server/Application/Handlers/init.luau (Handlers layer removed)
+
+### Technical
+
+* Added behavior tree framework for complex enemy AI decision-making
+* Implemented enemy state management with model spawning and destruction
+* Added enemy folder management in workspace for organized enemy placement
+* Enhanced dependency injection with enemy service and controller registrations
+* Added comprehensive enemy data templates with health, speed, damage, and range stats
+
 ## \[1.9.0] - 2026-01-19
 
 ### Added

@@ -1,4 +1,6 @@
 ---@class Data
-local Data = {}
+local Data = {
+    Enemies = require(script.Enemies),
+}
 
 return Data

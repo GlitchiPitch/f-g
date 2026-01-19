@@ -43,6 +43,15 @@
 * \[x] Improved hunter AI with more frequent updates
 * \[x] Farmer entity animation support (Run and Idle)
 
+## Completed (v1.10.0)
+
+* \[x] Complete enemy AI system with behavior trees
+* \[x] Enemy entity with spawning, attacking, and death mechanics
+* \[x] EnemyController and EnemyService for enemy management
+* \[x] Multiple enemy templates (Dummy, Orc, StrongOrc, Goblin, GoblinCommander)
+* \[x] Behavior tree modules (Attack, CanSeePlayer, MoveTo, FaceTarget, Idle)
+* \[x] Refactored enemy handling from Handlers to Controllers/Services architecture
+
 ## Completed (v1.9.0)
 
 * \[x] Implement inventory management for weapons and food storage
@@ -69,15 +78,16 @@
 * \[x] Client repository infrastructure for player entity management
 * \[x] Enhanced player entity with data serialization methods
 
-## Immediate Tasks (v1.9.0)
+## Immediate Tasks (v1.10.0)
 
+* \[ ] Integrate enemy spawning system with world management (spawn enemies in appropriate worlds)
+* \[ ] Add enemy combat integration with player weapons and damage systems
+* \[ ] Implement enemy loot drops and reward systems
+* \[ ] Add enemy pathfinding and navigation around obstacles
+* \[ ] Create enemy spawn points and spawn area management
 * \[ ] Add food consumption mechanics with health/energy restoration
 * \[ ] Implement bird spawning mechanics for hunting gameplay
 * \[ ] Add hunting score system with success/failure feedback
-* \[ ] Implement Player leaderboard system for competitive features
-* \[ ] Add input validation for Player operations and data integrity
-* \[ ] Implement comprehensive error handling and logging system
-* \[ ] Add weapon durability and damage systems for combat balance
 
 ## Medium Priority (v1.4.0)
 
