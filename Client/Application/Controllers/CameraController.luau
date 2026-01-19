@@ -68,7 +68,10 @@ function CameraController:_handleOcclusionTransparency(cameraPos, targetPos)
 	local distance = (targetPos - cameraPos).Magnitude
 	local raycastParams = RaycastParams.new()
 	local ignoreInstances = { self.character }
-	--@TODO: add farmers and hell to ignore
+	if workspace:FindFirstChild("Hunter") then
+		table.insert(ignoreInstances, workspace.Hunter)
+	end
+	
 	raycastParams.FilterDescendantsInstances = ignoreInstances -- Ignore player's own character
 	raycastParams.FilterType = Enum.RaycastFilterType.Exclude
 

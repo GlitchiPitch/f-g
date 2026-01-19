@@ -35,8 +35,14 @@
 - [x] Food asset system with multiple food types
 - [x] Weapons asset system with one-handed and two-handed categories
 - [x] Player teleportation mechanics with anti-spam protection
+- [x] World management system with player world tracking
+- [x] Enhanced teleportation mechanics with world-based setup
+- [x] Player character parenting system for world separation
+- [x] Death handling system with world transitions
+- [x] Improved hunter AI with more frequent updates
+- [x] Farmer entity animation support (Run and Idle)
 
-## Immediate Tasks (v1.6.0)
+## Immediate Tasks (v1.7.0)
 - [ ] Implement Player data persistence system
 - [ ] Add Player leaderboard system
 - [ ] Add hunting score system with success/failure feedback

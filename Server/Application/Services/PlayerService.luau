@@ -20,8 +20,30 @@ function PlayerService:init()
 	self.constants = shared.constants
 end
 
+---@param player Player
 function PlayerService:onPlayerAdded(player)
+	local function onCharacterAdded(character)
+		local playerEntity = self.playerRepository:getPlayerEntity(player)
+		local humanoid = character:FindFirstChild("Humanoid")
+
+		local currentWorldName = playerEntity:getCurrentWorld()
+		local currentWorld = workspace.Worlds:FindFirstChild(currentWorldName)
+
+		if currentWorld then
+			character.Parent = currentWorld.Players
+		else
+			character.Parent = workspace.Lobby.Players
+		end
+
+		if humanoid then
+			humanoid.Died:Connect(function()
+				playerEntity:setCurrentWorld("Hell")
+			end)
+		end
+	end
+
 	self.playerRepository:getPlayerEntity(player)
+	player.CharacterAdded:Connect(onCharacterAdded)
 end
 
 function PlayerService:onPlayerRemoving(player)

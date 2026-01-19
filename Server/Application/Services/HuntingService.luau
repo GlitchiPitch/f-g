@@ -32,21 +32,25 @@ function HuntingService:init()
 	self.constants = shared.constants
 	self.hunter = shared.domain.Entities.Farmer.new(shared.assets.Hunter)
 	self.hunterSpawn = workspace.Worlds.MainWorld.HunterSpawn
+
+	self.hunter:init(self.diContainer)
 end
 
 function HuntingService:start()
+	warn("HuntingService:start")
 	if self.isActive then
 		return
 	end
 
 	self.isActive = true
 	self.hunter:setState(true)
-	self.hunter:PivotTo(self.hunterSpawn.CFrame)
+	self.hunter:setToPosition(self.hunterSpawn.Position)
 	self:_chooseTargetBirdType()
 	self:_notifyPlayers()
 end
 
 function HuntingService:stop()
+	warn("HuntingService:stop")
 	self.isActive = false
 	self.hunter:setState(false)
 end

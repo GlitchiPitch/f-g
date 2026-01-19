@@ -12,7 +12,8 @@ local Animations = {
 	Peck = "rbxassetid://89696184559939",
 	-- Eat = "rbxassetid://115354805353614",
 	-- Walk = "rbxassetid://138456918929926",
-	-- Run = "rbxassetid://102729767070225",
+	Run = "rbxassetid://180426354",
+	Idle = "rbxassetid://180435571",
 }
 
 for i, v in Animations do

@@ -17,6 +17,8 @@ function PlayerEntity.new(player)
 		level = 1,
 		seeds = 0,
 	}
+	self.currentWorld = "Lobby"
+
 	return self
 end
 
@@ -28,6 +30,14 @@ function PlayerEntity:getData()
 	return {
 		stats = self.stats,
 	}
+end
+
+function PlayerEntity:setCurrentWorld(world)
+	self.currentWorld = world
+end
+
+function PlayerEntity:getCurrentWorld()
+	return self.currentWorld
 end
 
 return PlayerEntity

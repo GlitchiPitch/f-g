@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.6.0] - 2026-01-19
+
+### Added
+
+* World management system with player world tracking and assignment
+* Enhanced teleportation mechanics with world-based teleport setup
+* Player character parenting system for lobby and world separation
+* Death handling system that moves players to "Hell" world on death
+* Improved hunter AI with more frequent updates (0.1s intervals)
+* Farmer entity animation support (Run and Idle animations)
+* Enhanced detection distance system for hunter targeting
+
+### Changed
+
+* HuntingController update frequency increased from 0.3s to 0.1s for smoother AI
+* Farmer attack distance increased from 10 to 20 units
+* TeleportService now handles world transitions and character parenting
+* PlayerService enhanced with character management and death event handling
+* Spawn hunter interval reduced from 10 to 5 seconds for more dynamic gameplay
+
+### Technical
+
+* Added setCurrentWorld/getCurrentWorld methods to Player entity
+* Implemented world-based character parenting in PlayerService
+* Enhanced TeleportService with world name parameters and player entity integration
+* Added animation loading and state management to Farmer entity
+* Improved hunter detection logic with configurable detection distance
+
 ## \[1.5.0] - 2026-01-18
 
 ### Added

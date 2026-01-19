@@ -1,6 +1,8 @@
 ---@class ServerFarmController
+---@field diContainer DIContainer
 ---@field farmService ServerFarmService
-
+---@field foodSpawnRate number
+---@field foodSpawnTimer number
 local FarmController = {}
 FarmController.__index = FarmController
 
