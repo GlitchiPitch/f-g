@@ -1,9 +1,12 @@
 local Debris = game:GetService("Debris")
 local TweenService = game:GetService("TweenService")
+
+local InventoryUI = require(script.InventoryUI)
 ---@class UI
 ---@field diContainer DIContainer
 ---@field foodPopup Frame
 ---@field playerService ClientPlayerService
+---@field inventoryUI InventoryUI
 local UI = {}
 UI.__index = UI
 
@@ -12,6 +15,7 @@ UI.__index = UI
 function UI.new(diContainer)
 	local self = setmetatable({}, UI)
 	self.diContainer = diContainer
+	self.inventoryUI = InventoryUI.new(self.diContainer)
 	return self
 end
 
@@ -25,6 +29,9 @@ function UI:init()
 	self.notification = self.mainUI.Notification
 	self.foodPopup = self.mainUI.FoodPopup
 	self.playerService = application.services.playerService
+	
+
+	self.inventoryUI:init()
 end
 
 function UI:showNotification(message)
@@ -70,6 +77,18 @@ function UI:showDiedScreen()
 		hideTween:Play()
 	end)
 	showTween:Play()
+end
+
+function UI:toggleInventory()
+	if self.inventoryUI.isOpen then
+		self.inventoryUI:close()
+	else
+		self.inventoryUI:open()
+	end
+end
+
+function UI:refreshInventory()
+	self.inventoryUI:backpackRefresh()
 end
 
 return UI

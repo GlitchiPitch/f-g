@@ -30,6 +30,9 @@ function PlayerService.new(diContainer)
 end
 
 function PlayerService:init()
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	self.eventBus = shared.eventBus
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
 	self.animationService = application.services.animationService
@@ -43,6 +46,14 @@ function PlayerService:init()
 	---@param character Model
 	local function onCharacterAdded(character)
 		self:_onCharacterAdded(character)
+
+		local function _inventoryRefresh()
+			self.eventBus:fire("inventoryRefresh")
+		end
+		
+		character.ChildAdded:Connect(_inventoryRefresh)
+		character.ChildRemoved:Connect(_inventoryRefresh)
+		_inventoryRefresh()
 	end
 
 	if self.player.Character then

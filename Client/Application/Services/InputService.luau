@@ -72,6 +72,10 @@ function InputService:_inputBegan(input, gameProccessed)
 		self.sprintController:run()
 	end
 
+	if input.KeyCode == self.config.Client.Control.InventoryKey then
+		self.eventBus:fire("toggleInventory")
+	end
+
 	-- if self.config.Client.Control.EquippmentKeys[input.KeyCode.Name] then
 	-- 	self.equipmentService:pressEquipKey(input.KeyCode.Name)
 	-- end

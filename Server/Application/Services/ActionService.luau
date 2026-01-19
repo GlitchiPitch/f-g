@@ -56,7 +56,10 @@ function ActionService:toolActivated(playerEntity)
 			local isPlayer = humanoid == playerEntity.player.Character.Humanoid
 			if not isPlayer then
 				humanoid:TakeDamage(10)
-				-- break
+				-- if player has one handed use break for one damaged person
+				-- if two handed not use break
+				
+				-- break 
 			end
 		end
 	end

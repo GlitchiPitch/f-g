@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.9.0] - 2026-01-19
+
+### Added
+
+* Complete inventory management system with InventoryUI component
+* Player inventory toggle functionality (E key)
+* Real-time inventory refresh when items are equipped/unequipped
+* Enemy data templates for combat system (Dummy, Orc, StrongOrc, Goblin, etc.)
+* Event-driven inventory system integration
+
+### Changed
+
+* InputService enhanced with inventory key handling
+* PlayerService integrated with inventory refresh events
+* ActionService updated with weapon damage mechanics comments
+* Shared Config expanded with inventory key binding
+* UI Presentation layer enhanced with inventory management
+
+### Technical
+
+* Added InventoryUI class for comprehensive inventory management
+* Implemented event-based inventory toggle and refresh system
+* Added enemy data structure for future combat mechanics
+* Enhanced client-side event bus with inventory events
+* Integrated inventory system with character item monitoring
+
 ## \[1.8.1] - 2026-01-19
 
 ### Added

@@ -5,6 +5,7 @@ local Config = {
             MainAction = Enum.UserInputType.MouseButton1,
             SecondAction = Enum.UserInputType.MouseButton2,
             RunKey = Enum.KeyCode.LeftShift,
+            InventoryKey = Enum.KeyCode.E,
         },
     },
 }

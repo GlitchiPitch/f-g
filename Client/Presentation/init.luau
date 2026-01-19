@@ -32,6 +32,13 @@ function Presentation:init()
 	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.PLAYER_DIED, function(eventData)
 		self.ui:showDiedScreen()
 	end)
+	shared.eventBus:connect("toggleInventory", function(eventData)
+		self.ui:toggleInventory()
+	end)
+
+	shared.eventBus:connect("inventoryRefresh", function(eventData)
+		self.ui:refreshInventory()
+	end)
 end
 
 return Presentation
