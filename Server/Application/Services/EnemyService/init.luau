@@ -25,6 +25,11 @@ function EnemyService:init()
 	self.enemyController = application.controllers.enemyController
 	self.EnemyTemplates = shared.data.Enemies
 	self.Enemy = shared.domain.Entities.Enemy
+
+	local w1SpawnPoints = workspace.Worlds.World1.EnemySpawnPoints:GetChildren()
+	for _, spawnPoint in w1SpawnPoints do
+		self:spawnEnemy("Orc", spawnPoint.Position)
+	end
 end
 
 -- Spawn method

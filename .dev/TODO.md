@@ -43,6 +43,13 @@
 * \[x] Improved hunter AI with more frequent updates
 * \[x] Farmer entity animation support (Run and Idle)
 
+## Completed (v1.11.0)
+
+* \[x] Integrate enemy spawning system with world management (spawn enemies in appropriate worlds)
+* \[x] Add automatic enemy spawning in World1 using spawn points
+* \[x] Add Enemies assets module for organized enemy model management
+* \[x] Update enemy data templates to use ReplicatedStorage assets
+
 ## Completed (v1.10.0)
 
 * \[x] Complete enemy AI system with behavior trees
@@ -78,9 +85,8 @@
 * \[x] Client repository infrastructure for player entity management
 * \[x] Enhanced player entity with data serialization methods
 
-## Immediate Tasks (v1.10.0)
+## Immediate Tasks (v1.11.0)
 
-* \[ ] Integrate enemy spawning system with world management (spawn enemies in appropriate worlds)
 * \[ ] Add enemy combat integration with player weapons and damage systems
 * \[ ] Implement enemy loot drops and reward systems
 * \[ ] Add enemy pathfinding and navigation around obstacles

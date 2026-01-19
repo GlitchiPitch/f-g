@@ -1,6 +1,7 @@
 ---@class Assets
 local Assets = {
 	Lighting = require(script.Lighting),
+	Enemies = require(script.Enemies),
 	Animations = require(script.Animations),
 	Weapons = require(script.Weapons),
 	Food = require(script.Food),

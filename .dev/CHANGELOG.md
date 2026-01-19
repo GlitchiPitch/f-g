@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.11.0] - 2026-01-19
+
+### Added
+
+* Enemy spawning system integration with world management
+* Automatic enemy spawning in World1 using spawn points
+* Enemies assets module for organized enemy model management
+* EnemyService registration in server application Services layer
+
+### Changed
+
+* Updated enemy data templates to use ReplicatedStorage assets instead of ServerStorage
+* Enhanced Shared/Assets with Enemies module integration
+* Updated sourcemap.json with Enemies assets inclusion
+
+### Technical
+
+* Implemented world-based enemy spawn point system
+* Enhanced asset management architecture with enemy models
+* Updated enemy initialization to automatically spawn enemies on server startup
+
 ## \[1.10.0] - 2026-01-19
 
 ### Added

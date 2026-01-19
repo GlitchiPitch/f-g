@@ -1,5 +1,6 @@
-local ss = game:GetService("ServerStorage")
-local enemyFolder = ss:WaitForChild("Enemies")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+local enemyAssets = require(ReplicatedStorage.Shared.Assets).Enemies
 
 local enemyTemplates = {
 	Dummy = {
@@ -11,7 +12,7 @@ local enemyTemplates = {
 		respawnTime = 20, -- To prevent it from respawning, remove this line
 		attackAnimation = 115067823846471,
 
-		model = enemyFolder.Dummy,
+		model = enemyAssets.Dummy,
 	},
 
 	Orc = {
@@ -23,7 +24,7 @@ local enemyTemplates = {
 		respawnTime = 20, -- To prevent it from respawning, remove this line
 		attackAnimation = 115067823846471,
 
-		model = enemyFolder.Orc,
+		model = enemyAssets.Orc,
 	},
 
 	StrongOrc = {
@@ -35,7 +36,7 @@ local enemyTemplates = {
 		respawnTime = 20, -- To prevent it from respawning, remove this line
 		attackAnimation = 115067823846471,
 
-		model = enemyFolder["Strong Orc"],
+		model = enemyAssets.StrongOrc,
 	},
 
 	Goblin = {
@@ -47,7 +48,7 @@ local enemyTemplates = {
 		respawnTime = 20, -- To prevent it from respawning, remove this line
 		attackAnimation = 115067823846471,
 
-		model = enemyFolder.Goblin,
+		model = enemyAssets.Goblin,
 	},
 
 	GoblinCommander = {
@@ -59,7 +60,7 @@ local enemyTemplates = {
 		respawnTime = 20, -- To prevent it from respawning, remove this line
 		attackAnimation = 115067823846471,
 
-		model = enemyFolder["Goblin Commander"],
+		model = enemyAssets.GoblinCommander,
 	},
 }
 
