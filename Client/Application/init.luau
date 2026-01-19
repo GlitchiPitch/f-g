@@ -38,7 +38,12 @@ function Application:init()
 			self.services.farmService:onFoodEaten(eventData)
 		end,
 		[shared.constants.REMOTE_EVENTS.PLAYER_DIED] = function(eventData)
+			warn("Application:init - PLAYER_DIED", eventData)
 			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.PLAYER_DIED, eventData)
+		end,
+		[shared.constants.REMOTE_EVENTS.PLAYER_UPDATED] = function(eventData)
+			self.services.playerService:updatePlayer(eventData.data)
+			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.PLAYER_UPDATED, eventData.data)
 		end,
 	})
 end

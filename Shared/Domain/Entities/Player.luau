@@ -18,17 +18,30 @@ function PlayerEntity.new(player)
 		seeds = 0,
 	}
 	self.currentWorld = "Lobby"
-
+	self._vars = {}
 	return self
 end
 
 function PlayerEntity:fromData(data)
+	self.currentWorld = if data.currentWorld then data.currentWorld else self.currentWorld
 	self.stats = if data.stats then data.stats else self.stats
+end
+
+---@param vars table<string, ValueBase>
+function PlayerEntity:addVars(vars)
+	for name, var in vars do
+		self._vars[name] = var
+	end
+end
+
+function PlayerEntity:getVars()
+	return self._vars
 end
 
 function PlayerEntity:getData()
 	return {
 		stats = self.stats,
+		currentWorld = self.currentWorld,
 	}
 end
 

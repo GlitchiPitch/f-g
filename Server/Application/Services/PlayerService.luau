@@ -23,13 +23,11 @@ end
 ---@param player Player
 function PlayerService:onPlayerAdded(player)
 	local function onCharacterAdded(character)
-		warn("PlayerService:onPlayerAdded - Character added: ", character)
 		local playerEntity = self.playerRepository:getPlayerEntity(player)
 		local humanoid = character:FindFirstChild("Humanoid")
 
 		local currentWorldName = playerEntity:getCurrentWorld()
 		local currentWorld = workspace.Worlds:FindFirstChild(currentWorldName)
-		warn("PlayerService:onPlayerAdded - Current world: ", currentWorldName)
 		if currentWorld then
 			character.Parent = currentWorld.Players
 			character:PivotTo(CFrame.new(currentWorld.SpawnPoint.Position))
@@ -39,14 +37,15 @@ function PlayerService:onPlayerAdded(player)
 
 		if humanoid then
 			humanoid.Died:Connect(function()
-				warn("PlayerService:onPlayerAdded - Humanoid died")
 				if player:GetAttribute("Hunter") then
 					playerEntity:setCurrentWorld("Butchery")
 					player:SetAttribute("Hunter", nil)
 				else
 					playerEntity:setCurrentWorld("Hell")
 				end
-				
+
+				self:updatePlayer(player)
+
 				if character.PrimaryPart then
 					character.PrimaryPart.Anchored = true
 				end
@@ -68,8 +67,9 @@ end
 
 function PlayerService:updatePlayer(player)
 	local playerEntity = self.playerRepository:getPlayerEntity(player)
-	self.remoteEventService:fireClient(player, self.constants.REMOTE_EVENTS.PLAYER_UPDATED, {
-		playerData = playerEntity:getData(),
+	self.remoteEventService:fireClient(player, {
+		eventName = self.constants.REMOTE_EVENTS.PLAYER_UPDATED,
+		data = playerEntity:getData(),
 	})
 end
 

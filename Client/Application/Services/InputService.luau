@@ -93,6 +93,10 @@ function InputService:_inputChanged(input, gameProccessed)
 	if gameProccessed then
 		return
 	end
+
+	-- if input.UserInputType == Enum.UserInputType.MouseMovement then
+	-- 	self.cameraController:onMouseMovement(input)
+	-- end
 end
 
 function InputService:destroy()

@@ -5,6 +5,7 @@ local Players = game:GetService("Players")
 ---@field character Model
 ---@field cameraController CameraController
 ---@field sprintController SprintController
+---@field playerRepository ClientPlayerRepository
 ---@field _currentState "Idle" | "Weapon" | "NPC"
 ---@field _weapon Tool
 ---@field _npc Model
@@ -34,6 +35,9 @@ function PlayerService:init()
 	self.toolService = application.services.toolService
 	self.cameraController = application.controllers.cameraController
 	self.sprintController = application.controllers.sprintController
+	---@type ClientInfrastructure
+	local infrastructure = self.diContainer:resolve("Infrastructure")
+	self.playerRepository = infrastructure.repositories.playerRepository
 	---@param character Model
 	local function onCharacterAdded(character)
 		self:_onCharacterAdded(character)
@@ -47,6 +51,14 @@ function PlayerService:init()
 end
 
 function PlayerService:_onCharacterAdded()
+	local playerEntity = self.playerRepository:getPlayerEntity(self.player)
+	local currentWorldName = playerEntity:getCurrentWorld()
+	if currentWorldName == "Butchery" then
+		self.cameraController:setDefaultCamera(true)
+	else
+		self.cameraController:setDefaultCamera(false)
+	end
+
 	self.animationService:init()
 	self.cameraController:onCharacterAdded()
 	self.toolService:checkCharacterTool()
@@ -59,6 +71,11 @@ end
 
 function PlayerService:setPlayerState(state)
 	self._currentState = state
+end
+
+function PlayerService:updatePlayer(playerData)
+	local playerEntity = self.playerRepository:getPlayerEntity(self.player)
+	playerEntity:fromData(playerData)
 end
 
 return PlayerService

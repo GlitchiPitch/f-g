@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.8.0] - 2026-01-19
+
+### Added
+
+* World-based camera system with automatic switching between default and isometric cameras
+* Player data persistence system with PLAYER_UPDATED remote events for real-time synchronization
+* Client repository infrastructure for player entity management and data caching
+* Enhanced player entity with data serialization methods (fromData, getData, addVars, getVars)
+* Camera controller setDefaultCamera method for dynamic camera mode switching
+
+### Changed
+
+* CameraController enhanced with world-based camera logic (Butchery world uses default camera, others use isometric)
+* PlayerService now integrates with client repositories and handles player data updates
+* Application layer extended with PLAYER_UPDATED event handling for client-side synchronization
+* Client Infrastructure layer expanded with repositories for better data management architecture
+
+### Technical
+
+* Added PLAYER_UPDATED remote event constant for client-server data synchronization
+* Implemented client-side player entity caching and world-based camera switching
+* Enhanced dependency injection with client repository integration
+* Added comprehensive type definitions for client repository components
+
 ## \[1.7.0] - 2026-01-19
 
 ### Added

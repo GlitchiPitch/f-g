@@ -42,16 +42,19 @@
 - [x] Improved hunter AI with more frequent updates
 - [x] Farmer entity animation support (Run and Idle)
 
-## Completed (v1.7.0)
+## Completed (v1.8.0)
 - [x] Comprehensive death handling system with world transitions
 - [x] Death screen UI with fade animations
 - [x] Simplified hunting mechanics (removed complex AI)
 - [x] Enhanced character management in client controllers
 - [x] Hunter-specific death mechanics ("Butchery" world)
+- [x] World-based camera system with automatic switching between default and isometric cameras
+- [x] Player data persistence system with real-time synchronization
+- [x] Client repository infrastructure for player entity management
+- [x] Enhanced player entity with data serialization methods
 
-## Immediate Tasks (v1.8.0)
-- [ ] Implement Player data persistence system
-- [ ] Add Player leaderboard system
+## Immediate Tasks (v1.9.0)
+- [ ] Implement Player leaderboard system
 - [ ] Add hunting score system with success/failure feedback
 - [ ] Implement bird spawning mechanics for hunting
 - [ ] Add input validation for Player operations

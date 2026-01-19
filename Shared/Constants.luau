@@ -8,6 +8,7 @@ local Constants = {
 		FOOD_EATEN = "FoodEaten",
 		TOOL_ACTIVATED = "ToolActivated",
 		PLAYER_DIED = "PlayerDied",
+		PLAYER_UPDATED = "PlayerUpdated",
 	},
 	DAY_NIGHT = {
 		-- Time constants (in minutes after midnight)
