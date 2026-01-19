@@ -42,6 +42,15 @@
 - [x] Improved hunter AI with more frequent updates
 - [x] Farmer entity animation support (Run and Idle)
 
+## Completed (v1.8.1)
+- [x] Dynamic lighting system with world-based lighting modes (Butchery and Hell worlds)
+- [x] LightingService for automatic lighting transitions based on player world state
+- [x] Two-handed weapon animations (TwoHandedIdle, TwoHandednSlash1-4)
+- [x] Block animation for defensive combat mechanics
+- [x] Enhanced animation management with stopAllAnimations method
+- [x] ToolService unified weapon activation logic for both one-handed and two-handed weapons
+- [x] Server Application architecture restored with Handlers layer
+
 ## Completed (v1.8.0)
 - [x] Comprehensive death handling system with world transitions
 - [x] Death screen UI with fade animations
@@ -54,15 +63,14 @@
 - [x] Enhanced player entity with data serialization methods
 
 ## Immediate Tasks (v1.9.0)
-- [ ] Implement Player leaderboard system
+- [ ] Add food consumption mechanics with health/energy restoration
+- [ ] Implement bird spawning mechanics for hunting gameplay
 - [ ] Add hunting score system with success/failure feedback
-- [ ] Implement bird spawning mechanics for hunting
-- [ ] Add input validation for Player operations
-- [ ] Implement comprehensive error handling and logging
-- [ ] Add food consumption mechanics
-- [ ] Implement deadly game modes functionality
-- [ ] Add weapon durability and damage systems
-- [ ] Implement inventory management for weapons and food
+- [ ] Implement Player leaderboard system for competitive features
+- [ ] Add input validation for Player operations and data integrity
+- [ ] Implement comprehensive error handling and logging system
+- [ ] Add weapon durability and damage systems for combat balance
+- [ ] Implement inventory management for weapons and food storage
 
 ## Medium Priority (v1.4.0)
 - [ ] Add unit tests for core services

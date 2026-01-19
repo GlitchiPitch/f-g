@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.8.1] - 2026-01-19
+
+### Added
+
+* Dynamic lighting system with world-based lighting modes (Butchery and Hell worlds)
+* LightingService for automatic lighting transitions based on player world state
+* Two-handed weapon animations (TwoHandedIdle, TwoHandednSlash1-4)
+* Block animation for defensive combat mechanics
+* Enhanced animation management with stopAllAnimations method
+
+### Changed
+
+* ToolService unified weapon activation logic for both one-handed and two-handed weapons
+* AnimationService enhanced with two-handed weapon support and block animations
+* Client application integrated with LightingService for real-time lighting updates
+* Server Application architecture restored with Handlers layer
+* Shared Assets structure expanded with Lighting asset management
+
+### Fixed
+
+* Typo correction in ToolService ("First TIme" → "First Time")
+
+### Technical
+
+* Added Lighting assets directory with world-specific lighting configurations
+* Implemented dynamic lighting mode switching on player world transitions
+* Enhanced weapon animation system with type-based animation prefixes
+* Added comprehensive animation track management for combat states
+
 ## \[1.8.0] - 2026-01-19
 
 ### Added

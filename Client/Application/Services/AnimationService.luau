@@ -28,17 +28,38 @@ function AnimationService:init()
 		shared.assets.Animations.OneHandednSlash1,
 	}
 
+	local twoHandedAnimations = {
+		shared.assets.Animations.TwoHandednSlash4,
+		shared.assets.Animations.TwoHandednSlash3,
+		shared.assets.Animations.TwoHandednSlash2,
+		shared.assets.Animations.TwoHandednSlash1,
+	}
+
 	self.animTracks.peck = animator:LoadAnimation(shared.assets.Animations.Peck)
 	self.animTracks.peck.Priority = Enum.AnimationPriority.Action
+
+	self.animTracks.block = animator:LoadAnimation(shared.assets.Animations.Block) :: AnimationTrack
+	self.animTracks.block.Looped = true
+	self.animTracks.block.Priority = Enum.AnimationPriority.Action2
 
 	self.animTracks.oneHandedIdle = animator:LoadAnimation(shared.assets.Animations.OneHandedIdle) :: AnimationTrack
 	self.animTracks.oneHandedIdle.Looped = true
 	self.animTracks.oneHandedIdle.Priority = Enum.AnimationPriority.Action
 
+	self.animTracks.twoHandedIdle = animator:LoadAnimation(shared.assets.Animations.TwoHandedIdle) :: AnimationTrack
+	self.animTracks.twoHandedIdle.Looped = true
+	self.animTracks.twoHandedIdle.Priority = Enum.AnimationPriority.Action
+
 	for i, animation in oneHandedAnimations do
 		self.animTracks["oneHanded" .. i] = animator:LoadAnimation(animation) :: AnimationTrack
 		self.animTracks["oneHanded" .. i].Looped = false
 		self.animTracks["oneHanded" .. i].Priority = Enum.AnimationPriority.Action2
+	end
+
+	for i, animation in twoHandedAnimations do
+		self.animTracks["twoHanded" .. i] = animator:LoadAnimation(animation) :: AnimationTrack
+		self.animTracks["twoHanded" .. i].Looped = false
+		self.animTracks["twoHanded" .. i].Priority = Enum.AnimationPriority.Action2
 	end
 end
 
@@ -60,5 +81,11 @@ function AnimationService:stopAnimation(animationName)
 	end
 
 	self.animTracks[animationName]:Stop()
+end
+
+function AnimationService:stopAllAnimations()
+	for _, animation in self.animTracks do
+		animation:Stop()
+	end
 end
 return AnimationService

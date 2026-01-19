@@ -63,7 +63,9 @@ function InputService:_inputBegan(input, gameProccessed)
 			self.toolService:activated()
 		end
 	elseif input.UserInputType == self.config.Client.Control.SecondAction then
-		-- TODO: Implement second action
+		if playerState == "Weapon" then
+			self.toolService:block(true)
+		end
 	end
 
 	if input.KeyCode == self.config.Client.Control.RunKey then
@@ -79,9 +81,11 @@ function InputService:_inputEnded(input, gameProccessed)
 	if gameProccessed then
 		return
 	end
-
+	local playerState = self.playerService:getPlayerState()
 	if input.UserInputType == self.config.Client.Control.SecondAction then
-		-- TODO: Implement second action ended
+		if playerState == "Weapon" then
+			self.toolService:block(false)
+		end
 	end
 
 	if input.KeyCode == self.config.Client.Control.RunKey then

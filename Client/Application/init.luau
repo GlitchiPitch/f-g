@@ -43,6 +43,7 @@ function Application:init()
 		end,
 		[shared.constants.REMOTE_EVENTS.PLAYER_UPDATED] = function(eventData)
 			self.services.playerService:updatePlayer(eventData.data)
+			self.services.lightingService:setMode(self.services.playerService:getPlayerState())
 			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.PLAYER_UPDATED, eventData.data)
 		end,
 	})

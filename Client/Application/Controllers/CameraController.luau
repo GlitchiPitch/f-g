@@ -58,8 +58,8 @@ end
 ---@param state boolean
 function CameraController:setDefaultCamera(state)
 	self._defaultCamera = state
-	warn(self._defaultCamera)
 	if self._defaultCamera then
+		self.fieldOfView = 80
 		self.camera.CameraType = Enum.CameraType.Custom
 	else
 		self.camera.CameraType = Enum.CameraType.Scriptable
@@ -87,7 +87,7 @@ function CameraController:_onRender(_)
 			self:_isometricCamera()
 			-- self:_firstPersonCamera()
 		else
-			self.fieldOfView = 80
+			self.camera.FieldOfView = self.fieldOfView
 			if self.character and self.character:FindFirstChild("Humanoid") then
 				self.camera.CameraSubject = self.character.Humanoid
 			end

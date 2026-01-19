@@ -3,6 +3,7 @@ local Players = game:GetService("Players")
 ---@class TeleportHandler
 ---@field diContainer DIContainer
 ---@field playerRepository ServerPlayerRepository
+---@field playerService ServerPlayerService
 local TeleportService = {}
 TeleportService.__index = TeleportService
 
@@ -18,7 +19,9 @@ function TeleportService:init()
 	---@type ServerInfrastructure
 	local infrastructure = self.diContainer:resolve("Infrastructure")
 	self.playerRepository = infrastructure.repositories.playerRepository
-
+	---@type ServerApp
+	local application = self.diContainer:resolve("Application")
+	self.playerService = application.services.playerService
 	local lobbyTeleports = workspace.Lobby.Teleports
 	self:setupTeleport(lobbyTeleports.Enter.PrimaryPart, lobbyTeleports.Exit.PrimaryPart, "MainWorld")
 
@@ -43,6 +46,7 @@ function TeleportService:setupTeleport(a1, a2, worldName)
 			local playerEntity = self.playerRepository:getPlayerEntity(player)
 			local currentWorld = if worldName then workspace.Worlds:FindFirstChild(worldName) else workspace.Lobby
 			playerEntity:setCurrentWorld(worldName)
+			self.playerService:updatePlayer(player)
 			player:SetAttribute("Teleported", true)
 			player.Character:PivotTo(CFrame.new(targetPart.CFrame.Position) + Vector3.new(0, 2, 0))
 			player.Character.Parent = currentWorld.Players

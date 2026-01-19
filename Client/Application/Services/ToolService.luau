@@ -75,7 +75,7 @@ function ToolService:_removeTool()
 	self._currentTool = nil
 	self.lastTime = nil
 	self.isEquipped = false
-	self.animationService:stopAnimation("oneHandedIdle")
+	self.animationService:stopAllAnimations()
 end
 
 function ToolService:activated()
@@ -91,10 +91,9 @@ function ToolService:activated()
 
 	self.useCases:toolActivated()
 
-	if self._currentTool:GetAttribute("WeaponType") == "OneHanded" then
-		self:_activeOneHanded()
-	elseif self._currentTool:GetAttribute("WeaponType") == "TwoHanded" then
-		self:_activeTwoHanded()
+	local weaponType = self._currentTool:GetAttribute("WeaponType")
+	if weaponType == "OneHanded" or weaponType == "TwoHanded" then
+		self:_activeWeapon(weaponType)
 		-- elseif self._currentTool:HasTag("Food") then
 		-- 	self:_activeFood()
 	end
@@ -105,15 +104,18 @@ end
 ---@param setBlock boolean
 function ToolService:block(setBlock)
 	if setBlock then
-		self.animationService:playAnimation("OneHandedBlock")
+		self.animationService:playAnimation("block")
 	else
-		self.animationService:stopAnimation("OneHandedBlock")
+		self.animationService:stopAnimation("block")
 	end
 end
 
-function ToolService:_activeOneHanded()
+---@param weaponType string
+function ToolService:_activeWeapon(weaponType)
+	local animationPrefix = weaponType == "OneHanded" and "oneHanded" or "twoHanded"
+
 	if self.lastTime == nil then
-		print("First TIme")
+		print("First Time")
 	elseif os.time() - 2 > self.lastTime then
 		self.attackIndex = 1
 	else
@@ -126,15 +128,14 @@ function ToolService:_activeOneHanded()
 
 	self.lastTime = os.time()
 
-	if self.animationService.animTracks["oneHanded" .. self.attackIndex] then
-		self.animationService.animTracks["oneHanded" .. self.attackIndex]:Play()
-		task.wait(self.animationService.animTracks["oneHanded" .. self.attackIndex].Length)
+	local animationName = animationPrefix .. self.attackIndex
+	if self.animationService.animTracks[animationName] then
+		self.animationService.animTracks[animationName]:Play()
+		task.wait(self.animationService.animTracks[animationName].Length)
 	else
 		task.wait(0.5)
 	end
 end
-
-function ToolService:_activeTwoHanded() end
 
 -- function ToolService:_activeFood()
 -- 	self.animationService.animTracks.Eat:Play()

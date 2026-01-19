@@ -17,17 +17,16 @@ end
 function ActionService:init()
 	---@type Shared
 	local shared = self.diContainer:resolve("Shared")
-    ---@type ServerApp
-    local application = self.diContainer:resolve("Application")
-    self.farmService = application.services.farmService
+	---@type ServerApp
+	local application = self.diContainer:resolve("Application")
+	self.farmService = application.services.farmService
 	self.peckHitbox = shared.assets.PeckHitbox
 end
 
 ---@param playerEntity PlayerEntity
 function ActionService:peck(playerEntity)
 	local character = playerEntity.player.Character
-	local lookVector = character.HumanoidRootPart.CFrame.LookVector
-	local hitboxPosition = character.HumanoidRootPart.CFrame.Position + lookVector * 5
+	local hitboxPosition = character.HumanoidRootPart.CFrame.Position
 	local hitbox = self.peckHitbox:Clone()
 	hitbox.Parent = workspace
 	hitbox.CFrame = CFrame.new(hitboxPosition)
@@ -44,15 +43,21 @@ end
 ---@param playerEntity PlayerEntity
 function ActionService:toolActivated(playerEntity)
 	local character = playerEntity.player.Character
-	local lookVector = character.HumanoidRootPart.CFrame.LookVector
-	local hitboxPosition = character.HumanoidRootPart.CFrame.Position + lookVector * 5
+
+	local hitboxPosition = character.HumanoidRootPart.CFrame.Position
 	local hitbox = self.peckHitbox:Clone()
 	hitbox.Parent = workspace
 	hitbox.CFrame = CFrame.new(hitboxPosition)
 	local partsInRadius = workspace:GetPartBoundsInBox(hitbox.CFrame, hitbox.Size)
 	for _, part in partsInRadius do
-		if part.Parent:FindFirstChild("Humanoid") then
-			print("Hit a player")
+		local humanoid = part.Parent:FindFirstChild("Humanoid")
+
+		if humanoid then
+			local isPlayer = humanoid == playerEntity.player.Character.Humanoid
+			if not isPlayer then
+				humanoid:TakeDamage(10)
+				-- break
+			end
 		end
 	end
 

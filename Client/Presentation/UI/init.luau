@@ -51,28 +51,25 @@ function UI:showFoodEaten()
 	tween:Play()
 end
 
----@param state boolean
-function UI:showDiedScreen(state)
-	if not state then
-		self.diedFrame.Visible = state
-		self.diedFrame.Transparency = 1
-	end
-	warn("UI:showDiedScreen - State: ", state)
-	if state then
-		local tween = TweenService:Create(self.diedFrame, TweenInfo.new(2), {
-			Transparency = 0,
-		})
-		tween:Play()
-	else
-		local tween = TweenService:Create(self.diedFrame, TweenInfo.new(2), {
+function UI:showDiedScreen()
+	self.diedFrame.Visible = true
+	self.diedFrame.Transparency = 1
+
+	local showTween = TweenService:Create(self.diedFrame, TweenInfo.new(2), {
+		Transparency = 0,
+	})
+	showTween.Completed:Connect(function()
+		local hideTween = TweenService:Create(self.diedFrame, TweenInfo.new(2), {
 			Transparency = 1,
 		})
-		tween.Completed:Connect(function()
-			self.diedFrame.Visible = state
+		
+		hideTween.Completed:Connect(function()
+			self.diedFrame.Visible = false
 			self.diedFrame.Transparency = 1
 		end)
-		tween:Play()
-	end
+		hideTween:Play()
+	end)
+	showTween:Play()
 end
 
 return UI

@@ -30,7 +30,7 @@ function Presentation:init()
 		self.ui:showFoodEaten()
 	end)
 	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.PLAYER_DIED, function(eventData)
-		self.ui:showDiedScreen(true)
+		self.ui:showDiedScreen()
 	end)
 end
 

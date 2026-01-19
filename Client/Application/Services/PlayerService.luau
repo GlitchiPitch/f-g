@@ -10,6 +10,7 @@ local Players = game:GetService("Players")
 ---@field _weapon Tool
 ---@field _npc Model
 ---@field toolService ClientToolService
+---@field lightingService LightingService
 ---@field _connections table<string, RBXScriptSignal>
 ---@field animationService ClientAnimationService
 local PlayerService = {}
@@ -35,6 +36,7 @@ function PlayerService:init()
 	self.toolService = application.services.toolService
 	self.cameraController = application.controllers.cameraController
 	self.sprintController = application.controllers.sprintController
+	self.lightingService = application.services.lightingService
 	---@type ClientInfrastructure
 	local infrastructure = self.diContainer:resolve("Infrastructure")
 	self.playerRepository = infrastructure.repositories.playerRepository
@@ -55,6 +57,9 @@ function PlayerService:_onCharacterAdded()
 	local currentWorldName = playerEntity:getCurrentWorld()
 	if currentWorldName == "Butchery" then
 		self.cameraController:setDefaultCamera(true)
+		self.lightingService:setMode("Butchery")
+	elseif currentWorldName == "Hell" then
+		self.lightingService:setMode("Hell")
 	else
 		self.cameraController:setDefaultCamera(false)
 	end

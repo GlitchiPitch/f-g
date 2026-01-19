@@ -50,8 +50,9 @@ function PlayerService:onPlayerAdded(player)
 					character.PrimaryPart.Anchored = true
 				end
 
-				self.remoteEventService:fireClient(player, self.constants.REMOTE_EVENTS.PLAYER_DIED, {
-					playerData = playerEntity:getData(),
+				self.remoteEventService:fireClient(player, {
+					eventName = self.constants.REMOTE_EVENTS.PLAYER_DIED,
+					data = {},
 				})
 			end)
 		end
