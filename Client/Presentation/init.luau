@@ -29,6 +29,9 @@ function Presentation:init()
 	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.FOOD_EATEN, function(eventData)
 		self.ui:showFoodEaten()
 	end)
+	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.PLAYER_DIED, function(eventData)
+		self.ui:showDiedScreen(true)
+	end)
 end
 
 return Presentation

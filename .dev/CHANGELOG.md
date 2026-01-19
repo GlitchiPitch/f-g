@@ -5,6 +5,36 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.7.0] - 2026-01-19
+
+### Added
+
+* Comprehensive death handling system with world-based player transitions
+* Death screen UI with smooth fade animations
+* PLAYER_DIED remote event for client-server death notifications
+* Enhanced character management in client controllers (CameraController, SprintController)
+* Hunter-specific death mechanics with "Butchery" world destination
+
+### Changed
+
+* HuntingController significantly simplified - removed complex hunter AI, spawning, and targeting logic
+* Hunting now toggles on/off every 5 seconds instead of continuous real-time updates
+* Player death now routes hunters to "Butchery" world and regular players to "Hell" world
+* Enhanced client PlayerService with controller coordination on character addition
+
+### Removed
+
+* Hunter AI update loops and targeting algorithms from HuntingController
+* Real-time hunter spawning and despawning mechanics
+* Complex hunter movement and attack distance calculations
+
+### Technical
+
+* Added death event broadcasting with player data serialization
+* Implemented character anchoring on death to prevent physics issues
+* Enhanced controller lifecycle management with onCharacterAdded methods
+* Streamlined hunting system architecture for simpler gameplay mechanics
+
 ## \[1.6.0] - 2026-01-19
 
 ### Added

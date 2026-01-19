@@ -19,6 +19,9 @@ function UI:init()
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
 	self.mainUI = application.services.playerService.player.PlayerGui:WaitForChild("MainUI")
+	self.diedUI = application.services.playerService.player.PlayerGui:WaitForChild("DiedUI")
+	self.diedFrame = self.diedUI.Frame
+
 	self.notification = self.mainUI.Notification
 	self.foodPopup = self.mainUI.FoodPopup
 	self.playerService = application.services.playerService
@@ -46,6 +49,28 @@ function UI:showFoodEaten()
 	end)
 
 	tween:Play()
+end
+
+---@param state boolean
+function UI:showDiedScreen(state)
+	if not state then
+		self.diedUI.Enabled = state
+	end
+
+	if state then
+		local tween = TweenService:Create(self.diedFrame, TweenInfo.new(2), {
+			Transparency = 1,
+		})
+		tween:Play()
+	else
+		local tween = TweenService:Create(self.diedFrame, TweenInfo.new(2), {
+			Transparency = 0,
+		})
+		tween.Completed:Connect(function()
+			self.diedUI.Enabled = state
+		end)
+		tween:Play()
+	end
 end
 
 return UI

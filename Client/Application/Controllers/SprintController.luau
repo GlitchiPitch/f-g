@@ -51,6 +51,11 @@ function SprintController:init()
 	RunService.RenderStepped:Connect(onRender)
 end
 
+function SprintController:onCharacterAdded()
+	self.character = self.player.Character or self.player.CharacterAdded:Wait()
+	self.humanoid = self.character:WaitForChild("Humanoid")
+end
+
 function SprintController:run()
 	local playerEntity = self.playerService:getPlayerEntity()
 	self.canRun = playerEntity.stats.stamina.current > 0

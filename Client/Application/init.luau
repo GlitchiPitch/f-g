@@ -37,6 +37,9 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.FOOD_EATEN] = function(eventData)
 			self.services.farmService:onFoodEaten(eventData)
 		end,
+		[shared.constants.REMOTE_EVENTS.PLAYER_DIED] = function(eventData)
+			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.PLAYER_DIED, eventData)
+		end,
 	})
 end
 return Application

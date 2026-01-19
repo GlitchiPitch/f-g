@@ -2,6 +2,9 @@ local Players = game:GetService("Players")
 ---@class ClientPlayerService
 ---@field diContainer DIContainer
 ---@field player Player
+---@field character Model
+---@field cameraController CameraController
+---@field sprintController SprintController
 ---@field _currentState "Idle" | "Weapon" | "NPC"
 ---@field _weapon Tool
 ---@field _npc Model
@@ -29,6 +32,8 @@ function PlayerService:init()
 	local application = self.diContainer:resolve("Application")
 	self.animationService = application.services.animationService
 	self.toolService = application.services.toolService
+	self.cameraController = application.controllers.cameraController
+	self.sprintController = application.controllers.sprintController
 	---@param character Model
 	local function onCharacterAdded(character)
 		self:_onCharacterAdded(character)
@@ -41,9 +46,11 @@ function PlayerService:init()
 	end
 end
 
-function PlayerService:_onCharacterAdded(_)
+function PlayerService:_onCharacterAdded()
 	self.animationService:init()
+	self.cameraController:onCharacterAdded()
 	self.toolService:checkCharacterTool()
+	self.sprintController:onCharacterAdded()
 end
 
 function PlayerService:getPlayerState()

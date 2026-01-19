@@ -37,6 +37,10 @@ function CameraController:init()
 	RunService.RenderStepped:Connect(onRender)
 end
 
+function CameraController:onCharacterAdded()
+	self.character = self.player.Character or self.player.CharacterAdded:Wait()
+end
+
 function CameraController:_onRender(_)
 	self.camera.FieldOfView = self.fieldOfView
 	if self.character then

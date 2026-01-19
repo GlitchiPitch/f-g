@@ -24,7 +24,11 @@ function TeleportService:init()
 
 	for _, world in workspace.Worlds:GetChildren() do
 		if world:FindFirstChild("Teleports") then
-			self:setupTeleport(world.Teleports.Enter.PrimaryPart, world.Teleports.Exit.PrimaryPart, world:GetAttribute("NextWorld"))
+			self:setupTeleport(
+				world.Teleports.Enter.PrimaryPart,
+				world.Teleports.Exit.PrimaryPart,
+				world:GetAttribute("NextWorld")
+			)
 		end
 	end
 end
@@ -37,7 +41,7 @@ function TeleportService:setupTeleport(a1, a2, worldName)
 		local player = Players:GetPlayerFromCharacter(otherPart.Parent)
 		if player and not player:GetAttribute("Teleported") then
 			local playerEntity = self.playerRepository:getPlayerEntity(player)
-			local currentWorld = workspace.Worlds:FindFirstChild(worldName) or workspace.Lobby
+			local currentWorld = if worldName then workspace.Worlds:FindFirstChild(worldName) else workspace.Lobby
 			playerEntity:setCurrentWorld(worldName)
 			player:SetAttribute("Teleported", true)
 			player.Character:PivotTo(CFrame.new(targetPart.CFrame.Position) + Vector3.new(0, 2, 0))
