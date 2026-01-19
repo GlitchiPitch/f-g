@@ -50,6 +50,19 @@
 * \[x] Add Enemies assets module for organized enemy model management
 * \[x] Update enemy data templates to use ReplicatedStorage assets
 
+## Completed (v1.12.0)
+
+* \[x] Add AlchemyService for potion brewing mechanics in server application services
+* \[x] Add Shared PlayerService base class for code reuse between client and server PlayerServices
+* \[x] Add comprehensive weapons data system with one-handed and two-handed weapon templates
+* \[x] Add Items data system with food items (Apple, Meat, Banana, Ham, Rice, Fish)
+* \[x] Add Potions data system foundation for future alchemy mechanics
+* \[x] Add Shared Repositories infrastructure layer with WeaponRepository and ItemsRepository
+* \[x] Add Enums directory structure for game constants and enumerations
+* \[x] Add Lighting assets meta configuration for world-based lighting systems
+* \[x] Enhance Shared Infrastructure layer with repositories initialization
+* \[x] Refactor server initialization to remove player event handlers (moved to services layer)
+
 ## Completed (v1.10.0)
 
 * \[x] Complete enemy AI system with behavior trees
@@ -85,15 +98,16 @@
 * \[x] Client repository infrastructure for player entity management
 * \[x] Enhanced player entity with data serialization methods
 
-## Immediate Tasks (v1.11.0)
+## Immediate Tasks (v1.12.0)
 
-* \[ ] Add enemy combat integration with player weapons and damage systems
-* \[ ] Implement enemy loot drops and reward systems
-* \[ ] Add enemy pathfinding and navigation around obstacles
-* \[ ] Create enemy spawn points and spawn area management
+* \[ ] Implement alchemy brewing mechanics with potion recipes and ingredients
+* \[ ] Add weapon crafting and upgrade systems using alchemy
+* \[ ] Create inventory management system for weapons, items, and potions
+* \[ ] Implement item trading and marketplace mechanics
+* \[ ] Add weapon durability and repair systems
+* \[ ] Create player progression system with skill trees and stat allocation
 * \[ ] Add food consumption mechanics with health/energy restoration
-* \[ ] Implement bird spawning mechanics for hunting gameplay
-* \[ ] Add hunting score system with success/failure feedback
+* \[ ] Implement enemy loot drops and reward systems
 
 ## Medium Priority (v1.4.0)
 

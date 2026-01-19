@@ -40,6 +40,7 @@ function Shared.new()
 end
 
 function Shared:init()
+	self.infrastructure:init()
 	self.application:init()
 end
 

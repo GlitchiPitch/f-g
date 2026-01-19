@@ -1,11 +1,12 @@
 local Players = game:GetService("Players")
----@class ClientPlayerService
----@field diContainer DIContainer
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local SharedPlayerService = require(ReplicatedStorage.Shared.Application.Services.PlayerService)
+
+---@class ClientPlayerService : SharedPlayerService
 ---@field player Player
 ---@field character Model
 ---@field cameraController CameraController
 ---@field sprintController SprintController
----@field playerRepository ClientPlayerRepository
 ---@field _currentState "Idle" | "Weapon" | "NPC"
 ---@field _weapon Tool
 ---@field _npc Model
@@ -13,15 +14,14 @@ local Players = game:GetService("Players")
 ---@field lightingService LightingService
 ---@field _connections table<string, RBXScriptSignal>
 ---@field animationService ClientAnimationService
-local PlayerService = {}
+local PlayerService = setmetatable({}, SharedPlayerService)
 PlayerService.__index = PlayerService
 
 ---@param diContainer DIContainer
 ---@return ClientPlayerService
 function PlayerService.new(diContainer)
-	local self = setmetatable({}, PlayerService)
+	local self = setmetatable(SharedPlayerService.new(diContainer), PlayerService)
 	self.player = Players.LocalPlayer
-	self.diContainer = diContainer
 	self._currentState = "Idle" :: "Idle" | "Weapon" | "NPC"
 	self._weapon = nil
 	self._npc = nil
@@ -32,28 +32,21 @@ end
 function PlayerService:init()
 	---@type Shared
 	local shared = self.diContainer:resolve("Shared")
-	self.eventBus = shared.eventBus
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
+
+	SharedPlayerService.init(self)
+
+	self.eventBus = shared.eventBus
+
 	self.animationService = application.services.animationService
 	self.toolService = application.services.toolService
 	self.cameraController = application.controllers.cameraController
 	self.sprintController = application.controllers.sprintController
 	self.lightingService = application.services.lightingService
-	---@type ClientInfrastructure
-	local infrastructure = self.diContainer:resolve("Infrastructure")
-	self.playerRepository = infrastructure.repositories.playerRepository
 	---@param character Model
 	local function onCharacterAdded(character)
 		self:_onCharacterAdded(character)
-
-		local function _inventoryRefresh()
-			self.eventBus:fire("inventoryRefresh")
-		end
-		
-		character.ChildAdded:Connect(_inventoryRefresh)
-		character.ChildRemoved:Connect(_inventoryRefresh)
-		_inventoryRefresh()
 	end
 
 	if self.player.Character then
@@ -63,9 +56,27 @@ function PlayerService:init()
 	end
 end
 
-function PlayerService:_onCharacterAdded()
-	local playerEntity = self.playerRepository:getPlayerEntity(self.player)
+function PlayerService:getPlayerState()
+	return self._currentState
+end
+
+function PlayerService:setPlayerState(state)
+	self._currentState = state
+end
+
+function PlayerService:_onCharacterAdded(character)
+	local playerRepository = self:_getPlayerRepository()
+	local playerEntity = playerRepository:getPlayerEntity(self.player)
 	local currentWorldName = playerEntity:getCurrentWorld()
+
+	local function _inventoryRefresh()
+		self.eventBus:fire("inventoryRefresh")
+	end
+
+	character.ChildAdded:Connect(_inventoryRefresh)
+	character.ChildRemoved:Connect(_inventoryRefresh)
+	_inventoryRefresh()
+
 	if currentWorldName == "Butchery" then
 		self.cameraController:setDefaultCamera(true)
 		self.lightingService:setMode("Butchery")
@@ -81,17 +92,11 @@ function PlayerService:_onCharacterAdded()
 	self.sprintController:onCharacterAdded()
 end
 
-function PlayerService:getPlayerState()
-	return self._currentState
-end
-
-function PlayerService:setPlayerState(state)
-	self._currentState = state
-end
-
-function PlayerService:updatePlayer(playerData)
-	local playerEntity = self.playerRepository:getPlayerEntity(self.player)
-	playerEntity:fromData(playerData)
+---@return ClientPlayerRepository
+function PlayerService:_getPlayerRepository()
+	---@type ClientInfrastructure
+	local infrastructure = self.diContainer:resolve("Infrastructure")
+	return infrastructure.repositories.playerRepository
 end
 
 return PlayerService

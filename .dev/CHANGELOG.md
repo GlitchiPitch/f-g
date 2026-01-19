@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.12.0] - 2026-01-19
+
+### Added
+
+* AlchemyService for potion brewing mechanics in server application services
+* Shared PlayerService base class for code reuse between client and server PlayerServices
+* Comprehensive weapons data system with one-handed and two-handed weapon templates
+* Items data system with food items (Apple, Meat, Banana, Ham, Rice, Fish)
+* Potions data system foundation for future alchemy mechanics
+* Shared Repositories infrastructure layer with WeaponRepository and ItemsRepository
+* Enums directory structure for game constants and enumerations
+* Lighting assets meta configuration for world-based lighting systems
+
+### Changed
+
+* Enhanced Shared Infrastructure layer with repositories initialization
+* Refactored server initialization to remove player event handlers (moved to services layer)
+* Updated Shared Data module to include Weapons, Items, and Potions data
+* Enhanced PlayerService architecture with shared base class for better maintainability
+
+### Technical
+
+* Added base PlayerService class with common methods for entity management and world tracking
+* Implemented comprehensive weapon data structure with damage, requirements, and pricing
+* Added food item data with health restoration bonuses
+* Enhanced dependency injection with new repository registrations
+* Improved server architecture with cleaner service initialization
+
 ## \[1.11.0] - 2026-01-19
 
 ### Added

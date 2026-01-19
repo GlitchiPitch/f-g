@@ -43,17 +43,6 @@ function Server:init()
 	self.infrastructure:init()
 	self.application:init()
 
-	local function onPlayerAdded(player)
-		self.application.services.playerService:onPlayerAdded(player)
-	end
-
-	local function onPlayerRemoving(player)
-		self.application.services.playerService:onPlayerRemoving(player)
-	end
-
-	Players.PlayerAdded:Connect(onPlayerAdded)
-	Players.PlayerRemoving:Connect(onPlayerRemoving)
-
 	ReplicatedStorage:SetAttribute(self.shared.constants.INIT_SERVER, true)
 end
 
