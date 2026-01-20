@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.14.2] - 2026-01-20
+
+### Added
+
+* Complete equipment system with item equipping and unequipping mechanics
+* EQUIP_ITEM remote event for client-server equipment synchronization
+* Enhanced AlchemyService with proper initialization and item management methods
+* InventoryUI mode switching system for inventory, alchemy, and crafting modes
+* Improved InventoryUI with better item management and visual feedback
+
+### Changed
+
+* ActionService enhanced with AlchemyService integration for alchemy interactions
+* InventoryUI refactored with streamlined item handling and connection management
+* Client UseCases expanded with equipItem functionality
+* Server UseCases enhanced with comprehensive equipment management
+
+### Technical
+
+* Added equipment state tracking in InventoryUI with equipped item highlighting
+* Implemented event-driven equipment system with remote event synchronization
+* Enhanced dependency injection with AlchemyService integration in ActionService
+* Improved InventoryUI architecture with mode-based item interaction logic
+
 ## \[1.14.1] - 2026-01-20
 
 ### Added

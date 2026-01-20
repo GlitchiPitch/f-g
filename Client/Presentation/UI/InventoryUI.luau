@@ -4,10 +4,12 @@
 ---@field mainFrame Frame
 ---@field player Player
 ---@field character Model
----@field items table
----@field buttons table
+---@field items Tool[]
 ---@field _equippedItem Tool | nil
----@field _selectedItem Tool | nil
+---@field buttons table<TextButton, RBXScriptConnection>
+---@field useCases ClientUseCases
+---@field alchemyService ClientAlchemyService
+---@field _mode "inventory" | "alchemy" | "crafting"
 local InventoryUI = {}
 
 InventoryUI.__index = InventoryUI
@@ -18,12 +20,13 @@ function InventoryUI.new(diContainer)
 	local self = setmetatable({}, InventoryUI)
 	self.diContainer = diContainer
 	self.isOpen = false
-	self.closePosition = UDim2.fromScale(1.95, 0.05)
-	self.openPosition = UDim2.fromScale(0.95, 0.05)
+	self.closePosition = UDim2.fromScale(2, 0)
+	self.openPosition = UDim2.fromScale(1, 0)
 	self.items = {}
 	self.buttons = {}
 	self._equippedItem = nil
-	self._selectedItem = nil
+
+	self._mode = "inventory"
 	return self
 end
 
@@ -32,6 +35,9 @@ function InventoryUI:init()
 	local application = self.diContainer:resolve("Application")
 	local playerService = application.services.playerService
 	local inventoryUI = playerService.player.PlayerGui:WaitForChild("InventoryUI")
+	self.useCases = application.useCases
+	self.alchemyService = application.services.alchemyService
+
 	self.mainFrame = inventoryUI.Main
 	self.player = playerService.player
 	self.character = self.player.Character
@@ -45,59 +51,51 @@ function InventoryUI:init()
 	self:backpackRefresh()
 end
 
-function InventoryUI:search(location)
-	for _, child in pairs(location:GetChildren()) do
-		if child:IsA("Tool") then
-			table.insert(self.items, child)
-		end
-	end
-end
-
-function InventoryUI:refresh()
-	-- Destroy existing buttons
-	for _, button in pairs(self.buttons) do
-		button:Destroy()
-	end
-	self.buttons = {}
-
+function InventoryUI:_refresh()
 	-- Create new buttons for each item
-	for i, item in pairs(self.items) do
-		local button = self.itemTemplate:Clone()
+	for i, item in self.items do
+		local button = self.itemTemplate:Clone() :: ImageButton
 		button.Name = item.Name
 		button.LayoutOrder = i
-        button.Visible = true
+		button.Visible = true
 		button.Parent = self.handler
 		button.Image = item.TextureId
-		table.insert(self.buttons, button)
 
-		button.MouseButton1Click:Connect(function()
-			if self.handler.Selected.Value == nil or self.handler.Selected.Value ~= item then
-				self.mainFrame.Frame.ItemName.Text = item.Name
-				self.mainFrame.Frame.ImageLabel.Image = item.TextureId
-				self.handler.Selected.Value = item
+		if item == self._equippedItem then
+			button.BackgroundColor3 = Color3.fromRGB(28, 135, 42)
+		end
 
-				if self.handler.Selected.Value ~= self.handler.Equipped.Value then
-					self.handler.Location.Value = item.Parent
-					self.mainFrame.Frame.Equip.Text = "Equip"
-				elseif self.handler.Selected.Value == self.handler.Equipped.Value then
-					self.handler.Location.Value = item.Parent
-					self.handler.Equip.Text = "Unequip"
-				end
+		self.buttons[button] = button.MouseButton1Click:Connect(function()
+			if self._mode == "alchemy" then
+				self.alchemyService:addItemToAlchemy(item)
+			elseif self._mode == "inventory" then
+				self.useCases:equipItem(item)
 			end
 		end)
 	end
 end
 
-function InventoryUI:backpackRefresh()
-	self.items = {}
-	if self.character then
-		self:search(self.character)
-	end
-	self:search(self.player.Backpack)
-	self:refresh()
+---@param mode "inventory" | "alchemy" | "crafting"
+function InventoryUI:setMode(mode)
+	self._mode = mode
 end
 
-function InventoryUI:update() end
+function InventoryUI:backpackRefresh()
+	self:_clear()
+
+	if self.character then
+		self._equippedItem = self.character:FindFirstChildOfClass("Tool")
+		if self._equippedItem then
+			table.insert(self.items, self._equippedItem)
+		end
+	end
+
+	for _, child in self.player.Backpack:GetChildren() do
+		table.insert(self.items, child)
+	end
+
+	self:_refresh()
+end
 
 function InventoryUI:open()
 	self.mainFrame:TweenPosition(self.openPosition, "Out", "Quint", 1, true) -- Same X Position, Change Y's Scale to negative then change Y's Offset to negative the size of the frame in y
@@ -107,6 +105,17 @@ end
 function InventoryUI:close()
 	self.mainFrame:TweenPosition(self.closePosition, "Out", "Quint", 1, true) -- Same X Position, Change Y's Scale to negative then change Y's Offset to negative the size of the frame in y
 	self.isOpen = false
+end
+
+function InventoryUI:_clear()
+	for button, buttonConnect in self.buttons do
+		buttonConnect:Disconnect()
+		button:Destroy()
+	end
+
+	self.buttons = {}
+	self.items = {}
+	self._equippedItem = nil
 end
 
 return InventoryUI

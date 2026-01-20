@@ -62,4 +62,11 @@ function UseCases:onFoodEaten(data)
 	self.eventBus:fire(self.constants.REMOTE_EVENTS.FOOD_EATEN, data)
 end
 
+function UseCases:equipItem(item)
+	self.remoteEventService:fireServer({
+		eventName = self.constants.REMOTE_EVENTS.EQUIP_ITEM,
+		data = { item = item },
+	})
+end
+
 return UseCases

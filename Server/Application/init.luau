@@ -37,6 +37,9 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.BREW_POTION] = function(player, eventData)
 			self.useCases:brewPotion(player, eventData.data)
 		end,
+		[shared.constants.REMOTE_EVENTS.EQUIP_ITEM] = function(player, eventData)
+			self.useCases:equipItem(player, eventData.data)
+		end,
 	})
 end
 

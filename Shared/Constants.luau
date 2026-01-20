@@ -2,6 +2,7 @@
 local Constants = {
 	INIT_SERVER = "InitServer",
 	REMOTE_EVENTS = {
+		EQUIP_ITEM = "EquipItem",
 		HUNTING_STARTED = "HuntingStarted",
 		PECK = "Peck",
 		FOOD_SPAWNED = "FoodSpawned",

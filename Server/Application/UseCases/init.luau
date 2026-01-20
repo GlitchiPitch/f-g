@@ -59,4 +59,21 @@ function UseCases:brewPotion(player, data)
 	})
 end
 
+---@param player Player
+---@param data table
+function UseCases:equipItem(player, data)
+	data.player = player
+	local currentTool = player.Character:FindFirstChildOfClass("Tool")
+	if currentTool then
+		if currentTool == data.item then
+			currentTool.Parent = player.Backpack
+		else
+			currentTool.Parent = player.Backpack
+			data.item.Parent = player.Character
+		end
+	else
+		data.item.Parent = player.Character
+	end
+end
+
 return UseCases

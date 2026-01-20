@@ -59,6 +59,19 @@
 * \[x] Simplify constants structure with cleaned up TAGS section
 * \[x] Update client use cases dependency injection resolution
 
+## Completed (v1.14.2)
+
+* \[x] Complete equipment system with item equipping and unequipping mechanics
+* \[x] Add EQUIP_ITEM remote event for client-server equipment synchronization
+* \[x] Enhance AlchemyService with proper initialization and item management methods
+* \[x] Implement InventoryUI mode switching system for inventory, alchemy, and crafting modes
+* \[x] Improve InventoryUI with better item management and visual feedback
+* \[x] Refactor ActionService with AlchemyService integration for alchemy interactions
+* \[x] Expand Client UseCases with equipItem functionality
+* \[x] Enhance Server UseCases with comprehensive equipment management
+* \[x] Add equipment state tracking in InventoryUI with equipped item highlighting
+* \[x] Implement event-driven equipment system with remote event synchronization
+
 ## Completed (v1.14.1)
 
 * \[x] Add SoundService for audio management and sound playback functionality
@@ -67,7 +80,7 @@
 * \[x] Enhance Player entity with isAlive() method for health validation
 * \[x] Update camera zoom and occlusion transparency settings
 
-## Immediate Tasks (v1.14.1)
+## Immediate Tasks (v1.14.2)
 
 * \[ ] Integrate SoundService with game events (combat, UI interactions, world transitions)
 * \[ ] Add sound assets and audio feedback for player actions
@@ -135,18 +148,18 @@
 * \[x] Client repository infrastructure for player entity management
 * \[x] Enhanced player entity with data serialization methods
 
-## Immediate Tasks (v1.14.0)
+## Immediate Tasks (v1.14.2)
 
 * \[ ] Implement alchemy brewing mechanics with potion recipes and ingredients
-* \[ ] Create inventory management system for weapons, items, and potions
 * \[ ] Add food consumption mechanics with health/energy restoration
 * \[ ] Implement enemy loot drops and reward systems
 * \[ ] Add potion consumption mechanics with stat bonuses
-* \[ ] Implement weapon equipping and stat modifiers
 * \[ ] Add weapon crafting and upgrade systems using alchemy
 * \[ ] Implement item trading and marketplace mechanics
 * \[ ] Add weapon durability and repair systems
 * \[ ] Create player progression system with skill trees and stat allocation
+* \[ ] Integrate SoundService with equipment interactions and UI feedback
+* \[ ] Add visual effects for equipment changes and item usage
 
 ## Medium Priority (v1.4.0)
 
