@@ -18,8 +18,7 @@ function AlchemyService:init()
     self.potions = shared.assets.Potions
 end
 
----@param data table
-function AlchemyService:tryBrew(data)
+function AlchemyService:tryBrew()
     error("Not implemented")
 end
 

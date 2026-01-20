@@ -59,6 +59,18 @@
 * \[x] Simplify constants structure with cleaned up TAGS section
 * \[x] Update client use cases dependency injection resolution
 
+## Completed (v1.14.4)
+
+* \[x] Add loot system foundation with LootController and LootService
+* \[x] Implement item assets system (PurpleFlower, RedMushroom, BlueMushroom, Chamomile, PurpleMushroom)
+* \[x] Add Shared Cache system for temporary object management
+* \[x] Add CRAFT_ITEM remote event constant for crafting integration
+* \[x] Enhance InventoryUI with crafting mode support and item management
+* \[x] Expand Shared Assets module with Items module integration
+* \[x] Update Server Application with CRAFT_ITEM event handling
+* \[x] Enhance Client and Server UseCases with crafting system support
+* \[x] Expand Shared Data with comprehensive item definitions and models
+
 ## Completed (v1.14.3)
 
 * \[x] Add CraftService for comprehensive crafting mechanics and item management
@@ -92,14 +104,17 @@
 * \[x] Enhance Player entity with isAlive() method for health validation
 * \[x] Update camera zoom and occlusion transparency settings
 
-## Immediate Tasks (v1.14.4)
+## Immediate Tasks (v1.14.5)
 
-* \[ ] Implement crafting recipes and ingredient requirements system
-* \[ ] Create crafting UI component with recipe selection and ingredient management
-* \[ ] Add crafting station objects and interaction mechanics
-* \[ ] Implement crafting progress and completion animations
-* \[ ] Add crafting skill progression and recipe unlocking system
-* \[ ] Integrate crafting results with inventory system
+* \[ ] Implement enemy loot drops with item spawning mechanics
+* \[ ] Add loot collection system with player interaction
+* \[ ] Create crafting recipes system with ingredient requirements
+* \[ ] Implement crafting station objects and proximity detection
+* \[ ] Add crafting UI with recipe selection and ingredient validation
+* \[ ] Implement crafting progress animations and completion effects
+* \[ ] Add server-client eventBus interaction for loot and crafting events
+* \[ ] Integrate loot drops with inventory system
+* \[ ] Add item rarity and drop rate mechanics
 
 ## Completed (v1.13.0)
 

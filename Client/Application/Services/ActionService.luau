@@ -39,9 +39,9 @@ function ActionService:interactAction()
 	local currentTarget = self.targetController:getCurrentTarget()
 	local interactType = currentTarget:GetAttribute(self.constants.ATTRIBUTES.INTERACT_TYPE)
 	if interactType == "Alchemy" then
-		self.alchemyService:openAlchemy(currentTarget.CameraPart.CFrame)
+		self.alchemyService:openAlchemy(currentTarget)
 	elseif interactType == "Craft" then
-		self.craftService:openCraft(currentTarget.CameraPart.CFrame)
+		self.craftService:openCraft(currentTarget)
 	end
 end
 

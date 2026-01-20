@@ -16,6 +16,7 @@ CraftService.__index = CraftService
 function CraftService.new(diContainer)
 	local self = setmetatable({}, CraftService)
 	self.diContainer = diContainer
+	self._currentCraftTable = nil
 	return self
 end
 
@@ -33,8 +34,10 @@ function CraftService:init()
 	self.targetController = application.controllers.targetController
 end
 
----@param cameraCFrame CFrame
-function CraftService:openCraft(cameraCFrame)
+---@param craftTable Model
+function CraftService:openCraft(craftTable)
+	self._currentCraftTable = craftTable
+	local cameraCFrame = craftTable.CameraPart.CFrame
 	self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_CRAFT, { state = true })
 	self.inputService:blockInput(true)
 	self.playerService:toggleRobloxControl(false)
@@ -58,6 +61,15 @@ function CraftService:closeCraft()
 	self.playerService:toggleRobloxControl(true)
 	self.cameraController:setCameraMode("isometric")
 	self.targetController:blockTargetUpdate(false)
+end
+
+function CraftService:tryCraft()
+	self.useCases:craftItem(self.items)
+end
+
+---@param item Tool
+function CraftService:_animateAddItem(item)
+	
 end
 
 return CraftService

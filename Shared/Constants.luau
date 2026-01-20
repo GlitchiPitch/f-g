@@ -12,6 +12,7 @@ local Constants = {
 		PLAYER_UPDATED = "PlayerUpdated",
 
 		BREW_POTION = "BrewPotion",
+		CRAFT_ITEM = "CraftItem",
 	},
 	CLIENT_EVENTS = {
 		TOGGLE_DIED_SCREEN = "toggleDiedScreen",

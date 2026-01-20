@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.14.4] - 2026-01-20
+
+### Added
+
+* Loot system foundation with LootController and LootService for enemy drop mechanics
+* Item assets system with PurpleFlower, RedMushroom, BlueMushroom, Chamomile, and PurpleMushroom
+* Shared Cache system for temporary object management and storage
+* CRAFT_ITEM remote event constant for crafting system integration
+* Enhanced InventoryUI with crafting mode support and item management
+
+### Changed
+
+* Shared Assets module expanded with Items module integration
+* InventoryUI enhanced with craft mode functionality and service integration
+* Server Application updated with CRAFT_ITEM event handling
+* Client and Server UseCases expanded with crafting system support
+* Shared Data enhanced with comprehensive item definitions and models
+
+### Technical
+
+* Added loot point setup system in LootService with cache management
+* Implemented object caching with add/remove/get methods for temporary storage
+* Enhanced InventoryUI architecture with mode-based item interaction logic
+* Added event-driven crafting system with remote event synchronization
+* Expanded item data structure with health bonuses and pricing for new item types
+
 ## \[1.14.3] - 2026-01-20
 
 ### Added

@@ -32,7 +32,7 @@ local Potions = {
 				"Alchemy",
 			},
 			recipe = {
-				Apple = 1,
+				PurpleFlower = 1,
 				Water = 1,
 			},
 		},
@@ -49,7 +49,7 @@ local Potions = {
 				"Alchemy",
 			},
 			recipe = {
-				Apple = 1,
+				RedMushroom = 1,
 				Water = 1,
 			},
 		},
@@ -66,7 +66,7 @@ local Potions = {
 				"Alchemy",
 			},
 			recipe = {
-				Apple = 1,
+				BlueMushroom = 1,
 				Water = 1,
 			},
 		},
@@ -83,7 +83,7 @@ local Potions = {
 				"Alchemy",
 			},
 			recipe = {
-				Apple = 1,
+				Chamomile = 1,
 				Water = 1,
 			},
 		},

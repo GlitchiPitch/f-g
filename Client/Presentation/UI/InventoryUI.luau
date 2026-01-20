@@ -117,12 +117,14 @@ function InventoryUI:_refresh()
 			if self._mode == "alchemy" then
 				if self.alchemyService:addItemToAlchemy(item) then
 					print("Item added to alchemy")
+					button.Visible = false
 				else
 					print("Item not added to alchemy")
 				end
 			elseif self._mode == "craft" then
 				if self.craftService:addItemToCraft(item) then
 					print("Item added to craft")
+					button.Visible = false
 				else
 					print("Item not added to craft")
 				end

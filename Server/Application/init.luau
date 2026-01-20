@@ -40,6 +40,9 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.EQUIP_ITEM] = function(player, eventData)
 			self.useCases:equipItem(player, eventData.data)
 		end,
+		[shared.constants.REMOTE_EVENTS.CRAFT_ITEM] = function(player, eventData)
+			self.useCases:craftItem(player, eventData.data)
+		end,
 	})
 end
 

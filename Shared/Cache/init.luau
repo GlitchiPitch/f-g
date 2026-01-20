@@ -16,6 +16,7 @@ end
 
 function Cache:removeObjectFromCache(object)
 	self.objects[object.Name] = nil
+	object:Destroy()
 end
 
 function Cache:getObjectFromCache(name)

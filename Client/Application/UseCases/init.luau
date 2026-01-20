@@ -69,4 +69,11 @@ function UseCases:equipItem(item)
 	})
 end
 
+function UseCases:craftItem(items)
+	self.remoteEventService:fireServer({
+		eventName = self.constants.REMOTE_EVENTS.CRAFT_ITEM,
+		data = { items = items },
+	})
+end
+
 return UseCases

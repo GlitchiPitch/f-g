@@ -1,3 +1,4 @@
+local Debris = game:GetService("Debris")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local SharedAlchemyService = require(ReplicatedStorage.Shared.Application.Services.AlchemyService)
 
@@ -11,6 +12,7 @@ local SharedAlchemyService = require(ReplicatedStorage.Shared.Application.Servic
 ---@field playerService ClientPlayerService
 ---@field cameraController CameraController
 ---@field targetController TargetController
+---@field useCases ClientUseCases
 local AlchemyService = setmetatable({}, SharedAlchemyService)
 AlchemyService.__index = AlchemyService
 
@@ -19,6 +21,7 @@ AlchemyService.__index = AlchemyService
 function AlchemyService.new(diContainer)
 	local self = setmetatable(SharedAlchemyService.new(diContainer), AlchemyService)
 	self.items = {}
+	self._currentAlchemyTable = nil
 	return self
 end
 
@@ -30,6 +33,7 @@ function AlchemyService:init()
 	self.eventBus = shared.eventBus
 	self.constants = shared.constants
     self.cache = shared.cache
+	self.useCases = application.useCases
     self.inputService = application.services.inputService
 	self.playerService = application.services.playerService
 	self.cameraController = application.controllers.cameraController
@@ -37,8 +41,10 @@ function AlchemyService:init()
 	SharedAlchemyService.init(self)
 end
 
----@param cameraCFrame CFrame
-function AlchemyService:openAlchemy(cameraCFrame)
+---@param alchemyTable Model
+function AlchemyService:openAlchemy(alchemyTable)
+	self._currentAlchemyTable = alchemyTable
+	local cameraCFrame = alchemyTable.CameraPart.CFrame
 	self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_ALCHEMY, { state = true })
 	self.inputService:blockInput(true)
 	self.playerService:toggleRobloxControl(false)
@@ -51,6 +57,7 @@ function AlchemyService:addItemToAlchemy(item)
 	if item:HasTag("Alchemable") then
 		self.items[item.Name] = item
 		self.cache:addObjectToCache(item)
+		self:_animateAddItem(item:Clone())
 		return true
 	end
 	return false
@@ -62,7 +69,19 @@ function AlchemyService:closeAlchemy()
 	self.playerService:toggleRobloxControl(true)
 	self.cameraController:setCameraMode("isometric")
 	self.targetController:blockTargetUpdate(false)
+	self.items = {}
+	self._currentAlchemyTable = nil
 end
 
+function AlchemyService:tryBrew()
+	self.useCases:brewPotion(self.items)
+end
+
+---@param item Tool
+function AlchemyService:_animateAddItem(item)
+	item.Parent = self._currentAlchemyTable
+	item:PivotTo(CFrame.new(self._currentAlchemyTable.IngredientSpawnPoint.CFrame.Position))
+	Debris:AddItem(item, 1)
+end
 
 return AlchemyService

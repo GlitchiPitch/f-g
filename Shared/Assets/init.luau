@@ -6,6 +6,7 @@ local Assets = {
 	Enemies = require(script.Enemies),
 	Weapons = require(script.Weapons),
 	Food = require(script.Food),
+	Items = require(script.Items),
 	Hunter = script:FindFirstChild("Hunter"),
 	PeckHitbox = script:FindFirstChild("PeckHitbox"),
 	Seed = script:FindFirstChild("Seed"),

@@ -64,6 +64,51 @@ local Items = {
 		},
 		price = 10,
 	},
+	PurpleFlower = {
+		name = "Purple Flower",
+		image = "rbxassetid://1234567890",
+		model = Assets.Items.PurpleFlower,
+		bonus = {
+			health = 10,
+		},
+		price = 10,
+	},
+	RedMushroom = {
+		name = "Red Mushroom",
+		image = "rbxassetid://1234567890",
+		model = Assets.Items.RedMushroom,
+		bonus = {
+			health = 10,
+		},
+		price = 10,
+	},
+	BlueMushroom = {
+		name = "Blue Mushroom",
+		image = "rbxassetid://1234567890",
+		model = Assets.Items.BlueMushroom,
+		bonus = {
+			health = 10,
+		},
+		price = 10,
+	},
+	Chamomile = {
+		name = "Chamomile",
+		image = "rbxassetid://1234567890",
+		model = Assets.Items.Chamomile,
+		bonus = {
+			health = 10,
+		},
+		price = 10,
+	},
+	PurpleMushroom = {
+		name = "Purple Mushroom",
+		image = "rbxassetid://1234567890",
+		model = Assets.Items.PurpleMushroom,
+		bonus = {
+			health = 10,
+		},
+		price = 10,
+	},
 }
 
 return Items

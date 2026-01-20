@@ -3,6 +3,7 @@
 ---@field playerRepository ServerPlayerRepository
 ---@field actionService ServerActionService
 ---@field alchemyService ServerAlchemyService
+---@field craftService ServerCraftService
 ---@field remoteEventService RemoteEventService
 ---@field constants Constants
 local UseCases = {}
@@ -28,6 +29,7 @@ function UseCases:init()
 	self.actionService = application.services.actionService
 	self.playerRepository = infrastructure.repositories.playerRepository
 	self.alchemyService = application.services.alchemyService
+	self.craftService = application.services.craftService
 end
 
 ---@param player Player
@@ -74,6 +76,21 @@ function UseCases:equipItem(player, data)
 	else
 		data.item.Parent = player.Character
 	end
+end
+
+---@param player Player
+---@param data table
+function UseCases:craftItem(player, data)
+	print(`Craft item by {player.Name}`)
+	data.player = player
+	local result, message = self.craftService:tryCraft(data)
+	self.remoteEventService:fireClient(player, {
+		eventName = self.constants.REMOTE_EVENTS.CRAFT_ITEM,
+		data = {
+			result = result,
+			message = message,
+		},
+	})
 end
 
 return UseCases
