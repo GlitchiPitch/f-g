@@ -15,7 +15,7 @@ function TargetController.new(diContainer)
 	self.checkedTarget = nil
 	self.currentCheckedTarget = nil
 	self.player = Players.LocalPlayer
-
+	self._blockTargetUpdate = false
 	return self
 end
 
@@ -33,13 +33,25 @@ function TargetController:init()
 	self.playerService = application.services.playerService
 end
 
+---@param block boolean
+function TargetController:blockTargetUpdate(block)
+	self._blockTargetUpdate = block
+end
+
 ---@return Model | nil
 function TargetController:getCurrentTarget()
 	return self.currentCheckedTarget
 end
 
 function TargetController:update()
-	
+	if self._blockTargetUpdate then
+		if self.currentCheckedTarget then
+			self.currentCheckedTarget = nil
+			self:_setPlayerStateByTarget()
+		end
+		return
+	end
+
 	self.checkedTarget = self:_getTargetsClosestCrosshair()
 	if self.checkedTarget then
 		if self.currentCheckedTarget and self.currentCheckedTarget ~= self.checkedTarget then
@@ -58,8 +70,13 @@ end
 
 function TargetController:_setPlayerStateByTarget()
 	if self.currentCheckedTarget then
-		self.eventBus:fire("toggleActionButton", { state = true })
+		local interactType = self.currentCheckedTarget:GetAttribute(self.constants.ATTRIBUTES.INTERACT_TYPE)
+		if interactType then
+			self.playerService:setPlayerState("Interact")
+			self.eventBus:fire("toggleActionButton", { state = true })
+		end
 	else
+		self.playerService:setPlayerState("Idle")
 		self.eventBus:fire("toggleActionButton", { state = false })
 	end
 end

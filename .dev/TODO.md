@@ -59,6 +59,18 @@
 * \[x] Simplify constants structure with cleaned up TAGS section
 * \[x] Update client use cases dependency injection resolution
 
+## Completed (v1.14.3)
+
+* \[x] Add CraftService for comprehensive crafting mechanics and item management
+* \[x] Implement Shared Cache system for object management and temporary storage
+* \[x] Enhance CameraController with alchemy and crafting camera modes
+* \[x] Add TOGGLE_CRAFT client event constant for crafting UI management
+* \[x] Implement TargetController blocking functionality for interaction control
+* \[x] Add camera mode system with "standard", "alchemy", "craft", and "isometric" modes
+* \[x] Implement tweened camera transitions using TweenService for smooth UX
+* \[x] Add object caching system for temporary item management
+* \[x] Enhance target update blocking for seamless UI interaction states
+
 ## Completed (v1.14.2)
 
 * \[x] Complete equipment system with item equipping and unequipping mechanics
@@ -80,13 +92,14 @@
 * \[x] Enhance Player entity with isAlive() method for health validation
 * \[x] Update camera zoom and occlusion transparency settings
 
-## Immediate Tasks (v1.14.2)
+## Immediate Tasks (v1.14.4)
 
-* \[ ] Integrate SoundService with game events (combat, UI interactions, world transitions)
-* \[ ] Add sound assets and audio feedback for player actions
-* \[ ] Implement audio settings and volume controls in UI
-* \[ ] Add sound effects for weapon attacks and item usage
-* \[ ] Create ambient audio system for different world environments
+* \[ ] Implement crafting recipes and ingredient requirements system
+* \[ ] Create crafting UI component with recipe selection and ingredient management
+* \[ ] Add crafting station objects and interaction mechanics
+* \[ ] Implement crafting progress and completion animations
+* \[ ] Add crafting skill progression and recipe unlocking system
+* \[ ] Integrate crafting results with inventory system
 
 ## Completed (v1.13.0)
 

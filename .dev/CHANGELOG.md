@@ -5,6 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.14.3] - 2026-01-20
+
+### Added
+
+* CraftService for comprehensive crafting mechanics and item management
+* Shared Cache system for object management and temporary storage
+* Enhanced CameraController with alchemy and crafting camera modes
+* TOGGLE_CRAFT client event constant for crafting UI management
+* TargetController blocking functionality for interaction control
+
+### Changed
+
+* CameraController enhanced with tweened camera transitions for different interaction modes
+* TargetController improved with state blocking for UI interactions
+* Client services layer expanded with CraftService integration
+* Shared infrastructure enhanced with Cache system integration
+
+### Technical
+
+* Added camera mode system with "standard", "alchemy", "craft", and "isometric" modes
+* Implemented tweened camera transitions using TweenService for smooth UX
+* Added object caching system for temporary item management
+* Enhanced target update blocking for seamless UI interaction states
+
 ## \[1.14.2] - 2026-01-20
 
 ### Added

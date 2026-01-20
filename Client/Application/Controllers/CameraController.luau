@@ -1,4 +1,5 @@
 local RunService = game:GetService("RunService")
+local TweenService = game:GetService("TweenService")
 
 ---@class CameraController
 ---@field player Player
@@ -12,15 +13,12 @@ CameraController.__index = CameraController
 function CameraController.new(diContainer)
 	local self = setmetatable({}, CameraController)
 	self.diContainer = diContainer
-	self.fieldOfView = 8
 
 	--//Do not edit unless you know what you're doing//--
 	self.player = game.Players.LocalPlayer
 	-- self.mouse = self.player:GetMouse()
 	self.camera = workspace.CurrentCamera
-
-	self._deafultCamera = false
-
+	self._mode = "isometric"
 	-- First person camera attributes
 	-- you can mess with these settings
 	-- self.sensitivity = 0.6 -- anything higher would make looking up and down harder; recommend anything between 0~1
@@ -48,24 +46,44 @@ function CameraController:init()
 	self.zoom = shared.config.Client.Camera.zoom
 	self._isometricFOV = shared.config.Client.Camera.isometricFOV
 	self._defaultFOV = shared.config.Client.Camera.defaultFOV
-	
+
 	self.camera.CameraType = Enum.CameraType.Custom
 	self.character = self.player.Character or self.player.CharacterAdded:Wait()
 	self.head = self.character:FindFirstChild("Head")
-
-	
 end
 
----@param state boolean
-function CameraController:setDefaultCamera(state)
-	self._defaultCamera = state
-	if self._defaultCamera then
-		self.fieldOfView = self._defaultFOV
+---@param mode "standard" | "alchemy" | "craft" | "isometric"
+---@param data table
+function CameraController:setCameraMode(mode, data)
+	self._mode = mode
+
+	if mode == "standard" then
 		self.camera.CameraType = Enum.CameraType.Custom
-	else
+	elseif mode == "alchemy" then
+		self:_setAlchemyCamera(data.cameraCFrame)
+	elseif mode == "craft" then
+		self:_setCraftingCamera(data.cameraCFrame)
+	elseif mode == "isometric" then
 		self.camera.CameraType = Enum.CameraType.Scriptable
-		self.fieldOfView = self._isometricFOV
 	end
+end
+
+---@param cameraCFrame CFrame
+function CameraController:_setAlchemyCamera(cameraCFrame)
+	self.camera.CameraType = Enum.CameraType.Scriptable
+
+	local tween =
+		TweenService:Create(self.camera, TweenInfo.new(0.5), { CFrame = cameraCFrame, FieldOfView = self._defaultFOV })
+	tween:Play()
+end
+
+---@param cameraCFrame CFrame
+function CameraController:_setCraftingCamera(cameraCFrame)
+	self.camera.CameraType = Enum.CameraType.Scriptable
+
+	local tween =
+		TweenService:Create(self.camera, TweenInfo.new(0.5), { CFrame = cameraCFrame, FieldOfView = self._defaultFOV })
+	tween:Play()
 end
 
 function CameraController:onCharacterAdded()
@@ -83,15 +101,9 @@ end
 
 function CameraController:update()
 	if self.character then
-		-- self.camera.FieldOfView = self.fieldOfView
-		if not self._defaultCamera then
+		-- Only update camera for isometric mode; other modes have locked update loops
+		if self._mode == "isometric" then
 			self:_isometricCamera()
-			-- self:_firstPersonCamera()
-		else
-			self.camera.FieldOfView = self.fieldOfView
-			if self.character and self.character:FindFirstChild("Humanoid") then
-				self.camera.CameraSubject = self.character.Humanoid
-			end
 		end
 	end
 end
@@ -118,7 +130,7 @@ function CameraController:_isometricCamera()
 			self.character.Head.Position.Y + self.zoom,
 			self.character.Head.Position.Z + self.zoom
 		)
-		self.camera.FieldOfView = self.fieldOfView
+		self.camera.FieldOfView = self._isometricFOV
 		self.camera.CFrame = CFrame.new(cameraPos, self.character.Head.Position)
 		-- Handle occlusion transparency
 		self:_handleOcclusionTransparency(cameraPos, self.character.Head.Position)
@@ -148,15 +160,17 @@ function CameraController:_handleOcclusionTransparency(cameraPos, targetPos)
 	local raycastResult = workspace:Raycast(cameraPos, direction * distance, raycastParams)
 
 	if raycastResult then
-		local currentPos = cameraPos
 		local stepSize = 4 -- Check every 4 studs for performance
+		local numSamples = math.ceil(distance / stepSize)
 		local currentlyOccludingParts = {}
 
 		-- Cast multiple rays along the path to find all occluding parts
-		while (targetPos - currentPos).Magnitude > stepSize do
-			local segmentDirection = (targetPos - currentPos).Unit
-			local segmentDistance = math.min(stepSize, (targetPos - currentPos).Magnitude)
-			local segmentResult = workspace:Raycast(currentPos, segmentDirection * segmentDistance, raycastParams)
+		for i = 1, numSamples do
+			local t = (i - 1) / (numSamples - 1) -- Interpolation parameter (0 to 1)
+			local samplePos = cameraPos:Lerp(targetPos, t)
+			local rayDirection = (targetPos - samplePos).Unit
+			local rayDistance = math.min(stepSize, (targetPos - samplePos).Magnitude)
+			local segmentResult = workspace:Raycast(samplePos, rayDirection * rayDistance, raycastParams)
 
 			if
 				segmentResult
@@ -179,8 +193,6 @@ function CameraController:_handleOcclusionTransparency(cameraPos, targetPos)
 					self.transparentParts[part].lastOccludingTime = currentTime
 				end
 			end
-
-			currentPos = currentPos + segmentDirection * segmentDistance
 		end
 
 		-- Restore transparency for parts that are no longer occluding

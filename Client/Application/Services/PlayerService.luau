@@ -34,6 +34,10 @@ function PlayerService:init()
 	local shared = self.diContainer:resolve("Shared")
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
+	---@param character Model
+	local function onCharacterAdded(character)
+		self:_onCharacterAdded(character)
+	end
 
 	SharedPlayerService.init(self)
 
@@ -44,10 +48,10 @@ function PlayerService:init()
 	self.cameraController = application.controllers.cameraController
 	self.sprintController = application.controllers.sprintController
 	self.lightingService = application.services.lightingService
-	---@param character Model
-	local function onCharacterAdded(character)
-		self:_onCharacterAdded(character)
-	end
+
+
+	local playerModule = require(self.player.PlayerScripts:WaitForChild("PlayerModule"))
+	self.robloxControl = playerModule:GetControls()
 
 	if self.player.Character then
 		onCharacterAdded(self.player.Character)
@@ -84,12 +88,12 @@ function PlayerService:_onCharacterAdded(character)
 	_inventoryRefresh()
 
 	if currentWorldName == "Butchery" then
-		self.cameraController:setDefaultCamera(true)
+		self.cameraController:setCameraMode("standard")
 		self.lightingService:setMode("Butchery")
 	elseif currentWorldName == "Hell" then
 		self.lightingService:setMode("Hell")
 	else
-		self.cameraController:setDefaultCamera(false)
+		self.cameraController:setCameraMode("isometric")
 	end
 
 	self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_DIED_SCREEN, { state = false })
@@ -102,6 +106,15 @@ end
 
 function PlayerService:isAlive()
 	return self:_isAlive(self.player)
+end
+
+---@param state boolean
+function PlayerService:toggleRobloxControl(state)
+	if state then
+		self.robloxControl:Enable()
+	else
+		self.robloxControl:Disable()
+	end
 end
 
 ---@return ClientPlayerRepository

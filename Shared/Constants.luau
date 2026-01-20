@@ -19,6 +19,7 @@ local Constants = {
 		TOGGLE_ACTION_BUTTON = "toggleActionButton",
 		TOGGLE_ALCHEMY = "toggleAlchemy",
 		TOGGLE_INVENTORY = "toggleInventory",
+		TOGGLE_CRAFT = "toggleCraft",
 	},
 	DAY_NIGHT = {
 		-- Time constants (in minutes after midnight)

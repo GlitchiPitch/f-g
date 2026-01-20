@@ -5,11 +5,12 @@ local Domain = require(script.Domain)
 local Config = require(script.Config)
 local Data = require(script.Data)
 local Assets = require(script.Assets)
-
+local Cache = require(script.Cache)
 ---@class Shared
 ---@field assets Assets
 ---@field data Data
 ---@field config Config
+---@field cache Cache
 ---@field constants Constants
 ---@field domain Domain
 ---@field infrastructure Infrastructure
@@ -27,7 +28,8 @@ function Shared.new()
 	self.config = Config
 	self.constants = Constants
 	self.assets = Assets
-
+	
+	self.cache = Cache.new()
 	self.domain = Domain.new()
 	self.infrastructure = Infrastructure.new()
 	self.diContainer = self.infrastructure.diContainer

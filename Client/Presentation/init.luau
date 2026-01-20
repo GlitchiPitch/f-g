@@ -47,7 +47,11 @@ function Presentation:init()
 		self.ui:toggleActionButton(eventData.state)
 	end)
 	shared.eventBus:connect(shared.constants.CLIENT_EVENTS.TOGGLE_ALCHEMY, function(eventData)
-		self.ui:toggleAlchemy()
+
+		self.ui:toggleAlchemy(eventData.state)
+	end)
+	shared.eventBus:connect(shared.constants.CLIENT_EVENTS.TOGGLE_CRAFT, function(eventData)
+		self.ui:toggleCraft(eventData.state)
 	end)
 end
 

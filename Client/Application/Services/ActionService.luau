@@ -4,6 +4,10 @@
 ---@field targetController TargetController
 ---@field remoteEventService RemoteEventService
 ---@field constants Constants
+---@field inputService InputService
+---@field playerService ClientPlayerService
+---@field craftService ClientCraftService
+---@field alchemyService ClientAlchemyService
 local ActionService = {}
 ActionService.__index = ActionService
 
@@ -16,29 +20,34 @@ function ActionService.new(diContainer)
 end
 
 function ActionService:init()
-    ---@type ClientApp
-    local application = self.diContainer:resolve("Application")
-    ---@type Shared
-    local shared = self.diContainer:resolve("Shared")
-    self.useCases = application.useCases
-    self.animationService = application.services.animationService
-    self.eventBus = shared.eventBus
-    self.targetController = application.controllers.targetController
-    self.alchemyService = application.services.alchemyService
-    self.constants = shared.constants
+	---@type ClientApp
+	local application = self.diContainer:resolve("Application")
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	self.useCases = application.useCases
+	self.animationService = application.services.animationService
+	self.eventBus = shared.eventBus
+	self.targetController = application.controllers.targetController
+	self.alchemyService = application.services.alchemyService
+	self.constants = shared.constants
+	self.inputService = application.services.inputService
+	self.playerService = application.services.playerService
+	self.craftService = application.services.craftService
 end
 
 function ActionService:interactAction()
-    local currentTarget = self.targetController:getCurrentTarget()
-    local interactType = currentTarget:GetAttribute(self.constants.ATTRIBUTES.INTERACT_TYPE)
-    if interactType == "Alchemy" then
-        self.alchemyService:openAlchemy()
-    end
+	local currentTarget = self.targetController:getCurrentTarget()
+	local interactType = currentTarget:GetAttribute(self.constants.ATTRIBUTES.INTERACT_TYPE)
+	if interactType == "Alchemy" then
+		self.alchemyService:openAlchemy(currentTarget.CameraPart.CFrame)
+	elseif interactType == "Craft" then
+		self.craftService:openCraft(currentTarget.CameraPart.CFrame)
+	end
 end
 
 function ActionService:idleAction()
-    self.animationService:playAnimation("peck")
-    self.useCases:peck()
+	self.animationService:playAnimation("peck")
+	self.useCases:peck()
 end
 
 return ActionService

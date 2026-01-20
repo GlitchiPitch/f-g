@@ -103,11 +103,23 @@ function UI:toggleActionButton(state)
 	end
 end
 
-function UI:toggleAlchemy()
-	if self.alchemyUI.isOpen then
-		self.alchemyUI:close()
+function UI:toggleAlchemy(state)
+	if state then
+		self.inventoryUI:setMode("alchemy")
+		self:toggleInventory()
 	else
-		self.alchemyUI:open()
+		self.inventoryUI:setMode("inventory")
+		self:toggleInventory()
+	end
+end
+
+function UI:toggleCraft(state)
+	if state then
+		self.inventoryUI:setMode("craft")
+		self:toggleInventory()
+	else
+		self.inventoryUI:setMode("inventory")
+		self:toggleInventory()
 	end
 end
 
