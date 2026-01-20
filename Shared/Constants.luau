@@ -9,6 +9,7 @@ local Constants = {
 		TOOL_ACTIVATED = "ToolActivated",
 		PLAYER_DIED = "PlayerDied",
 		PLAYER_UPDATED = "PlayerUpdated",
+		BREW_POTION = "BrewPotion",
 	},
 	DAY_NIGHT = {
 		-- Time constants (in minutes after midnight)
@@ -28,6 +29,12 @@ local Constants = {
 		-- Default cycle settings
 		DEFAULT_DAY_LENGTH = 12, -- minutes
 		DEFAULT_UPDATE_RATE = 1 / 15, -- seconds
+	},
+
+	INTERACT_OBJECT_TYPES = {
+		INTERACT = "interact",
+		LOOT = "loot",
+		NPC = "npc",
 	},
 }
 

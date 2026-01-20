@@ -39,7 +39,7 @@ function InventoryUI:init()
 	self.itemTemplate = self.handler.Template
 
 	-- Disable the default backpack GUI
-	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+	-- game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
 
 	-- Initialize inventory refresh
 	self:backpackRefresh()

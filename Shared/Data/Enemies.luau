@@ -16,12 +16,12 @@ local enemyTemplates = {
 	},
 
 	Orc = {
-		health = 80,
+		health = 300,
 		speed = 12,
 		damage = 5,
 		attackRange = 5,
 		sightRange = 50,
-		respawnTime = 20, -- To prevent it from respawning, remove this line
+		respawnTime = 5, -- To prevent it from respawning, remove this line
 		attackAnimation = 115067823846471,
 
 		model = enemyAssets.Orc,

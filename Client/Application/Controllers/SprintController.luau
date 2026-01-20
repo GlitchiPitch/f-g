@@ -1,10 +1,8 @@
 local Players = game:GetService("Players")
-local RunService = game:GetService("RunService")
 
 ---@class SprintController
 ---@field diContainer DIContainer
 ---@field playerService ClientPlayerService
----@field commands SharedCommands
 ---@field useCases ClientUseCases
 local SprintController = {}
 SprintController.__index = SprintController
@@ -24,18 +22,7 @@ function SprintController:init()
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
 
-	local function onRender()
-		if self.humanoid.MoveDirection.Magnitude > 0 then
-			self.walking = true
-		else
-			self.walking = false
-			-- Don't automatically stop running when not moving
-			-- Player can hold run key to run in place
-		end
-	end
-
 	self.canRun = true -- If the player is able to run
-
 	self.commands = shared.application.commands
 	self.useCases = application.useCases
 	self.playerService = application.services.playerService
@@ -48,7 +35,16 @@ function SprintController:init()
 	-- self.runTrack = self.animator:LoadAnimation(self.runAnimation)
 	-- self.runTrack.Priority = Enum.AnimationPriority.Action
 
-	RunService.RenderStepped:Connect(onRender)
+end
+
+function SprintController:update()
+	if self.humanoid.MoveDirection.Magnitude > 0 then
+		self.walking = true
+	else
+		self.walking = false
+		-- Don't automatically stop running when not moving
+		-- Player can hold run key to run in place
+	end
 end
 
 function SprintController:onCharacterAdded()

@@ -5,6 +5,7 @@ local InputService = require(script.InputService)
 local FarmService = require(script.FarmService)
 local ToolService = require(script.ToolService)
 local LightingService = require(script.LightingService)
+local AlchemyService = require(script.AlchemyService)
 ---@class ClientAppServices
 ---@field diContainer DIContainer
 ---@field playerService ClientPlayerService
@@ -14,6 +15,7 @@ local LightingService = require(script.LightingService)
 ---@field farmService ClientFarmService
 ---@field toolService ClientToolService
 ---@field lightingService LightingService
+---@field alchemyService ClientAlchemyService
 local Services = {}
 Services.__index = Services
 
@@ -29,6 +31,7 @@ function Services.new(diContainer)
 	self.farmService = FarmService.new(self.diContainer)
 	self.toolService = ToolService.new(self.diContainer)
 	self.lightingService = LightingService.new(self.diContainer)
+	self.alchemyService = AlchemyService.new(self.diContainer)
 	return self
 end
 
@@ -39,6 +42,7 @@ function Services:init()
 	self.farmService:init()
 	self.toolService:init()
 	self.lightingService:init()
+	self.alchemyService:init()
 end
 
 return Services

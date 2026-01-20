@@ -12,7 +12,6 @@ CameraController.__index = CameraController
 function CameraController.new(diContainer)
 	local self = setmetatable({}, CameraController)
 	self.diContainer = diContainer
-	self.zoom = 140
 	self.fieldOfView = 8
 
 	--//Do not edit unless you know what you're doing//--
@@ -43,27 +42,29 @@ function CameraController.new(diContainer)
 end
 
 function CameraController:init()
-	--@param deltaTime number
-	local function onRender()
-		self:_onRender()
-	end
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
 
+	self.zoom = shared.config.Client.Camera.zoom
+	self._isometricFOV = shared.config.Client.Camera.isometricFOV
+	self._defaultFOV = shared.config.Client.Camera.defaultFOV
+	
 	self.camera.CameraType = Enum.CameraType.Custom
 	self.character = self.player.Character or self.player.CharacterAdded:Wait()
 	self.head = self.character:FindFirstChild("Head")
 
-	RunService.RenderStepped:Connect(onRender)
+	
 end
 
 ---@param state boolean
 function CameraController:setDefaultCamera(state)
 	self._defaultCamera = state
 	if self._defaultCamera then
-		self.fieldOfView = 80
+		self.fieldOfView = self._defaultFOV
 		self.camera.CameraType = Enum.CameraType.Custom
 	else
 		self.camera.CameraType = Enum.CameraType.Scriptable
-		self.fieldOfView = 8
+		self.fieldOfView = self._isometricFOV
 	end
 end
 
@@ -80,7 +81,7 @@ function CameraController:onMouseMovement(input)
 	self.targetAngleY = (self.targetAngleY - delta.x) % 360
 end
 
-function CameraController:_onRender(_)
+function CameraController:update()
 	if self.character then
 		-- self.camera.FieldOfView = self.fieldOfView
 		if not self._defaultCamera then

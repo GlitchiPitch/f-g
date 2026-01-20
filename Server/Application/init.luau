@@ -34,6 +34,9 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.TOOL_ACTIVATED] = function(player, eventData)
 			self.useCases:toolActivated(player)
 		end,
+		[shared.constants.REMOTE_EVENTS.BREW_POTION] = function(player, eventData)
+			self.useCases:brewPotion(player, eventData.data)
+		end,
 	})
 end
 

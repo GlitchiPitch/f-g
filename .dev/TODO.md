@@ -50,6 +50,18 @@
 * \[x] Add Enemies assets module for organized enemy model management
 * \[x] Update enemy data templates to use ReplicatedStorage assets
 
+## Completed (v1.13.0)
+
+* \[x] Add AlchemyService for potion brewing mechanics in client and server application services
+* \[x] Add comprehensive weapons data system with one-handed and two-handed weapon templates
+* \[x] Add Items data system with food items (Apple, Meat, Banana, Ham, Rice, Fish)
+* \[x] Add Potions data system foundation with Health, Mana, Stamina, and Speed potions
+* \[x] Add Shared Repositories infrastructure layer with WeaponRepository and ItemsRepository
+* \[x] Add Enums directory structure for game constants and enumerations
+* \[x] Add Lighting assets meta configuration for world-based lighting systems
+* \[x] Enhance Shared Infrastructure layer with repositories initialization
+* \[x] Refactor server initialization to remove player event handlers (moved to services layer)
+
 ## Completed (v1.12.0)
 
 * \[x] Add AlchemyService for potion brewing mechanics in server application services
@@ -98,7 +110,7 @@
 * \[x] Client repository infrastructure for player entity management
 * \[x] Enhanced player entity with data serialization methods
 
-## Immediate Tasks (v1.12.0)
+## Immediate Tasks (v1.13.0)
 
 * \[ ] Implement alchemy brewing mechanics with potion recipes and ingredients
 * \[ ] Add weapon crafting and upgrade systems using alchemy
@@ -108,6 +120,8 @@
 * \[ ] Create player progression system with skill trees and stat allocation
 * \[ ] Add food consumption mechanics with health/energy restoration
 * \[ ] Implement enemy loot drops and reward systems
+* \[ ] Add potion consumption mechanics with stat bonuses
+* \[ ] Implement weapon equipping and stat modifiers
 
 ## Medium Priority (v1.4.0)
 

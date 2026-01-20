@@ -2,6 +2,9 @@
 ---@field diContainer DIContainer
 ---@field playerRepository ServerPlayerRepository
 ---@field actionService ServerActionService
+---@field alchemyService ServerAlchemyService
+---@field remoteEventService RemoteEventService
+---@field constants Constants
 local UseCases = {}
 UseCases.__index = UseCases
 
@@ -14,12 +17,17 @@ function UseCases.new(diContainer)
 end
 
 function UseCases:init()
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
 	---@type ServerApp
 	local application = self.diContainer:resolve("Application")
 	---@type ServerInfrastructure
 	local infrastructure = self.diContainer:resolve("Infrastructure")
+	self.remoteEventService = shared.remoteEventService
+	self.constants = shared.constants
 	self.actionService = application.services.actionService
 	self.playerRepository = infrastructure.repositories.playerRepository
+	self.alchemyService = application.services.alchemyService
 end
 
 ---@param player Player
@@ -34,6 +42,21 @@ function UseCases:toolActivated(player)
 	print(`Tool activated by {player.Name}`)
 	local playerEntity = self.playerRepository:getPlayerEntity(player)
 	self.actionService:toolActivated(playerEntity)
+end
+
+---@param player Player
+---@param data table
+function UseCases:brewPotion(player, data)
+	print(`Brew potion by {player.Name}`)
+	data.player = player
+	local result, message = self.alchemyService:tryBrew(data)
+	self.remoteEventService:fireClient(player, {
+		eventName = self.constants.REMOTE_EVENTS.BREW_POTION,
+		data = {
+			result = result,
+			message = message,
+		},
+	})
 end
 
 return UseCases

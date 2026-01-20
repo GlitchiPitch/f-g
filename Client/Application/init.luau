@@ -31,20 +31,22 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.HUNTING_STARTED] = function(eventData)
 			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.HUNTING_STARTED, eventData)
 		end,
-		[shared.constants.REMOTE_EVENTS.FOOD_SPAWNED] = function(eventData)
-			self.services.farmService:onFoodSpawned(eventData)
-		end,
-		[shared.constants.REMOTE_EVENTS.FOOD_EATEN] = function(eventData)
-			self.services.farmService:onFoodEaten(eventData)
-		end,
 		[shared.constants.REMOTE_EVENTS.PLAYER_DIED] = function(eventData)
 			warn("Application:init - PLAYER_DIED", eventData)
 			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.PLAYER_DIED, eventData)
 		end,
+		
+		[shared.constants.REMOTE_EVENTS.FOOD_SPAWNED] = function(eventData)
+			self.useCases:onFoodSpawned(eventData)
+		end,
+		[shared.constants.REMOTE_EVENTS.FOOD_EATEN] = function(eventData)
+			self.useCases:onFoodEaten(eventData)
+		end,
 		[shared.constants.REMOTE_EVENTS.PLAYER_UPDATED] = function(eventData)
-			self.services.playerService:updatePlayer(eventData.data)
-			self.services.lightingService:setMode(self.services.playerService:getPlayerState())
-			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.PLAYER_UPDATED, eventData.data)
+			self.useCases:updatePlayer(eventData.data)
+		end,
+		[shared.constants.REMOTE_EVENTS.BREW_POTION] = function(eventData)
+			self.useCases:brewPotion(eventData.data)
 		end,
 	})
 end

@@ -1,8 +1,9 @@
 ---@class Assets
 local Assets = {
 	Lighting = require(script.Lighting),
-	Enemies = require(script.Enemies),
+	Potions = require(script.Potions),
 	Animations = require(script.Animations),
+	Enemies = require(script.Enemies),
 	Weapons = require(script.Weapons),
 	Food = require(script.Food),
 	Hunter = script:FindFirstChild("Hunter"),
