@@ -25,6 +25,7 @@ function UI:init()
 	self.mainUI = application.services.playerService.player.PlayerGui:WaitForChild("MainUI")
 	self.diedUI = application.services.playerService.player.PlayerGui:WaitForChild("DiedUI")
 	self.diedFrame = self.diedUI.Frame
+	self.actionButton = self.mainUI.ActionButton
 
 	self.notification = self.mainUI.Notification
 	self.foodPopup = self.mainUI.FoodPopup
@@ -89,6 +90,14 @@ end
 
 function UI:refreshInventory()
 	self.inventoryUI:backpackRefresh()
+end
+
+function UI:toggleActionButton(state)
+	if state then
+		self.actionButton.Visible = true
+	else
+		self.actionButton.Visible = false
+	end
 end
 
 return UI

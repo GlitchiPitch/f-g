@@ -31,10 +31,8 @@ local Constants = {
 		DEFAULT_UPDATE_RATE = 1 / 15, -- seconds
 	},
 
-	INTERACT_OBJECT_TYPES = {
-		INTERACT = "interact",
-		LOOT = "loot",
-		NPC = "npc",
+	TAGS = {
+		INTERACT = "Interact",
 	},
 }
 

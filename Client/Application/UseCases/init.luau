@@ -19,10 +19,10 @@ end
 function UseCases:init()
 	---@type Shared
 	local shared = self.diContainer:resolve("Shared")
-	---@type ClientAppServices
-	local services = self.diContainer:resolve("Services")
-	self.playerService = services.playerService
-	self.lightingService = services.lightingService
+	---@type ClientApp
+	local application = self.diContainer:resolve("Application")
+	self.playerService = application.services.playerService
+	self.lightingService = application.services.lightingService
 	self.remoteEventService = shared.remoteEventService
 	self.constants = shared.constants
 	self.eventBus = shared.eventBus

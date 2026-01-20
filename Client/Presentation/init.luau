@@ -39,6 +39,9 @@ function Presentation:init()
 	shared.eventBus:connect("inventoryRefresh", function(eventData)
 		self.ui:refreshInventory()
 	end)
+	shared.eventBus:connect("toggleActionButton", function(eventData)
+		self.ui:toggleActionButton(eventData.state)
+	end)
 end
 
 return Presentation

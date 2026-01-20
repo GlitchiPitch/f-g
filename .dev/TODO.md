@@ -50,6 +50,15 @@
 * \[x] Add Enemies assets module for organized enemy model management
 * \[x] Update enemy data templates to use ReplicatedStorage assets
 
+## Completed (v1.14.0)
+
+* \[x] Refactor TargetController with streamlined crosshair targeting logic
+* \[x] Add brew potion use case with BREW_POTION remote event for alchemy mechanics
+* \[x] Implement action button toggle functionality in UI presentation layer
+* \[x] Enhance enemy service initialization with dedicated spawn method
+* \[x] Simplify constants structure with cleaned up TAGS section
+* \[x] Update client use cases dependency injection resolution
+
 ## Completed (v1.13.0)
 
 * \[x] Add AlchemyService for potion brewing mechanics in client and server application services
@@ -110,18 +119,18 @@
 * \[x] Client repository infrastructure for player entity management
 * \[x] Enhanced player entity with data serialization methods
 
-## Immediate Tasks (v1.13.0)
+## Immediate Tasks (v1.14.0)
 
 * \[ ] Implement alchemy brewing mechanics with potion recipes and ingredients
-* \[ ] Add weapon crafting and upgrade systems using alchemy
 * \[ ] Create inventory management system for weapons, items, and potions
-* \[ ] Implement item trading and marketplace mechanics
-* \[ ] Add weapon durability and repair systems
-* \[ ] Create player progression system with skill trees and stat allocation
 * \[ ] Add food consumption mechanics with health/energy restoration
 * \[ ] Implement enemy loot drops and reward systems
 * \[ ] Add potion consumption mechanics with stat bonuses
 * \[ ] Implement weapon equipping and stat modifiers
+* \[ ] Add weapon crafting and upgrade systems using alchemy
+* \[ ] Implement item trading and marketplace mechanics
+* \[ ] Add weapon durability and repair systems
+* \[ ] Create player progression system with skill trees and stat allocation
 
 ## Medium Priority (v1.4.0)
 

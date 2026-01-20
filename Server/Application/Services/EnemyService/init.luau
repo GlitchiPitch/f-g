@@ -26,10 +26,6 @@ function EnemyService:init()
 	self.EnemyTemplates = shared.data.Enemies
 	self.Enemy = shared.domain.Entities.Enemy
 
-	local w1SpawnPoints = workspace.Worlds.World1.EnemySpawnPoints:GetChildren()
-	for _, spawnPoint in w1SpawnPoints do
-		self:spawnEnemy("Orc", spawnPoint.Position)
-	end
 end
 
 -- Spawn method
@@ -86,6 +82,13 @@ function EnemyService:destroy(enemy: any)
 	enemy:destroy()
 	-- Remove from global enemy list
 	self.enemies[enemy.id] = nil
+end
+
+function EnemyService:_spawnEnemies()
+	local w1SpawnPoints = workspace.Worlds.World1.EnemySpawnPoints:GetChildren()
+	for _, spawnPoint in w1SpawnPoints do
+		self:spawnEnemy("Orc", spawnPoint.Position)
+	end
 end
 
 return EnemyService

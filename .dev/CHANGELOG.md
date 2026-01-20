@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.14.0] - 2026-01-20
+
+### Added
+
+* Brew potion use case with BREW_POTION remote event for alchemy mechanics
+* Action button toggle functionality in UI presentation layer
+* Event-driven action button management in target controller
+
+### Changed
+
+* Refactored TargetController with streamlined crosshair targeting logic
+* Simplified target detection by removing complex UI billboard management
+* Improved raycast-based target acquisition with better distance validation
+* Enhanced enemy service initialization by moving spawn logic to dedicated method
+* Cleaned up constants structure with simplified TAGS section
+* Updated client use cases dependency injection resolution
+
+### Removed
+
+* Complex target view toggle methods (_toogleTargetView, _getTargetsInRange, _isTargetInView)
+* Redundant INTERACT_OBJECT_TYPES constants (replaced with simplified TAGS)
+
+### Technical
+
+* Added potion brewing remote event constant for future alchemy system integration
+* Streamlined target controller architecture for improved performance
+* Enhanced client presentation layer with action button event handling
+
 ## \[1.13.0] - 2026-01-20
 
 ### Added
