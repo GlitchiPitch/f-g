@@ -51,6 +51,13 @@ function PlayerService:setCurrentWorldName(player, worldName)
 	playerEntity:setCurrentWorld(worldName)
 end
 
+---@param player Player
+---@return boolean
+function PlayerService:_isAlive(player)
+	local playerEntity = self:getPlayerEntity(player)
+	return playerEntity:isAlive()
+end
+
 --- Override in subclasses to return appropriate repository
 ---@return ServerPlayerRepository | ClientPlayerRepository
 function PlayerService:_getPlayerRepository()

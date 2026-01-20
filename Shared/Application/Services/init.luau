@@ -1,5 +1,8 @@
+local SoundService = require(script.SoundService)
+
 ---@class Services
 ---@field diContainer DIContainer
+---@field soundService CustomSoundService
 local Services = {}
 Services.__index = Services
 
@@ -8,6 +11,7 @@ Services.__index = Services
 function Services.new(diContainer)
 	local self = setmetatable({}, Services)
 	self.diContainer = diContainer
+	self.soundService = SoundService.new()
 	return self
 end
 

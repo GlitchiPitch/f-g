@@ -59,6 +59,22 @@
 * \[x] Simplify constants structure with cleaned up TAGS section
 * \[x] Update client use cases dependency injection resolution
 
+## Completed (v1.14.1)
+
+* \[x] Add SoundService for audio management and sound playback functionality
+* \[x] Implement CLIENT_EVENTS constants for UI toggle management
+* \[x] Add ATTRIBUTES constants for interact type handling
+* \[x] Enhance Player entity with isAlive() method for health validation
+* \[x] Update camera zoom and occlusion transparency settings
+
+## Immediate Tasks (v1.14.1)
+
+* \[ ] Integrate SoundService with game events (combat, UI interactions, world transitions)
+* \[ ] Add sound assets and audio feedback for player actions
+* \[ ] Implement audio settings and volume controls in UI
+* \[ ] Add sound effects for weapon attacks and item usage
+* \[ ] Create ambient audio system for different world environments
+
 ## Completed (v1.13.0)
 
 * \[x] Add AlchemyService for potion brewing mechanics in client and server application services

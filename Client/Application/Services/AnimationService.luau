@@ -88,4 +88,5 @@ function AnimationService:stopAllAnimations()
 		animation:Stop()
 	end
 end
+
 return AnimationService

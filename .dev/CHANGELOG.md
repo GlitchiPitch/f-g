@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.14.1] - 2026-01-20
+
+### Added
+
+* SoundService for comprehensive audio management and sound playback
+* CLIENT_EVENTS constants for UI toggle functionality (inventory, alchemy, action button, death screen)
+* ATTRIBUTES constants for interact type management
+* isAlive() method to Player entity for health and character state checking
+
+### Changed
+
+* Camera zoom increased from 100 to 140 for better visibility
+* Occlusion transparency increased from 0.5 to 0.8 for improved visual clarity
+
+### Technical
+
+* Enhanced shared services layer with SoundService integration
+* Improved player entity with health validation methods
+* Expanded constants structure with client event and attribute definitions
+
 ## \[1.14.0] - 2026-01-20
 
 ### Added

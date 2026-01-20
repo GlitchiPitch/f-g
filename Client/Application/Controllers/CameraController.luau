@@ -173,7 +173,7 @@ function CameraController:_handleOcclusionTransparency(cameraPos, targetPos)
 						lastOccludingTime = currentTime,
 					}
 					-- Make part semitransparent
-					part.Transparency = 0.5
+					part.Transparency = 0.8
 				else
 					-- Update last occluding time
 					self.transparentParts[part].lastOccludingTime = currentTime

@@ -31,10 +31,10 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.HUNTING_STARTED] = function(eventData)
 			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.HUNTING_STARTED, eventData)
 		end,
-		[shared.constants.REMOTE_EVENTS.PLAYER_DIED] = function(eventData)
-			warn("Application:init - PLAYER_DIED", eventData)
-			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.PLAYER_DIED, eventData)
-		end,
+		-- [shared.constants.REMOTE_EVENTS.PLAYER_DIED] = function(eventData)
+		-- 	warn("Application:init - PLAYER_DIED", eventData)
+		-- 	shared.eventBus:fire(shared.constants.REMOTE_EVENTS.PLAYER_DIED, eventData)
+		-- end,
 		
 		[shared.constants.REMOTE_EVENTS.FOOD_SPAWNED] = function(eventData)
 			self.useCases:onFoodSpawned(eventData)

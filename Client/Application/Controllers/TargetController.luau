@@ -33,20 +33,13 @@ function TargetController:init()
 	self.playerService = application.services.playerService
 end
 
+---@return Model | nil
 function TargetController:getCurrentTarget()
 	return self.currentCheckedTarget
 end
 
 function TargetController:update()
-	-- local playerState = self.playerService:getPlayerState()
-	-- if not table.find(self.availableStatesForRender, playerState) then
-	-- 	if self.currentCheckedTarget then
-	-- 		self:_toogleTargetView(false)
-	-- 		-- self.currentCheckedTarget = nil
-	-- 	end
-	-- 	return
-	-- end
-
+	
 	self.checkedTarget = self:_getTargetsClosestCrosshair()
 	if self.checkedTarget then
 		if self.currentCheckedTarget and self.currentCheckedTarget ~= self.checkedTarget then

@@ -30,7 +30,6 @@ function UI:init()
 	self.notification = self.mainUI.Notification
 	self.foodPopup = self.mainUI.FoodPopup
 	self.playerService = application.services.playerService
-	
 
 	self.inventoryUI:init()
 end
@@ -59,25 +58,29 @@ function UI:showFoodEaten()
 	tween:Play()
 end
 
-function UI:showDiedScreen()
-	self.diedFrame.Visible = true
-	self.diedFrame.Transparency = 1
+function UI:toggleDiedScreen(state)
+	if state then
+		self.diedFrame.Visible = true
+		self.diedFrame.Transparency = 1
+	end
 
-	local showTween = TweenService:Create(self.diedFrame, TweenInfo.new(2), {
-		Transparency = 0,
-	})
-	showTween.Completed:Connect(function()
+	if state then
+		local showTween = TweenService:Create(self.diedFrame, TweenInfo.new(2), {
+			Transparency = 0,
+		})
+
+		showTween:Play()
+	else
 		local hideTween = TweenService:Create(self.diedFrame, TweenInfo.new(2), {
 			Transparency = 1,
 		})
-		
+
 		hideTween.Completed:Connect(function()
 			self.diedFrame.Visible = false
 			self.diedFrame.Transparency = 1
 		end)
 		hideTween:Play()
-	end)
-	showTween:Play()
+	end
 end
 
 function UI:toggleInventory()
@@ -97,6 +100,14 @@ function UI:toggleActionButton(state)
 		self.actionButton.Visible = true
 	else
 		self.actionButton.Visible = false
+	end
+end
+
+function UI:toggleAlchemy()
+	if self.alchemyUI.isOpen then
+		self.alchemyUI:close()
+	else
+		self.alchemyUI:open()
 	end
 end
 

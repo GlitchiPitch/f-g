@@ -29,18 +29,25 @@ function Presentation:init()
 	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.FOOD_EATEN, function(eventData)
 		self.ui:showFoodEaten()
 	end)
-	shared.eventBus:connect(shared.constants.REMOTE_EVENTS.PLAYER_DIED, function(eventData)
-		self.ui:showDiedScreen()
+	shared.eventBus:connect(shared.constants.CLIENT_EVENTS.TOGGLE_DIED_SCREEN, function(eventData)
+		if eventData.state then
+			shared.services.soundService:playSound("YouDied")
+		end
+
+		self.ui:toggleDiedScreen(eventData.state)
 	end)
-	shared.eventBus:connect("toggleInventory", function(eventData)
+	shared.eventBus:connect(shared.constants.CLIENT_EVENTS.TOGGLE_INVENTORY, function(eventData)
 		self.ui:toggleInventory()
 	end)
 
-	shared.eventBus:connect("inventoryRefresh", function(eventData)
+	shared.eventBus:connect(shared.constants.CLIENT_EVENTS.INVENTORY_REFRESH, function(eventData)
 		self.ui:refreshInventory()
 	end)
-	shared.eventBus:connect("toggleActionButton", function(eventData)
+	shared.eventBus:connect(shared.constants.CLIENT_EVENTS.TOGGLE_ACTION_BUTTON, function(eventData)
 		self.ui:toggleActionButton(eventData.state)
+	end)
+	shared.eventBus:connect(shared.constants.CLIENT_EVENTS.TOGGLE_ALCHEMY, function(eventData)
+		self.ui:toggleAlchemy()
 	end)
 end
 

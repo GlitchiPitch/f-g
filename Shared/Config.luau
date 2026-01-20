@@ -8,7 +8,7 @@ local Config = {
 			InventoryKey = Enum.KeyCode.E,
 		},
 		Camera = {
-			zoom = 100,
+			zoom = 140,
 			isometricFOV = 8,
 			defaultFOV = 80,
 		},

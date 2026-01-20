@@ -68,9 +68,15 @@ function PlayerService:_onCharacterAdded(character)
 	local playerRepository = self:_getPlayerRepository()
 	local playerEntity = playerRepository:getPlayerEntity(self.player)
 	local currentWorldName = playerEntity:getCurrentWorld()
-
+	local humanoid = character:FindFirstChild("Humanoid")
 	local function _inventoryRefresh()
-		self.eventBus:fire("inventoryRefresh")
+		self.eventBus:fire(self.constants.CLIENT_EVENTS.INVENTORY_REFRESH, {})
+	end
+
+	if humanoid then
+		humanoid.Died:Connect(function()
+			self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_DIED_SCREEN, { state = true })
+		end)
 	end
 
 	character.ChildAdded:Connect(_inventoryRefresh)
@@ -86,10 +92,16 @@ function PlayerService:_onCharacterAdded(character)
 		self.cameraController:setDefaultCamera(false)
 	end
 
+	self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_DIED_SCREEN, { state = false })
+
 	self.animationService:init()
 	self.cameraController:onCharacterAdded()
 	self.toolService:checkCharacterTool()
 	self.sprintController:onCharacterAdded()
+end
+
+function PlayerService:isAlive()
+	return self:_isAlive(self.player)
 end
 
 ---@return ClientPlayerRepository

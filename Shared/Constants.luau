@@ -9,7 +9,15 @@ local Constants = {
 		TOOL_ACTIVATED = "ToolActivated",
 		PLAYER_DIED = "PlayerDied",
 		PLAYER_UPDATED = "PlayerUpdated",
+
 		BREW_POTION = "BrewPotion",
+	},
+	CLIENT_EVENTS = {
+		TOGGLE_DIED_SCREEN = "toggleDiedScreen",
+		INVENTORY_REFRESH = "inventoryRefresh",
+		TOGGLE_ACTION_BUTTON = "toggleActionButton",
+		TOGGLE_ALCHEMY = "toggleAlchemy",
+		TOGGLE_INVENTORY = "toggleInventory",
 	},
 	DAY_NIGHT = {
 		-- Time constants (in minutes after midnight)
@@ -33,6 +41,9 @@ local Constants = {
 
 	TAGS = {
 		INTERACT = "Interact",
+	},
+	ATTRIBUTES = {
+		INTERACT_TYPE = "InteractType",
 	},
 }
 

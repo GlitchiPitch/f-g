@@ -2,6 +2,7 @@ local UserInputService = game:GetService("UserInputService")
 ---@class InputService
 ---@field diContainer DIContainer
 ---@field config Config
+---@field constants Constants
 ---@field eventBus EventBus
 ---@field playerService ClientPlayerService
 ---@field sprintController SprintController
@@ -15,6 +16,7 @@ InputService.__index = InputService
 function InputService.new(diContainer)
 	local self = setmetatable({}, InputService)
 	self.diContainer = diContainer
+	self._blockInput = false
 	return self
 end
 
@@ -36,6 +38,7 @@ function InputService:init()
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
 	self.config = shared.config
+	self.constants = shared.constants
 	self.eventBus = shared.eventBus
 	self.playerService = application.services.playerService
 
@@ -49,18 +52,26 @@ function InputService:init()
 	self._inputChangedConn = UserInputService.InputChanged:Connect(onInputChanged)
 end
 
+---@param state boolean
+function InputService:blockInput(state)
+	self._blockInput = state
+end
+
 ---@param input InputObject
 ---@param gameProccessed any
 function InputService:_inputBegan(input, gameProccessed)
-	if gameProccessed then
+	if gameProccessed or self._blockInput then
 		return
 	end
+
 	local playerState = self.playerService:getPlayerState()
 	if input.UserInputType == self.config.Client.Control.MainAction then
 		if playerState == "Idle" then
 			self.actionService:idleAction()
 		elseif playerState == "Weapon" then
 			self.toolService:activated()
+		elseif playerState == "Interact" then
+			self.actionService:interactAction()
 		end
 	elseif input.UserInputType == self.config.Client.Control.SecondAction then
 		if playerState == "Weapon" then
@@ -73,7 +84,7 @@ function InputService:_inputBegan(input, gameProccessed)
 	end
 
 	if input.KeyCode == self.config.Client.Control.InventoryKey then
-		self.eventBus:fire("toggleInventory")
+		self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_INVENTORY, {})
 	end
 
 	-- if self.config.Client.Control.EquippmentKeys[input.KeyCode.Name] then
@@ -82,7 +93,7 @@ function InputService:_inputBegan(input, gameProccessed)
 end
 
 function InputService:_inputEnded(input, gameProccessed)
-	if gameProccessed then
+	if gameProccessed or self._blockInput then
 		return
 	end
 	local playerState = self.playerService:getPlayerState()

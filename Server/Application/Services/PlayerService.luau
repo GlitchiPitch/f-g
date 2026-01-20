@@ -83,14 +83,16 @@ function PlayerService:_onCharacterAdded(character)
 			if character.PrimaryPart then
 				character.PrimaryPart.Anchored = true
 			end
-
-			self.remoteEventService:fireClient(player, {
-				eventName = self.constants.REMOTE_EVENTS.PLAYER_DIED,
-				data = {},
-			})
 		end)
 	end
 end
+
+---@param player Player
+---@return boolean
+function PlayerService:isAlive(player)
+	return self:_isAlive(player)
+end
+
 ---@param player Player
 function PlayerService:_onPlayerRemoving(player)
 	---@type ServerPlayerRepository

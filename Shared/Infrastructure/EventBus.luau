@@ -19,17 +19,14 @@ function EventBus:getEvent(eventName)
 	return self._events[eventName]
 end
 
-
----@alias eventName string
-
----@param eventName eventName
+---@param eventName string
 ---@param data any
 function EventBus:fire(eventName, data)
 	local event = self:getEvent(eventName)
 	event:Fire(data)
 end
 
----@param eventName eventName
+---@param eventName string
 ---@param callback function
 ---@return RBXScriptConnection
 function EventBus:connect(eventName, callback)
