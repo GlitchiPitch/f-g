@@ -1,6 +1,3 @@
-local Players = game:GetService("Players")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
 ---@class ServerHuntingService
 ---@field isActive boolean
 ---@field targetBird string
@@ -37,7 +34,6 @@ function HuntingService:init()
 end
 
 function HuntingService:start()
-	warn("HuntingService:start")
 	if self.isActive then
 		return
 	end
@@ -50,7 +46,6 @@ function HuntingService:start()
 end
 
 function HuntingService:stop()
-	warn("HuntingService:stop")
 	self.isActive = false
 	self.hunter:setState(false)
 end

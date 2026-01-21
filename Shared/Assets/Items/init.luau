@@ -5,6 +5,8 @@ local Items = {
     BlueMushroom = script.BlueMushroom,
     Chamomile = script.Chamomile,
     PurpleMushroom = script.PurpleMushroom,
+    Poop = script.Poop,
+    Water = script.Water,
 }
 
 return Items

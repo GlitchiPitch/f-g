@@ -13,6 +13,7 @@ local Constants = {
 
 		BREW_POTION = "BrewPotion",
 		CRAFT_ITEM = "CraftItem",
+		ADD_ITEM_FOR_BREWING = "AddItemForBrewing",
 	},
 	CLIENT_EVENTS = {
 		TOGGLE_DIED_SCREEN = "toggleDiedScreen",

@@ -2,7 +2,18 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
 local enemyAssets = require(ReplicatedStorage.Shared.Assets).Enemies
 
-local enemyTemplates = {
+---@class EnemyData
+---@field health number
+---@field speed number
+---@field damage number
+---@field attackRange number
+---@field sightRange number
+---@field respawnTime number
+---@field attackAnimation number
+---@field model Model
+
+---@class EnemiesData
+local Enemies = {
 	Dummy = {
 		health = 100,
 		speed = 16,
@@ -64,4 +75,4 @@ local enemyTemplates = {
 	},
 }
 
-return enemyTemplates
+return Enemies

@@ -43,6 +43,9 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.CRAFT_ITEM] = function(player, eventData)
 			self.useCases:craftItem(player, eventData.data)
 		end,
+		[shared.constants.REMOTE_EVENTS.ADD_ITEM_FOR_BREWING] = function(player, eventData)
+			self.useCases:addItemForBrewing(player, eventData.data)
+		end,
 	})
 end
 

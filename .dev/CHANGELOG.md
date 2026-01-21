@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.14.5] - 2026-01-21
+
+### Added
+
+* Specialized repository architecture with EnemyRepository, ItemRepository, and PotionRepository
+* Player entity inventory management methods (getInventory, addItemToInventory, removeItemFromInventory)
+* Enhanced InventoryUI with toggle functionality and inventory button integration
+* Improved item interaction system with tooltips and better click handling
+* Enhanced alchemy recipe validation with exact match checking
+
+### Changed
+
+* Refactored repository infrastructure from generic ItemsRepository to specialized repositories
+* Enhanced Player entity with comprehensive inventory management capabilities
+* Improved isAlive() validation with HumanoidRootPart check
+* AlchemyService refactored to use PotionRepository for better separation of concerns
+* InventoryUI restructured to use MainUI container with dedicated Inventory frame
+* Enhanced InventoryUI item interaction with mode-based click handlers
+* Improved cache system with better object management
+
+### Removed
+
+* ItemsRepository (replaced with specialized ItemRepository, EnemyRepository, and PotionRepository)
+
+### Technical
+
+* Implemented repository pattern specialization for better code organization
+* Enhanced dependency injection with new repository registrations
+* Improved inventory management architecture with entity-level methods
+* Added tooltip system for better item identification in InventoryUI
+* Enhanced alchemy recipe matching with exact ingredient count validation
+* Improved UI structure with MainUI container for better organization
+
 ## \[1.14.4] - 2026-01-20
 
 ### Added

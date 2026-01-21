@@ -6,7 +6,10 @@ local InventoryUI = require(script.InventoryUI)
 ---@field diContainer DIContainer
 ---@field foodPopup Frame
 ---@field playerService ClientPlayerService
+---@field alchemyService ClientAlchemyService
+---@field craftService ClientCraftService
 ---@field inventoryUI InventoryUI
+---@field _secondActionButtonConn RBXScriptSignal
 local UI = {}
 UI.__index = UI
 
@@ -16,16 +19,22 @@ function UI.new(diContainer)
 	local self = setmetatable({}, UI)
 	self.diContainer = diContainer
 	self.inventoryUI = InventoryUI.new(self.diContainer)
+	self._secondActionButtonConn = nil
 	return self
 end
 
 function UI:init()
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
+
+	self.alchemyService = application.services.alchemyService
+	self.craftService = application.services.craftService
+
 	self.mainUI = application.services.playerService.player.PlayerGui:WaitForChild("MainUI")
 	self.diedUI = application.services.playerService.player.PlayerGui:WaitForChild("DiedUI")
 	self.diedFrame = self.diedUI.Frame
 	self.actionButton = self.mainUI.ActionButton
+	self.secondActionButton = self.mainUI.SecondActionButton
 
 	self.notification = self.mainUI.Notification
 	self.foodPopup = self.mainUI.FoodPopup
@@ -84,11 +93,7 @@ function UI:toggleDiedScreen(state)
 end
 
 function UI:toggleInventory()
-	if self.inventoryUI.isOpen then
-		self.inventoryUI:close()
-	else
-		self.inventoryUI:open()
-	end
+	self.inventoryUI:toggle()
 end
 
 function UI:refreshInventory()
@@ -104,22 +109,43 @@ function UI:toggleActionButton(state)
 end
 
 function UI:toggleAlchemy(state)
+	if self._secondActionButtonConn then
+		self._secondActionButtonConn:Disconnect()
+		self._secondActionButtonConn = nil
+	end
+
 	if state then
 		self.inventoryUI:setMode("alchemy")
-		self:toggleInventory()
+		self.inventoryUI:open()
+		self.secondActionButton.Visible = true
+		self._secondActionButtonConn = self.secondActionButton.MouseButton1Click:Connect(function()
+			self.alchemyService:tryBrew()
+			
+		end)
 	else
 		self.inventoryUI:setMode("inventory")
-		self:toggleInventory()
+		self.inventoryUI:close()
+		self.secondActionButton.Visible = false
 	end
 end
 
 function UI:toggleCraft(state)
+	if self._secondActionButtonConn then
+		self._secondActionButtonConn:Disconnect()
+		self._secondActionButtonConn = nil
+	end
+
 	if state then
 		self.inventoryUI:setMode("craft")
-		self:toggleInventory()
+		self.inventoryUI:open()
+		self.secondActionButton.Visible = true
+		self._secondActionButtonConn = self.secondActionButton.MouseButton1Click:Connect(function()
+			self.craftService:tryCraft()
+		end)
 	else
 		self.inventoryUI:setMode("inventory")
-		self:toggleInventory()
+		self.inventoryUI:close()
+		self.secondActionButton.Visible = false
 	end
 end
 

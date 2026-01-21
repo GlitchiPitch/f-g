@@ -109,6 +109,24 @@ local Items = {
 		},
 		price = 10,
 	},
+	Poop = {
+		name = "Poop",
+		image = "rbxassetid://1234567890",
+		model = Assets.Items.Poop,
+		bonus = {
+			health = 10,
+		},
+		price = 10,
+	},
+	Water = {
+		name = "Water",
+		image = "rbxassetid://1234567890",
+		model = Assets.Items.Water,
+		bonus = {
+			health = 10,
+		},
+		price = 10,
+	},
 }
 
 return Items

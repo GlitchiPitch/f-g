@@ -35,7 +35,7 @@ function Application:init()
 		-- 	warn("Application:init - PLAYER_DIED", eventData)
 		-- 	shared.eventBus:fire(shared.constants.REMOTE_EVENTS.PLAYER_DIED, eventData)
 		-- end,
-		
+
 		[shared.constants.REMOTE_EVENTS.FOOD_SPAWNED] = function(eventData)
 			self.useCases:onFoodSpawned(eventData)
 		end,
@@ -46,7 +46,11 @@ function Application:init()
 			self.useCases:updatePlayer(eventData.data)
 		end,
 		[shared.constants.REMOTE_EVENTS.BREW_POTION] = function(eventData)
-			self.useCases:brewPotion(eventData.data)
+			-- Handle brew potion response
+			-- warn("Brew potion result:", eventData.data)
+		end,
+		[shared.constants.REMOTE_EVENTS.ADD_ITEM_FOR_BREWING] = function(eventData)
+			-- warn("Add item for brewing result:", eventData.data)
 		end,
 	})
 end

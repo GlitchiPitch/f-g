@@ -40,11 +40,11 @@ function UseCases:toolActivated()
 	})
 end
 
----@param data table
-function UseCases:brewPotion(data)
+---@param items table
+function UseCases:brewPotion(items)
 	self.remoteEventService:fireServer({
 		eventName = self.constants.REMOTE_EVENTS.BREW_POTION,
-		data = data,
+		data = { items = items },
 	})
 end
 
@@ -69,10 +69,18 @@ function UseCases:equipItem(item)
 	})
 end
 
-function UseCases:craftItem(items)
+---@param item Tool
+function UseCases:addItemForBrewing(item)
+	self.remoteEventService:fireServer({
+		eventName = self.constants.REMOTE_EVENTS.ADD_ITEM_FOR_BREWING,
+		data = { item = item },
+	})
+end
+
+function UseCases:craftItem()
 	self.remoteEventService:fireServer({
 		eventName = self.constants.REMOTE_EVENTS.CRAFT_ITEM,
-		data = { items = items },
+		data = {},
 	})
 end
 

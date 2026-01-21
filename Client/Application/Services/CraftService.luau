@@ -48,7 +48,7 @@ end
 ---@param item Tool
 function CraftService:addItemToCraft(item)
 	if item:HasTag("Craftable") then
-		self.items[item.Name] = item
+		self.items[item.Name] = (self.items[item.Name] or 0) + 1
 		self.cache:addObjectToCache(item)
 		return true
 	end
@@ -65,6 +65,7 @@ end
 
 function CraftService:tryCraft()
 	self.useCases:craftItem(self.items)
+	self:closeCraft()
 end
 
 ---@param item Tool

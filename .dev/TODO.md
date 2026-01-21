@@ -104,7 +104,19 @@
 * \[x] Enhance Player entity with isAlive() method for health validation
 * \[x] Update camera zoom and occlusion transparency settings
 
-## Immediate Tasks (v1.14.5)
+## Completed (v1.14.5)
+
+* \[x] Refactor repository architecture from generic ItemsRepository to specialized repositories
+* \[x] Implement EnemyRepository, ItemRepository, and PotionRepository
+* \[x] Add Player entity inventory management methods (getInventory, addItemToInventory, removeItemFromInventory)
+* \[x] Enhance InventoryUI with toggle functionality and inventory button
+* \[x] Improve item interaction system with tooltips and better click handling
+* \[x] Enhance alchemy recipe validation with exact match checking
+* \[x] Improve Player entity isAlive() validation with HumanoidRootPart check
+* \[x] Refactor AlchemyService to use PotionRepository
+* \[x] Restructure InventoryUI to use MainUI container
+
+## Immediate Tasks (v1.14.6)
 
 * \[ ] Implement enemy loot drops with item spawning mechanics
 * \[ ] Add loot collection system with player interaction

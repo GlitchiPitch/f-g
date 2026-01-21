@@ -66,7 +66,6 @@ function InputService:_inputBegan(input, gameProccessed)
 
 	local playerState = self.playerService:getPlayerState()
 	if input.UserInputType == self.config.Client.Control.MainAction then
-		warn(playerState)
 		if playerState == "Idle" then
 			self.actionService:idleAction()
 		elseif playerState == "Weapon" then

@@ -45,6 +45,37 @@ function PlayerEntity:getData()
 	}
 end
 
+function PlayerEntity:getInventory()
+	local inventory = {}
+	for _, item in self.player.Backpack:GetChildren() do
+		inventory[item.Name] = item
+	end
+
+	if self.player.Character then
+		local equippedItem = self.player.Character:FindFirstChildOfClass("Tool")
+		if equippedItem then
+			inventory[equippedItem.Name] = equippedItem
+		end
+	end
+
+	return inventory
+end
+
+---@param itemName string
+function PlayerEntity:removeItemFromInventory(itemName)
+	local item = self.player.Backpack:FindFirstChild(itemName)
+	if not item then
+		return
+	end
+
+	item:Destroy()
+end
+
+---@param item Tool
+function PlayerEntity:addItemToInventory(item)
+	item.Parent = self.player.Backpack
+end
+
 function PlayerEntity:setCurrentWorld(world)
 	self.currentWorld = world
 end
@@ -52,22 +83,27 @@ end
 function PlayerEntity:getCurrentWorld()
 	return self.currentWorld
 end
-	
+
 function PlayerEntity:isAlive()
 	local character = self.player.Character
 	if not character then
 		return false
 	end
-	
+
 	local humanoid = character:FindFirstChild("Humanoid")
 	if not humanoid then
 		return false
 	end
-	
+
+	local humanoidRootPart = character:FindFirstChild("HumanoidRootPart")
+	if not humanoidRootPart then
+		return false
+	end
+
 	if humanoid.Health <= 0 then
 		return false
 	end
-	
+
 	return true
 end
 

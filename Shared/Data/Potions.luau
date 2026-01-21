@@ -11,7 +11,7 @@ local Assets = require(ReplicatedStorage.Shared.Assets)
 ---@field skills string[]
 ---@field recipe table<string, number>
 
----@class potionData
+---@class PotionData
 ---@field name string
 ---@field image string
 ---@field bonus potionBonus

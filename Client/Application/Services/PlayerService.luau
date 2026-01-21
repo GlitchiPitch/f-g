@@ -85,6 +85,9 @@ function PlayerService:_onCharacterAdded(character)
 
 	character.ChildAdded:Connect(_inventoryRefresh)
 	character.ChildRemoved:Connect(_inventoryRefresh)
+	playerEntity.player.Backpack.ChildAdded:Connect(_inventoryRefresh)
+	playerEntity.player.Backpack.ChildRemoved:Connect(_inventoryRefresh)
+	
 	_inventoryRefresh()
 
 	if currentWorldName == "Butchery" then

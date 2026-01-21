@@ -35,19 +35,20 @@ function InventoryUI:init()
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
 	local playerService = application.services.playerService
-	local inventoryUI = playerService.player.PlayerGui:WaitForChild("InventoryUI")
+	local mainUI = playerService.player.PlayerGui:WaitForChild("MainUI")
+	self.mainUI = mainUI
 	self.useCases = application.useCases
 	self.alchemyService = application.services.alchemyService
 	self.craftService = application.services.craftService
-	self.mainFrame = inventoryUI.Main
+	self.mainFrame = mainUI.Inventory
 	self.player = playerService.player
 	self.character = self.player.Character
 	self.handler = self.mainFrame.Handler
 	self.itemTemplate = self.handler.Template
 	self.closeButton = self.mainFrame.CloseButton
-
+	self.inventoryButton = mainUI.InventoryButton
 	-- Disable the default backpack GUI
-	-- game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
 
 	-- Initialize inventory refresh
 
@@ -76,6 +77,14 @@ function InventoryUI:backpackRefresh()
 	self:_refresh()
 end
 
+function InventoryUI:toggle()
+	if self.isOpen then
+		self:close()
+	else
+		self:open()
+	end
+end
+
 function InventoryUI:open()
 	self.mainFrame:TweenPosition(self.openPosition, "Out", "Quint", 1, true) -- Same X Position, Change Y's Scale to negative then change Y's Offset to negative the size of the frame in y
 	self.isOpen = true
@@ -88,7 +97,11 @@ end
 
 function InventoryUI:_setup()
 	self:backpackRefresh()
-	
+
+	self.inventoryButton.MouseButton1Click:Connect(function()
+		self:toggle()
+	end)
+
 	self.closeButton.MouseButton1Click:Connect(function()
 		if self._mode == "alchemy" then
 			self.alchemyService:closeAlchemy()
@@ -99,11 +112,31 @@ function InventoryUI:_setup()
 		end
 	end)
 end
+
 function InventoryUI:_refresh()
 	-- Create new buttons for each item
 	for i, item in self.items do
 		local button = self.itemTemplate:Clone() :: ImageButton
+		local function onClickItem()
+			if self._mode == "alchemy" then
+				self.alchemyService:addItemToAlchemy(item)
+			elseif self._mode == "craft" then
+				self.craftService:addItemToCraft(item)
+			elseif self._mode == "inventory" then
+				self.useCases:equipItem(item)
+			end
+		end
+
+		local function onMouseEnter()
+			button.Tooltip.Visible = true
+		end
+
+		local function onMouseLeave()
+			button.Tooltip.Visible = false
+		end
+
 		button.Name = item.Name
+		button.Tooltip.Text = item.Name
 		button.LayoutOrder = i
 		button.Visible = true
 		button.Parent = self.handler
@@ -113,31 +146,19 @@ function InventoryUI:_refresh()
 			button.BackgroundColor3 = Color3.fromRGB(28, 135, 42)
 		end
 
-		self.buttons[button] = button.MouseButton1Click:Connect(function()
-			if self._mode == "alchemy" then
-				if self.alchemyService:addItemToAlchemy(item) then
-					print("Item added to alchemy")
-					button.Visible = false
-				else
-					print("Item not added to alchemy")
-				end
-			elseif self._mode == "craft" then
-				if self.craftService:addItemToCraft(item) then
-					print("Item added to craft")
-					button.Visible = false
-				else
-					print("Item not added to craft")
-				end
-			elseif self._mode == "inventory" then
-				self.useCases:equipItem(item)
-			end
-		end)
+		self.buttons[button] = {
+			onClick = button.MouseButton1Click:Connect(onClickItem),
+			onMouseEnter = button.MouseEnter:Connect(onMouseEnter),
+			onMouseLeave = button.MouseLeave:Connect(onMouseLeave),
+		}
 	end
 end
 
 function InventoryUI:_clear()
-	for button, buttonConnect in self.buttons do
-		buttonConnect:Disconnect()
+	for button, buttonConnects in self.buttons do
+		buttonConnects.onClick:Disconnect()
+		buttonConnects.onMouseEnter:Disconnect()
+		buttonConnects.onMouseLeave:Disconnect()
 		button:Destroy()
 	end
 

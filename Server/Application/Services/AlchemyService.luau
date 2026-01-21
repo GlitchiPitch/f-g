@@ -4,47 +4,66 @@ local SharedAlchemyService = require(ReplicatedStorage.Shared.Application.Servic
 ---@class ServerAlchemyService : SharedAlchemyService
 ---@field diContainer DIContainer
 ---@field playerRepository ServerPlayerRepository
+---@field items table<number, table>
 local AlchemyService = setmetatable({}, SharedAlchemyService)
 AlchemyService.__index = AlchemyService
 
 ---@param diContainer DIContainer
 ---@return ServerAlchemyService
 function AlchemyService.new(diContainer)
-    return setmetatable(SharedAlchemyService.new(diContainer), AlchemyService)
+	local self = setmetatable(SharedAlchemyService.new(diContainer), AlchemyService)
+	self.items = {}
+	return self
 end
 
 function AlchemyService:init()
-    ---@type ServerInfrastructure
-    local infrastructure = self.diContainer:resolve("Infrastructure")
-    self.playerRepository = infrastructure.repositories.playerRepository
-    SharedAlchemyService.init(self)
-
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	---@type ServerInfrastructure
+	local infrastructure = self.diContainer:resolve("Infrastructure")
+	self.playerRepository = infrastructure.repositories.playerRepository
+	self.potionRepository = shared.infrastructure.repositories.potionRepository
+    self.itemRepository = shared.infrastructure.repositories.itemRepository
+	SharedAlchemyService.init(self)
 end
 
 ---@param data table
 function AlchemyService:tryBrew(data)
-    local playerEntity = self.playerRepository:getPlayerEntity(data.player)
-    if not self:checkRecipe(playerEntity.inventory, data.recipe) then
-        return false
+	local playerEntity = self.playerRepository:getPlayerEntity(data.player)
+	local resultPotion = self:checkRecipe(self.items[playerEntity.player.UserId])
+	warn("resultPotion", resultPotion, data, self.items[playerEntity.player.UserId])
+	if not resultPotion then
+		resultPotion = self.itemRepository:getItemAsset("Poop")
+	end
+
+	self:addPotion(playerEntity, resultPotion)
+
+    self:clearItems(playerEntity)
+	return true
+end
+
+---@param playerEntity PlayerEntity
+---@param potion Tool
+function AlchemyService:addPotion(playerEntity, potion)
+	playerEntity:addItemToInventory(potion)
+end
+
+---@param playerEntity PlayerEntity
+---@param item Tool
+function AlchemyService:addItemForBrewing(playerEntity, item)
+    if not self.items[playerEntity.player.UserId] then
+        self.items[playerEntity.player.UserId] = {}
     end
-    
-    self:removeIngredients(playerEntity, data.recipe)
-    self:addPotion(playerEntity, data.potion)
+
+	table.insert(self.items[playerEntity.player.UserId], item.Name)
+    playerEntity:removeItemFromInventory(item.Name)
+    warn(playerEntity.player.Backpack:GetChildren())
     return true
 end
 
 ---@param playerEntity PlayerEntity
----@param recipe table
-function AlchemyService:removeIngredients(playerEntity, recipe)
-    for itemName, amount in recipe do
-        playerEntity.inventory[itemName] = playerEntity.inventory[itemName] - amount
-    end
-end
-
----@param playerEntity PlayerEntity
----@param potion table
-function AlchemyService:addPotion(playerEntity, potion)
-    playerEntity.inventory[potion.name] = playerEntity.inventory[potion.name] + 1
+function AlchemyService:clearItems(playerEntity)
+	self.items[playerEntity.player.UserId] = nil
 end
 
 return AlchemyService

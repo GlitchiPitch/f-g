@@ -19,14 +19,25 @@ function WeaponRepository:init()
 end
 
 ---@return WeaponsData
-function WeaponRepository:getAllWeapons()
+function WeaponRepository:getAllWeaponsData()
     return self.data
 end
 
 ---@param weaponName string
 ---@return WeaponData?
-function WeaponRepository:getWeapon(weaponName)
+function WeaponRepository:getWeaponData(weaponName)
     return self.data.OneHanded[weaponName] or self.data.TwoHanded[weaponName]
+end
+
+---@param weaponName string
+---@return Tool?
+function WeaponRepository:getWeaponAsset(weaponName)
+	local weaponData = self:getWeaponData(weaponName)
+	if not weaponData then
+		return
+	end
+
+	return weaponData.model:Clone()
 end
 
 return WeaponRepository

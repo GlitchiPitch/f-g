@@ -4,8 +4,6 @@ local SharedAlchemyService = require(ReplicatedStorage.Shared.Application.Servic
 
 ---@class ClientAlchemyService : SharedAlchemyService
 ---@field diContainer DIContainer
----@field cache Cache
----@field items table<string, Tool>
 ---@field eventBus EventBus
 ---@field constants Constants
 ---@field inputService InputService
@@ -32,7 +30,6 @@ function AlchemyService:init()
 	local application = self.diContainer:resolve("Application")
 	self.eventBus = shared.eventBus
 	self.constants = shared.constants
-    self.cache = shared.cache
 	self.useCases = application.useCases
     self.inputService = application.services.inputService
 	self.playerService = application.services.playerService
@@ -55,8 +52,8 @@ end
 ---@param item Tool
 function AlchemyService:addItemToAlchemy(item)
 	if item:HasTag("Alchemable") then
-		self.items[item.Name] = item
-		self.cache:addObjectToCache(item)
+		
+		self.useCases:addItemForBrewing(item)
 		self:_animateAddItem(item:Clone())
 		return true
 	end
@@ -69,19 +66,19 @@ function AlchemyService:closeAlchemy()
 	self.playerService:toggleRobloxControl(true)
 	self.cameraController:setCameraMode("isometric")
 	self.targetController:blockTargetUpdate(false)
-	self.items = {}
 	self._currentAlchemyTable = nil
 end
 
 function AlchemyService:tryBrew()
-	self.useCases:brewPotion(self.items)
+	self.useCases:brewPotion()
+	self:closeAlchemy()
 end
 
 ---@param item Tool
 function AlchemyService:_animateAddItem(item)
 	item.Parent = self._currentAlchemyTable
 	item:PivotTo(CFrame.new(self._currentAlchemyTable.IngredientSpawnPoint.CFrame.Position))
-	Debris:AddItem(item, 1)
+	Debris:AddItem(item, .5)
 end
 
 return AlchemyService
