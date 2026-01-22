@@ -49,6 +49,9 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.ADD_ITEM_FOR_CRAFTING] = function(player, eventData)
 			self.useCases:addItemForCrafting(player, eventData.data)
 		end,
+		[shared.constants.REMOTE_EVENTS.RESET_CRAFTING] = function(player, eventData)
+			self.useCases:resetCrafting(player)
+		end,
 	})
 end
 

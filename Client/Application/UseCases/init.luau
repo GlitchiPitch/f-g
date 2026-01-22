@@ -72,6 +72,7 @@ end
 
 ---@param item Tool
 function UseCases:addItemForBrewing(item)
+	self.eventBus:fire(self.constants.CLIENT_EVENTS.ADD_ITEM_FOR_BREWING, { item = item })
 	self.remoteEventService:fireServer({
 		eventName = self.constants.REMOTE_EVENTS.ADD_ITEM_FOR_BREWING,
 		data = { item = item },
@@ -91,6 +92,7 @@ function UseCases:addItemForCrafting(item)
 		eventName = self.constants.REMOTE_EVENTS.ADD_ITEM_FOR_CRAFTING,
 		data = { item = item },
 	})
+	self.eventBus:fire(self.constants.CLIENT_EVENTS.ADD_ITEM_FOR_CRAFTING, { item = item })
 end
 
 ---@param recipe ItemData
@@ -109,6 +111,14 @@ function UseCases:eatFood(food)
 	self.remoteEventService:fireServer({
 		eventName = self.constants.REMOTE_EVENTS.EAT_FOOD,
 		data = { food = food },
+	})
+end
+
+function UseCases:resetCrafting()
+	self.eventBus:fire(self.constants.CLIENT_EVENTS.RESET_CRAFTING, {})
+	self.remoteEventService:fireServer({
+		eventName = self.constants.REMOTE_EVENTS.RESET_CRAFTING,
+		data = {},
 	})
 end
 

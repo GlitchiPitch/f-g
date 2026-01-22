@@ -161,4 +161,16 @@ function UI:toggleRecipe(recipe)
 	self.recipeUI:toggle(recipe)
 end
 
+function UI:addItemForCrafting(item)
+	self.craftUI:addItem(item)
+end
+
+function UI:addItemForBrewing(item)
+	self.alchemyUI:addItem(item)
+end
+
+function UI:resetCrafting()
+	self.craftUI:clearItems()
+end
+
 return UI

@@ -31,7 +31,6 @@ end
 function AlchemyService:tryBrew(data)
 	local playerEntity = self.playerRepository:getPlayerEntity(data.player)
 	local resultPotion = self:checkRecipe(self.items[playerEntity.player.UserId])
-	warn("resultPotion", resultPotion, data, self.items[playerEntity.player.UserId])
 	if not resultPotion then
 		resultPotion = self.itemRepository:getItemAsset("Poop")
 	end
@@ -57,7 +56,6 @@ function AlchemyService:addItemForBrewing(playerEntity, item)
 
 	table.insert(self.items[playerEntity.player.UserId], item.Name)
     playerEntity:removeItemFromInventory(item.Name)
-    warn(playerEntity.player.Backpack:GetChildren())
     return true
 end
 

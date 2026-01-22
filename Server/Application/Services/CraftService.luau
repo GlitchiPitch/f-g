@@ -66,4 +66,14 @@ function CraftService:clearItems(playerEntity)
 	self.items[playerEntity.player.UserId] = nil
 end
 
+---@param playerEntity PlayerEntity
+function CraftService:resetCraft(playerEntity)
+	for _, itemName in self.items[playerEntity.player.UserId] do
+		local item = self.itemRepository:getItemAsset(itemName)
+		playerEntity:addItemToInventory(item)
+	end
+	
+	self.items[playerEntity.player.UserId] = nil
+end
+
 return CraftService

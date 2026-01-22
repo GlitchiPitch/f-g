@@ -59,6 +59,10 @@ function CraftService:addItemToCraft(item)
 	return false
 end
 
+function CraftService:resetCraft()
+	self.useCases:resetCrafting()
+end
+
 function CraftService:closeCraft()
 	self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_CRAFT, { state = false })
 	self.inputService:blockInput(false)

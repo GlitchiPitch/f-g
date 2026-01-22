@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.15.0] - 2026-01-22
+
+### Added
+
+* Reset crafting functionality with item return to inventory mechanics
+* Enhanced UI item management with add/clear functionality in _CraftableUI
+* Action button integration for crafting reset operations
+* Event-driven crafting item management with client event broadcasting
+
+### Changed
+
+* Refactored _CraftableUI with improved item display and management methods
+* Enhanced CraftService with resetCraft method for inventory restoration
+* Improved event handling architecture with consolidated event registration
+* Updated UseCases with resetCrafting functionality across client and server
+
+### Technical
+
+* Added RESET_CRAFTING remote event for server-client synchronization
+* Implemented ADD_ITEM_FOR_CRAFTING and ADD_ITEM_FOR_BREWING client events
+* Enhanced UI architecture with action button connection management
+* Improved code quality by removing debug warning statements
+
 ## \[1.14.9] - 2026-01-22
 
 ### Added

@@ -152,4 +152,17 @@ function UseCases:eatFood(player, data)
 		},
 	})
 end
+
+---@param player Player
+function UseCases:resetCrafting(player)
+	print(`Reset crafting by {player.Name}`)
+	local playerEntity = self.playerRepository:getPlayerEntity(player)
+	self.craftService:resetCraft(playerEntity)
+	self.remoteEventService:fireClient(player, {
+		eventName = self.constants.REMOTE_EVENTS.RESET_CRAFTING,
+		data = {
+			result = true,
+		},
+	})
+end
 return UseCases

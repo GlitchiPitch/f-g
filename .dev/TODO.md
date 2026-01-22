@@ -135,6 +135,17 @@
 * \[x] Fix CraftService spawn point positioning bug
 * \[x] Refactor EnemyService to use enemyRepository
 
+## Completed (v1.15.0)
+
+* \[x] Implement reset crafting functionality with item return to inventory mechanics
+* \[x] Add enhanced UI item management with add/clear functionality in _CraftableUI
+* \[x] Integrate action button for crafting reset operations
+* \[x] Implement event-driven crafting item management with client event broadcasting
+* \[x] Refactor _CraftableUI with improved item display and management methods
+* \[x] Enhance CraftService with resetCraft method for inventory restoration
+* \[x] Improve event handling architecture with consolidated event registration
+* \[x] Update UseCases with resetCrafting functionality across client and server
+
 ## Completed (v1.14.9)
 
 * \[x] Implement modular UI architecture with _BaseUI and _CraftableUI base classes
@@ -151,7 +162,7 @@
 * \[x] Implement recipe reading client event system
 * \[x] Add player bonus system for potion/food effects
 
-## Immediate Tasks (v1.14.9)
+## Immediate Tasks (v1.15.0)
 
 * \[ ] Implement enemy loot drops with item spawning mechanics
 * \[ ] Add loot collection system with player interaction

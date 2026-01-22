@@ -34,6 +34,7 @@ function ActionService:peck(playerEntity)
 	hitbox.CFrame = CFrame.new(hitboxPosition)
 	local partsInRadius = workspace:GetPartBoundsInBox(hitbox.CFrame, hitbox.Size)
 	for _, part in partsInRadius do
+		warn(part.Parent.Name)
 		if part.Parent.Name == "Food" then
 			self.farmService:eatFood(playerEntity, part.Parent)
 		end
