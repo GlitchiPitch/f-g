@@ -52,38 +52,18 @@ function CameraController:init()
 	self.head = self.character:FindFirstChild("Head")
 end
 
----@param mode "standard" | "alchemy" | "craft" | "isometric"
+---@param mode "standard" | "static" | "isometric"
 ---@param data table
 function CameraController:setCameraMode(mode, data)
 	self._mode = mode
 
 	if mode == "standard" then
 		self.camera.CameraType = Enum.CameraType.Custom
-	elseif mode == "alchemy" then
-		self:_setAlchemyCamera(data.cameraCFrame)
-	elseif mode == "craft" then
-		self:_setCraftingCamera(data.cameraCFrame)
+	elseif mode == "static" then
+		self:_setStaticCamera(data.cameraCFrame)
 	elseif mode == "isometric" then
 		self.camera.CameraType = Enum.CameraType.Scriptable
 	end
-end
-
----@param cameraCFrame CFrame
-function CameraController:_setAlchemyCamera(cameraCFrame)
-	self.camera.CameraType = Enum.CameraType.Scriptable
-
-	local tween =
-		TweenService:Create(self.camera, TweenInfo.new(0.5), { CFrame = cameraCFrame, FieldOfView = self._defaultFOV })
-	tween:Play()
-end
-
----@param cameraCFrame CFrame
-function CameraController:_setCraftingCamera(cameraCFrame)
-	self.camera.CameraType = Enum.CameraType.Scriptable
-
-	local tween =
-		TweenService:Create(self.camera, TweenInfo.new(0.5), { CFrame = cameraCFrame, FieldOfView = self._defaultFOV })
-	tween:Play()
 end
 
 function CameraController:onCharacterAdded()
@@ -135,6 +115,15 @@ function CameraController:_isometricCamera()
 		-- Handle occlusion transparency
 		self:_handleOcclusionTransparency(cameraPos, self.character.Head.Position)
 	end
+end
+
+---@param cameraCFrame CFrame
+function CameraController:_setStaticCamera(cameraCFrame)
+	self.camera.CameraType = Enum.CameraType.Scriptable
+
+	local tween =
+		TweenService:Create(self.camera, TweenInfo.new(0.5), { CFrame = cameraCFrame, FieldOfView = self._defaultFOV })
+	tween:Play()
 end
 
 function CameraController:_handleOcclusionTransparency(cameraPos, targetPos)

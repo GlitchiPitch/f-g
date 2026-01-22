@@ -19,6 +19,7 @@ local Constants = {
 		ADD_ITEM_FOR_BREWING = "AddItemForBrewing",
 		ADD_ITEM_FOR_CRAFTING = "AddItemForCrafting",
 		RESET_CRAFTING = "ResetCrafting",
+		
 	},
 	CLIENT_EVENTS = {
 		TOGGLE_DIED_SCREEN = "toggleDiedScreen",
@@ -31,6 +32,7 @@ local Constants = {
 		ADD_ITEM_FOR_CRAFTING = "addItemForCrafting",
 		ADD_ITEM_FOR_BREWING = "addItemForBrewing",
 		RESET_CRAFTING = "resetCrafting",
+		TOGGLE_SHOP = "ToggleShop",
 	},
 	DAY_NIGHT = {
 		-- Time constants (in minutes after midnight)

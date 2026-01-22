@@ -21,7 +21,7 @@ InventoryUI.__index = InventoryUI
 ---@return InventoryUI
 function InventoryUI.new(diContainer)
 	local self = setmetatable(_BaseUI.new(diContainer), InventoryUI)
-	
+
 	self.closePosition = UDim2.fromScale(2, 0)
 	self.openPosition = UDim2.fromScale(1, 0)
 	self.items = {}
@@ -32,14 +32,13 @@ function InventoryUI.new(diContainer)
 	return self
 end
 
-
 function InventoryUI:init()
 	_BaseUI.init(self)
 
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
 	local playerService = application.services.playerService
-	
+
 	self.useCases = application.useCases
 	self.alchemyService = application.services.alchemyService
 	self.craftService = application.services.craftService
@@ -80,22 +79,14 @@ function InventoryUI:backpackRefresh()
 	self:_refresh()
 end
 
-function InventoryUI:toggle()
-	if self.isOpen then
-		self:close()
-	else
-		self:open()
-	end
-end
-
 function InventoryUI:open()
 	self.mainFrame:TweenPosition(self.openPosition, "Out", "Quint", 1, true) -- Same X Position, Change Y's Scale to negative then change Y's Offset to negative the size of the frame in y
-	self.isOpen = true
+	self.inventoryButton.Visible = false
 end
 
 function InventoryUI:close()
 	self.mainFrame:TweenPosition(self.closePosition, "Out", "Quint", 1, true) -- Same X Position, Change Y's Scale to negative then change Y's Offset to negative the size of the frame in y
-	self.isOpen = false
+	self.inventoryButton.Visible = true
 end
 
 function InventoryUI:_setup()

@@ -45,7 +45,7 @@ function CraftService:openCraft(craftTable)
 	self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_CRAFT, { state = true })
 	self.inputService:blockInput(true)
 	self.playerService:toggleRobloxControl(false)
-	self.cameraController:setCameraMode("craft", { cameraCFrame = cameraCFrame })
+	self.cameraController:setCameraMode("static", { cameraCFrame = cameraCFrame })
 	self.targetController:blockTargetUpdate(true)
 end
 

@@ -92,7 +92,8 @@ function InputService:_inputBegan(input, gameProccessed)
 	if input.KeyCode == self.config.Client.Control.InventoryKey then
 		if playerState == "Idle" then
 			self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_INVENTORY, {})
-		
+		elseif playerState == "Interact" then
+			self.actionService:interactAction()
 		end
 	end
 

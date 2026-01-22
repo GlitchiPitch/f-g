@@ -146,7 +146,17 @@
 * \[x] Improve event handling architecture with consolidated event registration
 * \[x] Update UseCases with resetCrafting functionality across client and server
 
-## Completed (v1.14.9)
+## Completed (v1.16.0)
+
+* \[x] Implement shop system with ShopService and ShopUI for NPC/vendor interactions
+* \[x] Create ShopUI component extending _BaseUI with shop interface and close functionality
+* \[x] Add static camera mode for shop interactions with tweened camera transitions
+* \[x] Integrate shop events into presentation layer with TOGGLE_SHOP client event
+* \[x] Add crafting UI methods for item management (addItemForCrafting, addItemForBrewing, resetCrafting)
+* \[x] Refactor presentation event handlers to use table-based approach for better maintainability
+* \[x] Simplify CameraController by replacing alchemy/craft specific methods with generic _setStaticCamera
+
+## Completed (v1.15.0)
 
 * \[x] Implement modular UI architecture with _BaseUI and _CraftableUI base classes
 * \[x] Create AlchemyUI and CraftUI components extending _CraftableUI
@@ -162,7 +172,7 @@
 * \[x] Implement recipe reading client event system
 * \[x] Add player bonus system for potion/food effects
 
-## Immediate Tasks (v1.15.0)
+## Immediate Tasks (v1.16.0)
 
 * \[ ] Implement enemy loot drops with item spawning mechanics
 * \[ ] Add loot collection system with player interaction

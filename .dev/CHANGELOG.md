@@ -5,6 +5,31 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.16.0] - 2026-01-22
+
+### Added
+
+* Complete shop system with ShopService for NPC/vendor interactions
+* ShopUI component extending _BaseUI with shop interface and close functionality
+* Static camera mode for shop interactions with tweened camera transitions
+* Enhanced crafting UI methods for item management (addItemForCrafting, addItemForBrewing, resetCrafting)
+* TOGGLE_SHOP client event for shop UI state management
+* Shop camera positioning with CameraPart reference system
+
+### Changed
+
+* Refactored presentation event handlers to use table-based approach for better maintainability
+* Simplified CameraController by replacing alchemy/craft specific methods with generic _setStaticCamera
+* Enhanced event architecture with consolidated client event handling
+
+### Technical
+
+* Added shop service integration across client application layers
+* Implemented shop UI animation system with tweened position transitions
+* Added shop camera mode support in CameraController with CFrame-based positioning
+* Enhanced UI architecture with new shop component registration
+* Improved event handling performance with table-based event registration
+
 ## \[1.15.0] - 2026-01-22
 
 ### Added

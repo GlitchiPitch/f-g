@@ -7,6 +7,7 @@
 ---@field inputService InputService
 ---@field playerService ClientPlayerService
 ---@field craftService ClientCraftService
+---@field shopService ClientShopService
 ---@field alchemyService ClientAlchemyService
 local ActionService = {}
 ActionService.__index = ActionService
@@ -33,6 +34,7 @@ function ActionService:init()
 	self.inputService = application.services.inputService
 	self.playerService = application.services.playerService
 	self.craftService = application.services.craftService
+	self.shopService = application.services.shopService
 end
 
 function ActionService:interactAction()
@@ -42,6 +44,8 @@ function ActionService:interactAction()
 		self.alchemyService:openAlchemy(currentTarget)
 	elseif interactType == "Craft" then
 		self.craftService:openCraft(currentTarget)
+	elseif interactType == "Shop" then
+		self.shopService:openShop(currentTarget)
 	end
 end
 

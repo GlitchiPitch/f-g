@@ -30,8 +30,9 @@ function _BaseUI:open()
 end
 
 function _BaseUI:toggle()
+    warn("toggle")
     self.isOpen = not self.isOpen
-    
+    warn(self.isOpen)
     if self.isOpen then
         self:close()
     else

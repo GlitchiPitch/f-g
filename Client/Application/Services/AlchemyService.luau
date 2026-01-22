@@ -45,7 +45,7 @@ function AlchemyService:openAlchemy(alchemyTable)
 	self.eventBus:fire(self.constants.CLIENT_EVENTS.TOGGLE_ALCHEMY, { state = true })
 	self.inputService:blockInput(true)
 	self.playerService:toggleRobloxControl(false)
-	self.cameraController:setCameraMode("alchemy", { cameraCFrame = cameraCFrame })
+	self.cameraController:setCameraMode("static", { cameraCFrame = cameraCFrame })
 	self.targetController:blockTargetUpdate(true)
 end
 

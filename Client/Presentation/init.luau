@@ -64,6 +64,9 @@ function Presentation:init()
 		[shared.constants.CLIENT_EVENTS.RESET_CRAFTING] = function(eventData)
 			self.ui:resetCrafting()
 		end,
+		[shared.constants.CLIENT_EVENTS.TOGGLE_SHOP] = function(eventData)
+			self.ui:toggleShop(eventData.state)
+		end,
 	}
 
 	for eventName, handler in pairs(eventHandlers) do
