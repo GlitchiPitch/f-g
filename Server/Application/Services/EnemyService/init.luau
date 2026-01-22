@@ -23,14 +23,14 @@ function EnemyService:init()
 	---@type ServerApp
 	local application = self.diContainer:resolve("Application")
 	self.enemyController = application.controllers.enemyController
-	self.EnemyTemplates = shared.data.Enemies
+	self.enemyRepository = shared.infrastructure.repositories.enemyRepository
 	self.Enemy = shared.domain.Entities.Enemy
 
 end
 
 -- Spawn method
 function EnemyService:spawnEnemy(enemyType: string, spawnpoint: Vector3)
-	local enemyData = self.EnemyTemplates[enemyType]
+	local enemyData = self.enemyRepository:getEnemyData(enemyType)
 	if not enemyData then
 		return
 	end

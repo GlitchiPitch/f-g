@@ -1,23 +1,22 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local WeaponAssets = require(ReplicatedStorage.Shared.Assets).Weapons
 
-
 local OneHanded = {
-    Club = {
+	Club = {
 		name = "Club",
 		image = "rbxassetid://108752402225500",
 		model = WeaponAssets.OneHanded.Club,
 		damage = 15,
 		requirement = {
 			stats = {
-                strength = 10,
-            },
-            skills = {
-                "swordFighter",
-            },
+				strength = 10,
+			},
+			skills = {
+				"swordFighter",
+			},
 			recipe = {
 				Wood = 1,
-			}
+			},
 		},
 		bonus = {},
 		damageType = "hit",
@@ -31,15 +30,15 @@ local OneHanded = {
 		damage = 30,
 		requirement = {
 			stats = {
-                strength = 60,
-            },
+				strength = 60,
+			},
 			skills = {
 				"swordFighter",
 			},
 			recipe = {
 				Wood = 1,
 				Iron = 1,
-			}
+			},
 		},
 		bonus = {},
 		damageType = "blade",
@@ -53,15 +52,15 @@ local OneHanded = {
 		damage = 45,
 		requirement = {
 			stats = {
-                strength = 90,
-            },
+				strength = 90,
+			},
 			skills = {
 				"swordFighter",
 			},
 			recipe = {
 				Gold = 1,
 				Iron = 2,
-			}
+			},
 		},
 		bonus = {},
 		damageType = "blade",
@@ -75,15 +74,15 @@ local OneHanded = {
 		damage = 50,
 		requirement = {
 			stats = {
-                strength = 100,
-            },
+				strength = 100,
+			},
 			skills = {
 				"swordFighter",
 			},
 			recipe = {
 				Steel = 2,
 				Iron = 2,
-			}
+			},
 		},
 		bonus = {},
 		damageType = "blade",
@@ -97,15 +96,15 @@ local OneHanded = {
 		damage = 50,
 		requirement = {
 			stats = {
-                strength = 100,
-            },
+				strength = 100,
+			},
 			skills = {
 				"swordFighter",
 			},
 			recipe = {
 				Steel = 2,
 				Iron = 2,
-			}
+			},
 		},
 		bonus = {
 			"orcSlayer",
@@ -121,15 +120,15 @@ local OneHanded = {
 		damage = 60,
 		requirement = {
 			stats = {
-                dexterity = 120,
-            },
+				dexterity = 120,
+			},
 			skills = {
 				"swordFighter2",
 			},
 			recipe = {
 				Steel = 2,
 				Iron = 2,
-			}
+			},
 		},
 		bonus = {},
 		damageType = "blade",
@@ -143,15 +142,16 @@ local OneHanded = {
 		damage = 70,
 		requirement = {
 			stats = {
-                strength = 140,
-            },
+				strength = 140,
+			},
 			skills = {
 				"swordFighter2",
 			},
 			recipe = {
-				Steel = 2,
-				Iron = 2,
-			}
+				Steel = 3,
+				Iron = 5,
+				Gold = 1,
+			},
 		},
 		bonus = {},
 		damageType = "blade",
@@ -165,10 +165,19 @@ local OneHanded = {
 		damage = 80,
 		requirement = {
 			stats = {
-                strength = 160,
-            },
+				strength = 160,
+			},
 			skills = {
 				"swordFighter2",
+			},
+			recipe = {
+				Steel = 10,
+				Iron = 15,
+				Gold = 5,
+				Ruby = 2,
+				Sapphire = 2,
+				Emerald = 1,
+				Crystal = 3,
 			},
 		},
 		bonus = {},
@@ -183,15 +192,17 @@ local OneHanded = {
 		damage = 110,
 		requirement = {
 			stats = {
-                strength = 220,
-            },
+				strength = 220,
+			},
 			skills = {
 				"swordFighter3",
 			},
 			recipe = {
-				Steel = 2,
-				Iron = 2,
-			}
+				Steel = 15,
+				Iron = 20,
+				Gold = 3,
+				Ruby = 1,
+			},
 		},
 		bonus = {},
 		damageType = "blade",
@@ -199,17 +210,22 @@ local OneHanded = {
 	},
 }
 local TwoHanded = {
-    BarbedClub = {
+	BarbedClub = {
 		name = "Barbed club",
 		image = "rbxassetid://76964882407852",
 		model = WeaponAssets.TwoHanded.BarbedClub,
 		damage = 65,
 		requirement = {
 			stats = {
-                strength = 130,
-            },
+				strength = 130,
+			},
 			skills = {
 				"heavyWeapon",
+			},
+			recipe = {
+				Wood = 5,
+				Stone = 3,
+				Iron = 2,
 			},
 		},
 		damageType = "hit",
@@ -223,15 +239,15 @@ local TwoHanded = {
 		damage = 70,
 		requirement = {
 			stats = {
-                strength = 140,
-            },
+				strength = 140,
+			},
 			skills = {
 				"heavyWeapon",
 			},
 			recipe = {
 				Steel = 2,
 				Iron = 2,
-			}
+			},
 		},
 		damageType = "blade",
 		price = 700,
@@ -244,15 +260,16 @@ local TwoHanded = {
 		damage = 80,
 		requirement = {
 			stats = {
-                strength = 160,
-            },
+				strength = 160,
+			},
 			skills = {
 				"heavyWeapon",
 			},
 			recipe = {
-				Steel = 2,
-				Iron = 2,
-			}
+				Steel = 8,
+				Iron = 12,
+				Stone = 5,
+			},
 		},
 		damageType = "blade",
 		price = 7000,
@@ -265,15 +282,16 @@ local TwoHanded = {
 		damage = 85,
 		requirement = {
 			stats = {
-                strength = 170,
-            },
+				strength = 170,
+			},
 			skills = {
 				"heavyWeapon2",
 			},
 			recipe = {
-				Steel = 2,
-				Iron = 2,
-			}
+				Steel = 10,
+				Iron = 15,
+				Gold = 2,
+			},
 		},
 		damageType = "blade",
 		price = 10000,
@@ -286,15 +304,18 @@ local TwoHanded = {
 		damage = 110,
 		requirement = {
 			stats = {
-                strength = 220,
-            },
+				strength = 220,
+			},
 			skills = {
 				"heavyWeapon2",
 			},
 			recipe = {
-				Steel = 2,
-				Iron = 2,
-			}
+				Steel = 15,
+				Iron = 20,
+				Gold = 3,
+				Ruby = 1,
+				Obidian = 2,
+			},
 		},
 		damageType = "blade",
 		price = 30000,
@@ -307,21 +328,24 @@ local TwoHanded = {
 		damage = 120,
 		requirement = {
 			stats = {
-                strength = 240,
-            },
+				strength = 240,
+			},
 			skills = {
 				"heavyWeapon3",
 			},
 			recipe = {
-				Steel = 2,
-				Iron = 2,
-			}
+				Steel = 25,
+				Iron = 30,
+				Gold = 8,
+				Ruby = 3,
+				Sapphire = 3,
+				Emerald = 2,
+				Crystal = 5,
+			},
 		},
 		damageType = "hit",
-		price = 15000,
+		price = 150000,
 	},
-
-
 
 	Mace = {
 		name = "Mace",
@@ -330,15 +354,17 @@ local TwoHanded = {
 		damage = 259,
 		requirement = {
 			stats = {
-                strength = 250,
-            },
+				strength = 250,
+			},
 			skills = {
 				"heavyWeapon3",
 			},
 			recipe = {
-				Steel = 5,
-				Iron = 10,
-			}
+				Steel = 12,
+				Iron = 18,
+				Gold = 3,
+				Ruby = 1,
+			},
 		},
 		bonus = {},
 		damageType = "hit",
@@ -362,8 +388,8 @@ local TwoHanded = {
 
 ---@class WeaponsData
 local Weapons = {
-    OneHanded = OneHanded,
-    TwoHanded = TwoHanded,
+	OneHanded = OneHanded,
+	TwoHanded = TwoHanded,
 }
 
 return Weapons

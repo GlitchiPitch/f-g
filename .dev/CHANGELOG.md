@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.14.7] - 2026-01-22
+
+### Added
+
+* Comprehensive weapon crafting recipes with material requirements and skill prerequisites
+* Potion crafting recipes for Health, Mana, Stamina, and Speed potions
+* Recipe assets for all craftable weapons and potions (Club, RustySword, AssassinDagger, etc.)
+* Wood material asset and crafting data for basic weapon crafting
+* Advanced weapon recipes with gem requirements (Ruby, Sapphire, Emerald, Crystal, Obsidian)
+
+### Changed
+
+* Enhanced weapon data structure with integrated crafting recipes for all weapons
+* Improved CraftService spawn point positioning for better item placement
+* Refactored EnemyService to use enemyRepository for better data management
+* Expanded item assets module with comprehensive recipe asset references
+
+### Fixed
+
+* CraftService item positioning bug (IngredientSpawnPoint → CraftItemSpawnPoint)
+
+### Technical
+
+* Added crafting recipe validation system with exact material count requirements
+* Implemented weapon-specific crafting recipes with progressive difficulty scaling
+* Enhanced asset management with recipe model references for crafting UI
+* Improved enemy service initialization with repository-based data access
+
 ## \[1.14.6] - 2026-01-22
 
 ### Added

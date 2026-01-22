@@ -125,7 +125,17 @@
 * \[x] Implement weapon data with stats, requirements, and crafting recipes
 * \[x] Enhance repository architecture for specialized item management
 
-## Immediate Tasks (v1.14.7)
+## Completed (v1.14.7)
+
+* \[x] Implement comprehensive weapon crafting recipes with material requirements
+* \[x] Add potion crafting recipes (Health, Mana, Stamina, Speed potions)
+* \[x] Add Wood material and basic crafting ingredients
+* \[x] Integrate crafting recipes into weapon data structure
+* \[x] Add recipe assets for all craftable weapons and potions
+* \[x] Fix CraftService spawn point positioning bug
+* \[x] Refactor EnemyService to use enemyRepository
+
+## Immediate Tasks (v1.14.8)
 
 * \[ ] Implement enemy loot drops with item spawning mechanics
 * \[ ] Add loot collection system with player interaction

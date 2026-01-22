@@ -75,7 +75,7 @@ end
 ---@param item Tool
 function CraftService:_animateAddItem(item)
 	item.Parent = self._currentCraftTable
-	item:PivotTo(CFrame.new(self._currentCraftTable.IngredientSpawnPoint.CFrame.Position))
+	item:PivotTo(CFrame.new(self._currentCraftTable.CraftItemSpawnPoint.CFrame.Position))
 	Debris:AddItem(item, 0.5)
 end
 
