@@ -116,17 +116,26 @@
 * \[x] Refactor AlchemyService to use PotionRepository
 * \[x] Restructure InventoryUI to use MainUI container
 
-## Immediate Tasks (v1.14.6)
+## Completed (v1.14.6)
+
+* \[x] Implement comprehensive weapon crafting system with recipes and requirements
+* \[x] Add extensive item data system with crafting materials and alchemy ingredients
+* \[x] Create CraftService for client and server with recipe validation
+* \[x] Add crafting remote events (CRAFT_ITEM, ADD_ITEM_FOR_CRAFTING)
+* \[x] Implement weapon data with stats, requirements, and crafting recipes
+* \[x] Enhance repository architecture for specialized item management
+
+## Immediate Tasks (v1.14.7)
 
 * \[ ] Implement enemy loot drops with item spawning mechanics
 * \[ ] Add loot collection system with player interaction
-* \[ ] Create crafting recipes system with ingredient requirements
 * \[ ] Implement crafting station objects and proximity detection
 * \[ ] Add crafting UI with recipe selection and ingredient validation
 * \[ ] Implement crafting progress animations and completion effects
 * \[ ] Add server-client eventBus interaction for loot and crafting events
 * \[ ] Integrate loot drops with inventory system
 * \[ ] Add item rarity and drop rate mechanics
+* \[ ] Implement player progression system with crafting skill advancement
 
 ## Completed (v1.13.0)
 

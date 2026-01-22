@@ -107,4 +107,18 @@ function UseCases:addItemForBrewing(player, data)
 	})
 end
 
+---@param player Player
+---@param data table
+function UseCases:addItemForCrafting(player, data)
+	data.player = player
+	local playerEntity = self.playerRepository:getPlayerEntity(player)
+	local result = self.craftService:addItemForCrafting(playerEntity, data.item)
+	self.remoteEventService:fireClient(player, {
+		eventName = self.constants.REMOTE_EVENTS.ADD_ITEM_FOR_CRAFTING,
+		data = {
+			result = result,
+		},
+	})
+end
+
 return UseCases

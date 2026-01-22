@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.14.6] - 2026-01-22
+
+### Added
+
+* Comprehensive weapon crafting system with recipes, stat requirements, and skill prerequisites
+* Extensive item data system with crafting materials (Iron, Steel, Gold, gems, stones, etc.)
+* Alchemy ingredients system with mushrooms, flowers, and natural resources (PurpleFlower, RedMushroom, BlueMushroom, Chamomile, PurpleMushroom)
+* CraftService implementation for client and server with recipe validation and item management
+* New remote events for crafting mechanics (CRAFT_ITEM, ADD_ITEM_FOR_CRAFTING)
+* Enhanced weapon data with crafting recipes, damage types, and bonus effects
+* One-handed and two-handed weapon categories with progressive difficulty scaling
+
+### Changed
+
+* Enhanced repository architecture to support specialized crafting item management
+* Expanded Shared Data modules with comprehensive weapon and item definitions
+* Updated constants with new crafting remote events and client event handling
+* Improved item asset organization with dedicated Items module integration
+
+### Technical
+
+* Implemented exact-match recipe validation system for weapon crafting
+* Added weapon requirement system with stats (strength, dexterity) and skill prerequisites
+* Enhanced dependency injection with CraftService integration across client and server layers
+* Added comprehensive weapon asset management with model references and pricing
+* Implemented item counting and validation for crafting recipes
+* Added weapon bonus system for special effects (orcSlayer, etc.)
+
 ## \[1.14.5] - 2026-01-21
 
 ### Added

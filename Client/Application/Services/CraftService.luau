@@ -1,21 +1,24 @@
----@class ClientCraftService
+local Debris = game:GetService("Debris")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local SharedCraftService = require(ReplicatedStorage.Shared.Application.Services.CraftService)
+
+---@class ClientCraftService : SharedCraftService
 ---@field diContainer DIContainer
 ---@field eventBus EventBus
 ---@field constants Constants
----@field cache Cache
----@field items table<string, Tool>
 ---@field inputService InputService
 ---@field playerService ClientPlayerService
 ---@field cameraController CameraController
 ---@field targetController TargetController
-local CraftService = {}
+---@field useCases ClientUseCases
+local CraftService = setmetatable({}, SharedCraftService)
 CraftService.__index = CraftService
 
 ---@param diContainer DIContainer
 ---@return ClientCraftService
 function CraftService.new(diContainer)
-	local self = setmetatable({}, CraftService)
-	self.diContainer = diContainer
+	local self = setmetatable(SharedCraftService.new(diContainer), CraftService)
+	self.items = {}
 	self._currentCraftTable = nil
 	return self
 end
@@ -27,11 +30,12 @@ function CraftService:init()
 	local application = self.diContainer:resolve("Application")
 	self.eventBus = shared.eventBus
 	self.constants = shared.constants
-	self.cache = shared.cache
-	self.cameraController = application.controllers.cameraController
+	self.useCases = application.useCases
 	self.inputService = application.services.inputService
 	self.playerService = application.services.playerService
+	self.cameraController = application.controllers.cameraController
 	self.targetController = application.controllers.targetController
+	SharedCraftService.init(self)
 end
 
 ---@param craftTable Model
@@ -48,8 +52,8 @@ end
 ---@param item Tool
 function CraftService:addItemToCraft(item)
 	if item:HasTag("Craftable") then
-		self.items[item.Name] = (self.items[item.Name] or 0) + 1
-		self.cache:addObjectToCache(item)
+		self.useCases:addItemForCrafting(item)
+		self:_animateAddItem(item:Clone())
 		return true
 	end
 	return false
@@ -64,13 +68,15 @@ function CraftService:closeCraft()
 end
 
 function CraftService:tryCraft()
-	self.useCases:craftItem(self.items)
+	self.useCases:craftItem()
 	self:closeCraft()
 end
 
 ---@param item Tool
 function CraftService:_animateAddItem(item)
-	
+	item.Parent = self._currentCraftTable
+	item:PivotTo(CFrame.new(self._currentCraftTable.IngredientSpawnPoint.CFrame.Position))
+	Debris:AddItem(item, 0.5)
 end
 
 return CraftService

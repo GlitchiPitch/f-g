@@ -15,6 +15,9 @@ local OneHanded = {
             skills = {
                 "swordFighter",
             },
+			recipe = {
+				Wood = 1,
+			}
 		},
 		bonus = {},
 		damageType = "hit",
@@ -33,6 +36,10 @@ local OneHanded = {
 			skills = {
 				"swordFighter",
 			},
+			recipe = {
+				Wood = 1,
+				Iron = 1,
+			}
 		},
 		bonus = {},
 		damageType = "blade",
@@ -51,6 +58,10 @@ local OneHanded = {
 			skills = {
 				"swordFighter",
 			},
+			recipe = {
+				Gold = 1,
+				Iron = 2,
+			}
 		},
 		bonus = {},
 		damageType = "blade",
@@ -69,6 +80,10 @@ local OneHanded = {
 			skills = {
 				"swordFighter",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		bonus = {},
 		damageType = "blade",
@@ -87,6 +102,10 @@ local OneHanded = {
 			skills = {
 				"swordFighter",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		bonus = {
 			"orcSlayer",
@@ -107,6 +126,10 @@ local OneHanded = {
 			skills = {
 				"swordFighter2",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		bonus = {},
 		damageType = "blade",
@@ -125,6 +148,10 @@ local OneHanded = {
 			skills = {
 				"swordFighter2",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		bonus = {},
 		damageType = "blade",
@@ -161,6 +188,10 @@ local OneHanded = {
 			skills = {
 				"swordFighter3",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		bonus = {},
 		damageType = "blade",
@@ -197,6 +228,10 @@ local TwoHanded = {
 			skills = {
 				"heavyWeapon",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		damageType = "blade",
 		price = 700,
@@ -214,6 +249,10 @@ local TwoHanded = {
 			skills = {
 				"heavyWeapon",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		damageType = "blade",
 		price = 7000,
@@ -231,6 +270,10 @@ local TwoHanded = {
 			skills = {
 				"heavyWeapon2",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		damageType = "blade",
 		price = 10000,
@@ -248,6 +291,10 @@ local TwoHanded = {
 			skills = {
 				"heavyWeapon2",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		damageType = "blade",
 		price = 30000,
@@ -265,6 +312,10 @@ local TwoHanded = {
 			skills = {
 				"heavyWeapon3",
 			},
+			recipe = {
+				Steel = 2,
+				Iron = 2,
+			}
 		},
 		damageType = "hit",
 		price = 15000,
@@ -284,6 +335,10 @@ local TwoHanded = {
 			skills = {
 				"heavyWeapon3",
 			},
+			recipe = {
+				Steel = 5,
+				Iron = 10,
+			}
 		},
 		bonus = {},
 		damageType = "hit",

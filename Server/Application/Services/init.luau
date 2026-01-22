@@ -5,6 +5,7 @@ local FarmService = require(script.FarmService)
 local TeleportService = require(script.TeleportService)
 local EnemyService = require(script.EnemyService)
 local AlchemyService = require(script.AlchemyService)
+local CraftService = require(script.CraftService)
 ---@class ServerAppServices
 ---@field playerService ServerPlayerService
 ---@field huntingService ServerHuntingService
@@ -13,6 +14,7 @@ local AlchemyService = require(script.AlchemyService)
 ---@field teleportService TeleportService
 ---@field enemyService EnemyService
 ---@field alchemyService ServerAlchemyService
+---@field craftService ServerCraftService
 local Services = {}
 Services.__index = Services
 
@@ -28,6 +30,7 @@ function Services.new(diContainer)
     self.teleportService = TeleportService.new(self.diContainer)
     self.enemyService = EnemyService.new(self.diContainer)
     self.alchemyService = AlchemyService.new(self.diContainer)
+    self.craftService = CraftService.new(self.diContainer)
     return self
 end
 
@@ -39,6 +42,7 @@ function Services:init()
     self.teleportService:init()
     self.enemyService:init()
     self.alchemyService:init()
+    self.craftService:init()
 end
 
 return Services

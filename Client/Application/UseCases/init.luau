@@ -84,4 +84,12 @@ function UseCases:craftItem()
 	})
 end
 
+---@param item Tool
+function UseCases:addItemForCrafting(item)
+	self.remoteEventService:fireServer({
+		eventName = self.constants.REMOTE_EVENTS.ADD_ITEM_FOR_CRAFTING,
+		data = { item = item },
+	})
+end
+
 return UseCases
