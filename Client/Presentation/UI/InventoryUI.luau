@@ -1,4 +1,6 @@
----@class InventoryUI
+local _BaseUI = require(script.Parent._BaseUI)
+
+---@class InventoryUI : _BaseUI
 ---@field diContainer DIContainer
 ---@field isOpen boolean
 ---@field mainFrame Frame
@@ -11,16 +13,15 @@
 ---@field craftService ClientCraftService
 ---@field alchemyService ClientAlchemyService
 ---@field _mode "inventory" | "alchemy" | "crafting"
-local InventoryUI = {}
+local InventoryUI = setmetatable({}, _BaseUI)
 
 InventoryUI.__index = InventoryUI
 
 ---@param diContainer DIContainer
 ---@return InventoryUI
 function InventoryUI.new(diContainer)
-	local self = setmetatable({}, InventoryUI)
-	self.diContainer = diContainer
-	self.isOpen = false
+	local self = setmetatable(_BaseUI.new(diContainer), InventoryUI)
+	
 	self.closePosition = UDim2.fromScale(2, 0)
 	self.openPosition = UDim2.fromScale(1, 0)
 	self.items = {}
@@ -31,22 +32,24 @@ function InventoryUI.new(diContainer)
 	return self
 end
 
+
 function InventoryUI:init()
+	_BaseUI.init(self)
+
 	---@type ClientApp
 	local application = self.diContainer:resolve("Application")
 	local playerService = application.services.playerService
-	local mainUI = playerService.player.PlayerGui:WaitForChild("MainUI")
-	self.mainUI = mainUI
+	
 	self.useCases = application.useCases
 	self.alchemyService = application.services.alchemyService
 	self.craftService = application.services.craftService
-	self.mainFrame = mainUI.Inventory
+	self.mainFrame = self.mainUI.Inventory
 	self.player = playerService.player
 	self.character = self.player.Character
 	self.handler = self.mainFrame.Handler
 	self.itemTemplate = self.handler.Template
 	self.closeButton = self.mainFrame.CloseButton
-	self.inventoryButton = mainUI.InventoryButton
+	self.inventoryButton = self.mainUI.InventoryButton
 	-- Disable the default backpack GUI
 	game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
 

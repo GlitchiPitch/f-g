@@ -3,6 +3,8 @@ local TweenService = game:GetService("TweenService")
 
 local InventoryUI = require(script.InventoryUI)
 local RecipeUI = require(script.RecipeUI)
+local AlchemyUI = require(script.AlchemyUI)
+local CraftUI = require(script.CraftUI)
 
 ---@class UI
 ---@field diContainer DIContainer
@@ -12,6 +14,8 @@ local RecipeUI = require(script.RecipeUI)
 ---@field craftService ClientCraftService
 ---@field inventoryUI InventoryUI
 ---@field recipeUI RecipeUI
+---@field alchemyUI AlchemyUI
+---@field craftUI CraftUI
 ---@field _secondActionButtonConn RBXScriptSignal
 local UI = {}
 UI.__index = UI
@@ -23,6 +27,8 @@ function UI.new(diContainer)
 	self.diContainer = diContainer
 	self.inventoryUI = InventoryUI.new(self.diContainer)
 	self.recipeUI = RecipeUI.new(self.diContainer)
+	self.alchemyUI = AlchemyUI.new(self.diContainer)
+	self.craftUI = CraftUI.new(self.diContainer)
 	self._secondActionButtonConn = nil
 	return self
 end
@@ -46,6 +52,8 @@ function UI:init()
 
 	self.inventoryUI:init()
 	self.recipeUI:init()
+	self.craftUI:init()
+	self.alchemyUI:init()
 end
 
 function UI:showNotification(message)
@@ -120,15 +128,13 @@ function UI:toggleAlchemy(state)
 	end
 
 	if state then
-		self.inventoryUI:setMode("alchemy")
-		self.inventoryUI:open()
+		self.alchemyUI:open()
 		self.secondActionButton.Visible = true
 		self._secondActionButtonConn = self.secondActionButton.MouseButton1Click:Connect(function()
 			self.alchemyService:tryBrew()
 		end)
 	else
-		self.inventoryUI:setMode("inventory")
-		self.inventoryUI:close()
+		self.alchemyUI:close()
 		self.secondActionButton.Visible = false
 	end
 end
@@ -140,15 +146,13 @@ function UI:toggleCraft(state)
 	end
 
 	if state then
-		self.inventoryUI:setMode("craft")
-		self.inventoryUI:open()
+		self.craftUI:open()
 		self.secondActionButton.Visible = true
 		self._secondActionButtonConn = self.secondActionButton.MouseButton1Click:Connect(function()
 			self.craftService:tryCraft()
 		end)
 	else
-		self.inventoryUI:setMode("inventory")
-		self.inventoryUI:close()
+		self.craftUI:close()
 		self.secondActionButton.Visible = false
 	end
 end

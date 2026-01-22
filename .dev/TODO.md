@@ -135,6 +135,13 @@
 * \[x] Fix CraftService spawn point positioning bug
 * \[x] Refactor EnemyService to use enemyRepository
 
+## Completed (v1.14.9)
+
+* \[x] Implement modular UI architecture with _BaseUI and _CraftableUI base classes
+* \[x] Create AlchemyUI and CraftUI components extending _CraftableUI
+* \[x] Refactor InventoryUI and RecipeUI to inherit from _BaseUI base class
+* \[x] Enhance UI initialization system with integrated AlchemyUI and CraftUI components
+
 ## Completed (v1.14.8)
 
 * \[x] Implement RecipeUI component for displaying crafting recipes

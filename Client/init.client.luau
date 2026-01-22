@@ -39,6 +39,10 @@ function Client:init()
 	self.shared.diContainer:singleton("Domain", function()
 		return self.shared.domain
 	end)
+	
+	self.shared.diContainer:singleton("Presentation", function()
+		return self.presentation
+	end)
 
 	self.shared:init()
 	self.infrastructure:init()

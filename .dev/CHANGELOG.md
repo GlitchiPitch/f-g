@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.14.9] - 2026-01-22
+
+### Added
+
+* Modular UI architecture with _BaseUI and _CraftableUI base classes
+* AlchemyUI and CraftUI components extending _CraftableUI for specialized crafting interfaces
+* Enhanced UI inheritance system for better code organization and reusability
+
+### Changed
+
+* Refactored InventoryUI and RecipeUI to inherit from _BaseUI base class
+* Improved UI initialization system with integrated AlchemyUI and CraftUI components
+* Enhanced UI architecture with proper inheritance patterns and shared functionality
+
+### Technical
+
+* Implemented class-based UI inheritance system with metatable-based inheritance
+* Added UI mode management for inventory, alchemy, and crafting interactions
+* Enhanced dependency injection with new UI component registrations
+* Improved UI structure with dedicated base classes for different UI types
+
 ## \[1.14.8] - 2026-01-22
 
 ### Added
