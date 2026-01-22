@@ -53,6 +53,9 @@ function Presentation:init()
 	shared.eventBus:connect(shared.constants.CLIENT_EVENTS.TOGGLE_CRAFT, function(eventData)
 		self.ui:toggleCraft(eventData.state)
 	end)
+	shared.eventBus:connect(shared.constants.CLIENT_EVENTS.READ_RECIPE, function(eventData)
+		self.ui:toggleRecipe(eventData.recipe)
+	end)
 end
 
 return Presentation

@@ -2,16 +2,19 @@
 local Constants = {
 	INIT_SERVER = "InitServer",
 	REMOTE_EVENTS = {
+		USE_WEAPON = "UseWeapon",
 		EQUIP_ITEM = "EquipItem",
 		HUNTING_STARTED = "HuntingStarted",
 		PECK = "Peck",
 		FOOD_SPAWNED = "FoodSpawned",
 		FOOD_EATEN = "FoodEaten",
-		TOOL_ACTIVATED = "ToolActivated",
 		PLAYER_DIED = "PlayerDied",
 		PLAYER_UPDATED = "PlayerUpdated",
 
 		BREW_POTION = "BrewPotion",
+		DRINK_POTION = "DrinkPotion",
+		READ_RECIPE = "ReadRecipe",
+		EAT_FOOD = "EatFood",
 		CRAFT_ITEM = "CraftItem",
 		ADD_ITEM_FOR_BREWING = "AddItemForBrewing",
 		ADD_ITEM_FOR_CRAFTING = "AddItemForCrafting",
@@ -23,6 +26,7 @@ local Constants = {
 		TOGGLE_ALCHEMY = "toggleAlchemy",
 		TOGGLE_INVENTORY = "toggleInventory",
 		TOGGLE_CRAFT = "toggleCraft",
+		READ_RECIPE = "readRecipe",
 	},
 	DAY_NIGHT = {
 		-- Time constants (in minutes after midnight)

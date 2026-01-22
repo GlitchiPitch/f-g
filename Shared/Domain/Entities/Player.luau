@@ -107,4 +107,8 @@ function PlayerEntity:isAlive()
 	return true
 end
 
+function PlayerEntity:addBonus(bonus)
+	print(`Add bonus {bonus} to player {self.player.Name}`)
+end
+
 return PlayerEntity

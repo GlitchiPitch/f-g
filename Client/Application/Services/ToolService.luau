@@ -10,6 +10,7 @@ local Players = game:GetService("Players")
 ---@field constants Constants
 ---@field isEquipped boolean
 ---@field useCases ClientUseCases
+---@field itemRepository SharedItemRepository
 local ToolService = {}
 ToolService.__index = ToolService
 
@@ -39,22 +40,33 @@ function ToolService:init()
 	self.useCases = application.useCases
 	self.playerService = application.services.playerService
 	self.animationService = application.services.animationService
+	self.itemRepository = shared.infrastructure.repositories.itemRepository
 end
 
 function ToolService:checkCharacterTool()
 	local character = self.player.Character
 	---@param child Instance
 	local function _onChildAdded(child)
-		if child:IsA("Tool") and child:HasTag("Weapon") then
-			self.playerService:setPlayerState("Weapon")
+		if child:IsA("Tool") then
+			if child:HasTag("Weapon") then
+				self.playerService:setPlayerState("Weapon")
+			elseif child:HasTag("Food") then
+				self.playerService:setPlayerState("Food")
+			elseif child:HasTag("Potion") then
+				self.playerService:setPlayerState("Potion")
+			elseif child:HasTag("Recipe") then
+				self.playerService:setPlayerState("Recipe")
+			end
 			self:_setupTool(child)
 		end
 	end
 	---@param child Instance
 	local function _onChildRemoved(child)
-		if child:IsA("Tool") and child:HasTag("Weapon") then
+		if child:IsA("Tool") then
+			if child:HasTag("Weapon") then
+				self:_removeTool()
+			end
 			self.playerService:setPlayerState("Idle")
-			self:_removeTool()
 		end
 	end
 	character.ChildAdded:Connect(_onChildAdded)
@@ -78,7 +90,7 @@ function ToolService:_removeTool()
 	self.animationService:stopAllAnimations()
 end
 
-function ToolService:activated()
+function ToolService:useWeapon()
 	if not self.isEquipped then
 		return
 	end
@@ -89,7 +101,7 @@ function ToolService:activated()
 
 	self.debounce = true
 
-	self.useCases:toolActivated()
+	self.useCases:useWeapon(self._currentTool)
 
 	local weaponType = self._currentTool:GetAttribute("WeaponType")
 	if weaponType == "OneHanded" or weaponType == "TwoHanded" then
@@ -135,10 +147,31 @@ function ToolService:_activeWeapon(weaponType)
 	end
 end
 
--- function ToolService:_activeFood()
--- 	self.animationService.animTracks.Eat:Play()
--- 	task.wait(self.animationService.animTracks.Eat.Length)
--- end
+function ToolService:eatFood()
+	self.animationService.animTracks.eat:Play()
+	task.wait(self.animationService.animTracks.eat.Length)
+	-- @TODO: Implement food eating logic
+	-- add effect to player from food
+	self.useCases:eatFood(self._currentTool)
+end
+
+function ToolService:drinkPotion()
+	self.animationService.animTracks.drink:Play()
+	task.wait(self.animationService.animTracks.drink.Length)
+	-- @TODO: Implement potion drinking logic
+	-- add effect to player from potion
+	self.useCases:drinkPotion(self._currentTool)
+end
+
+function ToolService:readRecipe()
+	self.animationService.animTracks.read:Play()
+	task.wait(self.animationService.animTracks.read.Length)
+
+	local itemData = self.itemRepository:getItemData(self._currentTool.Name)
+	if itemData then
+		self.useCases:readRecipe(itemData)
+	end
+end
 
 function ToolService:destroy()
 	self._currentTool = nil

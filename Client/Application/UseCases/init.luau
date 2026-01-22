@@ -34,9 +34,10 @@ function UseCases:peck()
 	})
 end
 
-function UseCases:toolActivated()
+function UseCases:useWeapon(weapon)
 	self.remoteEventService:fireServer({
-		eventName = self.constants.REMOTE_EVENTS.TOOL_ACTIVATED,
+		eventName = self.constants.REMOTE_EVENTS.USE_WEAPON,
+		data = { weapon = weapon },
 	})
 end
 
@@ -89,6 +90,25 @@ function UseCases:addItemForCrafting(item)
 	self.remoteEventService:fireServer({
 		eventName = self.constants.REMOTE_EVENTS.ADD_ITEM_FOR_CRAFTING,
 		data = { item = item },
+	})
+end
+
+---@param recipe ItemData
+function UseCases:readRecipe(recipe)
+	self.eventBus:fire(self.constants.CLIENT_EVENTS.READ_RECIPE, { recipe = recipe })
+end
+
+function UseCases:drinkPotion(potion)
+	self.remoteEventService:fireServer({
+		eventName = self.constants.REMOTE_EVENTS.DRINK_POTION,
+		data = { potion = potion },
+	})
+end
+
+function UseCases:eatFood(food)
+	self.remoteEventService:fireServer({
+		eventName = self.constants.REMOTE_EVENTS.EAT_FOOD,
+		data = { food = food },
 	})
 end
 

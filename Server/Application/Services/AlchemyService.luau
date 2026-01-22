@@ -66,4 +66,16 @@ function AlchemyService:clearItems(playerEntity)
 	self.items[playerEntity.player.UserId] = nil
 end
 
+---@param playerEntity PlayerEntity
+---@param potion Tool
+function AlchemyService:drinkPotion(playerEntity, potion)
+	playerEntity:removeItemFromInventory(potion.Name)
+	local potionData = self.potionRepository:getPotionData(potion.Name)
+	if potionData then
+		for _, bonus in potionData.bonus do
+			playerEntity:addBonus(bonus)
+		end
+	end
+end
+
 return AlchemyService

@@ -135,7 +135,16 @@
 * \[x] Fix CraftService spawn point positioning bug
 * \[x] Refactor EnemyService to use enemyRepository
 
-## Immediate Tasks (v1.14.8)
+## Completed (v1.14.8)
+
+* \[x] Implement RecipeUI component for displaying crafting recipes
+* \[x] Add weapon usage mechanics with damage validation and calculation
+* \[x] Implement potion drinking system with inventory consumption
+* \[x] Add food eating mechanics with health restoration
+* \[x] Implement recipe reading client event system
+* \[x] Add player bonus system for potion/food effects
+
+## Immediate Tasks (v1.14.9)
 
 * \[ ] Implement enemy loot drops with item spawning mechanics
 * \[ ] Add loot collection system with player interaction

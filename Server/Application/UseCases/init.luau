@@ -40,10 +40,11 @@ function UseCases:peck(player)
 end
 
 ---@param player Player
-function UseCases:toolActivated(player)
-	print(`Tool activated by {player.Name}`)
+---@param data table
+function UseCases:useWeapon(player, data)
+	print(`Use weapon by {player.Name}`)
 	local playerEntity = self.playerRepository:getPlayerEntity(player)
-	self.actionService:toolActivated(playerEntity)
+	self.actionService:useWeapon(playerEntity, data.weapon)
 end
 
 ---@param player Player
@@ -121,4 +122,34 @@ function UseCases:addItemForCrafting(player, data)
 	})
 end
 
+---@param player Player
+---@param data table
+function UseCases:drinkPotion(player, data)
+	print(`Drink potion by {player.Name}`)
+	data.player = player
+	local playerEntity = self.playerRepository:getPlayerEntity(player)
+	local result, message = self.alchemyService:drinkPotion(playerEntity, data.potion)
+	self.remoteEventService:fireClient(player, {
+		eventName = self.constants.REMOTE_EVENTS.DRINK_POTION,
+		data = {
+			result = result,
+			message = message,
+		},
+	})
+end
+
+---@param player Player
+---@param data table
+function UseCases:eatFood(player, data)
+	print(`Eat food by {player.Name}`)
+	data.player = player
+	local result, message = self.alchemyService:tryEat(data)
+	self.remoteEventService:fireClient(player, {
+		eventName = self.constants.REMOTE_EVENTS.EAT_FOOD,
+		data = {
+			result = result,
+			message = message,
+		},
+	})
+end
 return UseCases

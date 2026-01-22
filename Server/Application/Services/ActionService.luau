@@ -3,6 +3,7 @@ local Debris = game:GetService("Debris")
 ---@field diContainer DIContainer
 ---@field peckHitbox Model
 ---@field farmService ServerFarmService
+---@field weaponRepository SharedWeaponRepository
 local ActionService = {}
 ActionService.__index = ActionService
 
@@ -21,6 +22,7 @@ function ActionService:init()
 	local application = self.diContainer:resolve("Application")
 	self.farmService = application.services.farmService
 	self.peckHitbox = shared.assets.PeckHitbox
+	self.weaponRepository = shared.infrastructure.repositories.weaponRepository
 end
 
 ---@param playerEntity PlayerEntity
@@ -41,9 +43,24 @@ function ActionService:peck(playerEntity)
 end
 
 ---@param playerEntity PlayerEntity
-function ActionService:toolActivated(playerEntity)
+---@param weapon Tool
+function ActionService:useWeapon(playerEntity, weapon)
 	local character = playerEntity.player.Character
 
+	-- Validate that the weapon is equipped by the player
+	if weapon.Parent ~= character then
+		warn("Player attempted to use unequipped weapon:", weapon.Name)
+		return
+	end
+
+	-- Get weapon damage from repository
+	local weaponData = self.weaponRepository:getWeaponData(weapon.Name)
+	if not weaponData then
+		warn("Weapon data not found for:", weapon.Name)
+		return
+	end
+
+	local damage = weaponData.damage
 	local hitboxPosition = character.HumanoidRootPart.CFrame.Position
 	local hitbox = self.peckHitbox:Clone()
 	hitbox.Parent = workspace
@@ -55,11 +72,11 @@ function ActionService:toolActivated(playerEntity)
 		if humanoid then
 			local isPlayer = humanoid == playerEntity.player.Character.Humanoid
 			if not isPlayer then
-				humanoid:TakeDamage(10)
+				humanoid:TakeDamage(damage)
 				-- if player has one handed use break for one damaged person
 				-- if two handed not use break
-				
-				-- break 
+
+				-- break
 			end
 		end
 	end

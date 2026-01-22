@@ -5,9 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## \[1.14.7] - 2026-01-22
+## \[1.14.8] - 2026-01-22
 
 ### Added
+
+* RecipeUI component for displaying crafting recipes with ingredient visualization
+* Enhanced weapon usage system with weapon data validation and dynamic damage calculation
+* Potion drinking mechanics with inventory consumption and stat bonus application
+* Food eating mechanics with health restoration and server-client synchronization
+* Recipe reading client event system for UI recipe display
+* Player bonus system for applying potion and food effects
+
+### Changed
+
+* Refactored weapon activation from toolActivated to useWeapon with weapon parameter
+* Enhanced ActionService with weapon repository integration for damage calculation
+* Updated remote event system to support weapon usage, potion drinking, and food consumption
+* Improved AlchemyService with potion consumption and bonus application logic
+
+### Technical
+
+* Added USE_WEAPON, DRINK_POTION, READ_RECIPE, and EAT_FOOD remote events
+* Implemented weapon validation system ensuring only equipped weapons can be used
+* Enhanced player entity with addBonus method for effect application
+* Added comprehensive type definitions for new consumption mechanics
+
+## \[1.14.7] - 2026-01-22
 
 * Comprehensive weapon crafting recipes with material requirements and skill prerequisites
 * Potion crafting recipes for Health, Mana, Stamina, and Speed potions

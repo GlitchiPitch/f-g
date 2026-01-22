@@ -68,8 +68,14 @@ function InputService:_inputBegan(input, gameProccessed)
 	if input.UserInputType == self.config.Client.Control.MainAction then
 		if playerState == "Idle" then
 			self.actionService:idleAction()
+		elseif playerState == "Food" then
+			self.toolService:eatFood()
+		elseif playerState == "Potion" then
+			self.toolService:drinkPotion()
+		elseif playerState == "Recipe" then
+			self.toolService:readRecipe()
 		elseif playerState == "Weapon" then
-			self.toolService:activated()
+			self.toolService:useWeapon()
 		elseif playerState == "Interact" then
 			self.actionService:interactAction()
 		end

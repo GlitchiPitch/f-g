@@ -31,8 +31,8 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.PECK] = function(player, eventData)
 			self.useCases:peck(player)
 		end,
-		[shared.constants.REMOTE_EVENTS.TOOL_ACTIVATED] = function(player, eventData)
-			self.useCases:toolActivated(player)
+		[shared.constants.REMOTE_EVENTS.USE_WEAPON] = function(player, eventData)
+			self.useCases:useWeapon(player, eventData.data)
 		end,
 		[shared.constants.REMOTE_EVENTS.BREW_POTION] = function(player, eventData)
 			self.useCases:brewPotion(player, eventData.data)

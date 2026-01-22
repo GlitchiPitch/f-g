@@ -2,6 +2,8 @@ local Debris = game:GetService("Debris")
 local TweenService = game:GetService("TweenService")
 
 local InventoryUI = require(script.InventoryUI)
+local RecipeUI = require(script.RecipeUI)
+
 ---@class UI
 ---@field diContainer DIContainer
 ---@field foodPopup Frame
@@ -9,6 +11,7 @@ local InventoryUI = require(script.InventoryUI)
 ---@field alchemyService ClientAlchemyService
 ---@field craftService ClientCraftService
 ---@field inventoryUI InventoryUI
+---@field recipeUI RecipeUI
 ---@field _secondActionButtonConn RBXScriptSignal
 local UI = {}
 UI.__index = UI
@@ -19,6 +22,7 @@ function UI.new(diContainer)
 	local self = setmetatable({}, UI)
 	self.diContainer = diContainer
 	self.inventoryUI = InventoryUI.new(self.diContainer)
+	self.recipeUI = RecipeUI.new(self.diContainer)
 	self._secondActionButtonConn = nil
 	return self
 end
@@ -41,6 +45,7 @@ function UI:init()
 	self.playerService = application.services.playerService
 
 	self.inventoryUI:init()
+	self.recipeUI:init()
 end
 
 function UI:showNotification(message)
@@ -120,7 +125,6 @@ function UI:toggleAlchemy(state)
 		self.secondActionButton.Visible = true
 		self._secondActionButtonConn = self.secondActionButton.MouseButton1Click:Connect(function()
 			self.alchemyService:tryBrew()
-			
 		end)
 	else
 		self.inventoryUI:setMode("inventory")
@@ -147,6 +151,10 @@ function UI:toggleCraft(state)
 		self.inventoryUI:close()
 		self.secondActionButton.Visible = false
 	end
+end
+
+function UI:toggleRecipe(recipe)
+	self.recipeUI:toggle(recipe)
 end
 
 return UI

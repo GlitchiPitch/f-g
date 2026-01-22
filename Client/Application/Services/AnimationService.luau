@@ -38,6 +38,10 @@ function AnimationService:init()
 	self.animTracks.peck = animator:LoadAnimation(shared.assets.Animations.Peck)
 	self.animTracks.peck.Priority = Enum.AnimationPriority.Action
 
+	self.animTracks.drink = animator:LoadAnimation(shared.assets.Animations.Drink)
+	self.animTracks.read = animator:LoadAnimation(shared.assets.Animations.Read)
+	self.animTracks.eat = animator:LoadAnimation(shared.assets.Animations.Eat)
+
 	self.animTracks.block = animator:LoadAnimation(shared.assets.Animations.Block) :: AnimationTrack
 	self.animTracks.block.Looped = true
 	self.animTracks.block.Priority = Enum.AnimationPriority.Action2
