@@ -22,6 +22,16 @@ function PlayerService:init()
 	end
 	SharedPlayerService.init(self)
 
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	self.eventBus = shared.infrastructure.eventBus
+	self.constants = shared.constants
+
+	-- Listen for player update requests from TeleportService
+	self.eventBus:connect(self.constants.EVENTS.PLAYER_UPDATE, function(player)
+		self:refreshPlayerData(player)
+	end)
+
 	Players.PlayerAdded:Connect(_onPlayerAdded)
 	Players.PlayerRemoving:Connect(_onPlayerRemoving)
 end

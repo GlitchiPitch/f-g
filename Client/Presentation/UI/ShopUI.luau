@@ -29,7 +29,6 @@ function ShopUI:init()
 end
 
 function ShopUI:open()
-    warn("open")
 	self.shopFrame:TweenPosition(self.openPosition, "Out", "Quint", 1, true)
 end
 

@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.17.0] - 2026-01-23
+
+### Added
+
+* Enhanced loot system with event-driven architecture and LootController integration
+* Comprehensive event system with controller-service communication channels
+* Event constants for farm, hunting, loot, and enemy lifecycle management
+
+### Changed
+
+* Refactored LootService with proper event bus integration and dependency injection
+* Enhanced LootController with event-driven loot destruction handling
+* Improved player service update methods with proper parameter passing
+* Streamlined sound service integration in presentation layer
+* Updated server services initialization with LootService registration
+
+### Technical
+
+* Added event-driven loot management system with cache-based loot point setup
+* Implemented event bus connections for loot destroyed notifications
+* Enhanced dependency injection with loot service integration across application layers
+* Improved code formatting and line ending consistency
+
 ## \[1.16.0] - 2026-01-22
 
 ### Added

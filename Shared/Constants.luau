@@ -1,6 +1,23 @@
 ---@class Constants
 local Constants = {
 	INIT_SERVER = "InitServer",
+	EVENTS = {
+		-- Controller → Service events
+		FARM_SPAWN_FOOD = "farm_spawn_food",
+		HUNTING_START = "hunting_start",
+		HUNTING_STOP = "hunting_stop",
+		LOOT_DESTROYED = "loot_destroyed",
+
+		-- Service → Controller events
+		ENEMY_SPAWNED = "enemy_spawned",
+		ENEMY_DIED = "enemy_died",
+		FOOD_EATEN = "food_eaten",
+		PLAYER_UPDATE = "player_update",
+
+		-- Service → Service events
+		FARM_FOOD_CONSUMED = "farm_food_consumed",
+		HUNTING_STATUS_CHANGED = "hunting_status_changed",
+	},
 	REMOTE_EVENTS = {
 		USE_WEAPON = "UseWeapon",
 		EQUIP_ITEM = "EquipItem",
@@ -19,7 +36,6 @@ local Constants = {
 		ADD_ITEM_FOR_BREWING = "AddItemForBrewing",
 		ADD_ITEM_FOR_CRAFTING = "AddItemForCrafting",
 		RESET_CRAFTING = "ResetCrafting",
-		
 	},
 	CLIENT_EVENTS = {
 		TOGGLE_DIED_SCREEN = "toggleDiedScreen",

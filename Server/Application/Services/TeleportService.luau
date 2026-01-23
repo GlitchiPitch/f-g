@@ -16,23 +16,22 @@ function TeleportService.new(diContainer)
 end
 
 function TeleportService:init()
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
 	---@type ServerInfrastructure
 	local infrastructure = self.diContainer:resolve("Infrastructure")
 	self.playerRepository = infrastructure.repositories.playerRepository
-	---@type ServerApp
-	local application = self.diContainer:resolve("Application")
-	self.playerService = application.services.playerService
-	local lobbyTeleports = workspace.Lobby.Teleports
+	self.eventBus = shared.infrastructure.eventBus
+	self.constants = shared.constants
+	local lobbyTeleports = workspace.Teleports.Lobby
 	self:setupTeleport(lobbyTeleports.Enter.PrimaryPart, lobbyTeleports.Exit.PrimaryPart, "MainWorld")
 
-	for _, world in workspace.Worlds:GetChildren() do
-		if world:FindFirstChild("Teleports") then
-			self:setupTeleport(
-				world.Teleports.Enter.PrimaryPart,
-				world.Teleports.Exit.PrimaryPart,
-				world:GetAttribute("NextWorld")
-			)
-		end
+	for _, world in workspace.Teleports:GetChildren() do
+		self:setupTeleport(
+			world.Enter.PrimaryPart,
+			world.Exit.PrimaryPart,
+			world:GetAttribute("NextWorld")
+		)
 	end
 end
 
@@ -46,7 +45,7 @@ function TeleportService:setupTeleport(a1, a2, worldName)
 			local playerEntity = self.playerRepository:getPlayerEntity(player)
 			local currentWorld = if worldName then workspace.Worlds:FindFirstChild(worldName) else workspace.Lobby
 			playerEntity:setCurrentWorld(worldName)
-			self.playerService:updatePlayer(player)
+			self.eventBus:fire(self.constants.EVENTS.PLAYER_UPDATE, player)
 			player:SetAttribute("Teleported", true)
 			player.Character:PivotTo(CFrame.new(targetPart.CFrame.Position) + Vector3.new(0, 2, 0))
 			player.Character.Parent = currentWorld.Players

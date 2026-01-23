@@ -20,12 +20,10 @@ end
 function EnemyService:init()
 	---@type Shared
 	local shared = self.diContainer:resolve("Shared")
-	---@type ServerApp
-	local application = self.diContainer:resolve("Application")
-	self.enemyController = application.controllers.enemyController
 	self.enemyRepository = shared.infrastructure.repositories.enemyRepository
 	self.Enemy = shared.domain.Entities.Enemy
-
+	self.eventBus = shared.infrastructure.eventBus
+	self.constants = shared.constants
 end
 
 -- Spawn method
@@ -51,7 +49,7 @@ function EnemyService:spawnEnemy(enemyType: string, spawnpoint: Vector3)
 	end
 
 	local model = enemy:spawn(spawnpoint, self.enemyFolder)
-	self.enemyController:onEnemySpawned(enemy)
+	self.eventBus:fire(self.constants.EVENTS.ENEMY_SPAWNED, enemy)
 
 	return model
 end
@@ -63,7 +61,7 @@ function EnemyService:handleDeath(enemy)
 		return
 	end
 
-	self.enemyController:onEnemyDied(enemy)
+	self.eventBus:fire(self.constants.EVENTS.ENEMY_DIED, enemy)
 
 	if enemy.respawnTime then
 		-- Respawn after a set respawn time

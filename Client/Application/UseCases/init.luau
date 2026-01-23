@@ -50,7 +50,7 @@ function UseCases:brewPotion(items)
 end
 
 function UseCases:updatePlayer(data)
-	self.playerService:updatePlayer(data)
+	self.playerService:updatePlayer(self.playerService.player, data)
 	self.lightingService:setMode(self.playerService:getPlayerState())
 	self.eventBus:fire(self.constants.REMOTE_EVENTS.PLAYER_UPDATED, data)
 end

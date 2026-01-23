@@ -22,8 +22,19 @@ function FarmService:init()
 	local shared = self.diContainer:resolve("Shared")
 	self.remoteEventService = shared.remoteEventService
 	self.constants = shared.constants
+	self.eventBus = shared.infrastructure.eventBus
 	self.foodZone = workspace.Worlds.MainWorld.FeedSpawn
 	self.foodAsset = shared.assets.Seed
+
+	-- Listen for spawn food requests from FarmController
+	self.eventBus:connect(self.constants.EVENTS.FARM_SPAWN_FOOD, function()
+		self:spawnFood()
+	end)
+
+	-- Listen for food consumption requests from ActionService
+	self.eventBus:connect(self.constants.EVENTS.FOOD_EATEN, function(data)
+		self:eatFood(data.playerEntity, data.food)
+	end)
 end
 
 function FarmService:spawnFood()

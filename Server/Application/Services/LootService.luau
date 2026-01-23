@@ -7,23 +7,27 @@ LootService.__index = LootService
 function LootService.new(diContainer)
 	local self = setmetatable({}, LootService)
 	self.diContainer = diContainer
-    self._lootCahce = {}
+	self._lootCahce = {}
 	return self
 end
 
 function LootService:init()
-    self:_setupLootPoints()
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	self.eventBus = shared.infrastructure.eventBus
+	self.constants = shared.constants
+	self:_setupLootPoints()
 end
 
 function LootService:_setupLootPoints()
-    local lootFolder = workspace.Worlds.MainWorld.Loot
-    ---@param loot Model
-    for _, loot in lootFolder:GetChildren() do
-        self._lootCahce[loot.Name] = loot:Clone()
-        loot.Destroying:Connect(function()
-            self.eventBus:fire("lootDestroyed", loot)
-        end)
-    end
+	local lootFolder = workspace.Worlds.MainWorld.Loot
+	---@param loot Model
+	for _, loot in lootFolder:GetChildren() do
+		self._lootCahce[loot.Name] = loot:Clone()
+		loot.Destroying:Connect(function()
+			self.eventBus:fire("lootDestroyed", loot)
+		end)
+	end
 end
 
 return LootService

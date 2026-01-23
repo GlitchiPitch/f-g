@@ -18,11 +18,10 @@ end
 function ActionService:init()
 	---@type Shared
 	local shared = self.diContainer:resolve("Shared")
-	---@type ServerApp
-	local application = self.diContainer:resolve("Application")
-	self.farmService = application.services.farmService
 	self.peckHitbox = shared.assets.PeckHitbox
 	self.weaponRepository = shared.infrastructure.repositories.weaponRepository
+	self.eventBus = shared.infrastructure.eventBus
+	self.constants = shared.constants
 end
 
 ---@param playerEntity PlayerEntity
@@ -36,7 +35,10 @@ function ActionService:peck(playerEntity)
 	for _, part in partsInRadius do
 		warn(part.Parent.Name)
 		if part.Parent.Name == "Food" then
-			self.farmService:eatFood(playerEntity, part.Parent)
+			self.eventBus:fire(self.constants.EVENTS.FOOD_EATEN, {
+				playerEntity = playerEntity,
+				food = part.Parent,
+			})
 		end
 	end
 

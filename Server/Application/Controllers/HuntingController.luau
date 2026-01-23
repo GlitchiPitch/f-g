@@ -1,9 +1,9 @@
 ---@class ServerHuntingController
 ---@field diContainer DIContainer
----@field huntingService ServerHuntingService
 ---@field _deltaTime number
 ---@field _updateTime number
 ---@field mainWorld Model
+---@field isActive boolean
 local HuntingController = {}
 HuntingController.__index = HuntingController
 
@@ -14,14 +14,21 @@ function HuntingController.new(diContainer)
 	self.diContainer = diContainer
 	self._deltaTime = 0
 	self._updateTime = 5
+	self.isActive = false
 	return self
 end
 
 function HuntingController:init()
-	---@type ServerApp
-	local application = self.diContainer:resolve("Application")
-	self.huntingService = application.services.huntingService
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	self.eventBus = shared.infrastructure.eventBus
+	self.constants = shared.constants
 	self.mainWorld = workspace.Worlds.MainWorld
+
+	-- Listen for hunting status changes from HuntingService
+	self.eventBus:connect(self.constants.EVENTS.HUNTING_STATUS_CHANGED, function(data)
+		self.isActive = data.isActive
+	end)
 end
 
 ---@param deltaTime number
@@ -31,10 +38,10 @@ function HuntingController:update(deltaTime)
 		return
 	end
 
-	if self.huntingService.isActive then
-		-- self.huntingService:stop()
+	if self.isActive then
+		self.eventBus:fire(self.constants.EVENTS.HUNTING_STOP)
 	else
-		self.huntingService:start()
+		self.eventBus:fire(self.constants.EVENTS.HUNTING_START)
 	end
 
 	self._deltaTime = 0

@@ -15,7 +15,21 @@ function EnemyController.new(diContainer)
 	return self
 end
 
-function EnemyController:init() end
+function EnemyController:init()
+	---@type Shared
+	local shared = self.diContainer:resolve("Shared")
+	self.eventBus = shared.eventBus
+	self.constants = shared.constants
+
+	-- Listen for enemy spawn/die events from EnemyService
+	self.eventBus:connect(self.constants.EVENTS.ENEMY_SPAWNED, function(enemy)
+		self:onEnemySpawned(enemy)
+	end)
+
+	self.eventBus:connect(self.constants.EVENTS.ENEMY_DIED, function(enemy)
+		self:onEnemyDied(enemy)
+	end)
+end
 
 function EnemyController:update(deltaTime)
 	self._deltaTime += deltaTime

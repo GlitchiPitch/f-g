@@ -1,8 +1,5 @@
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Players = game:GetService("Players")
-
 local Shared = require(ReplicatedStorage.Shared)
-
 local ServerInfrastructure = require(script.Infrastructure)
 local ServerApplication = require(script.Application)
 

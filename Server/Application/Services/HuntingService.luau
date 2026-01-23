@@ -27,10 +27,20 @@ function HuntingService:init()
 	self.playerRepository = infrastructure.repositories.playerRepository
 	self.remoteEventService = shared.remoteEventService
 	self.constants = shared.constants
+	self.eventBus = shared.infrastructure.eventBus
 	self.hunter = shared.domain.Entities.Farmer.new(shared.assets.Hunter)
 	self.hunterSpawn = workspace.Worlds.MainWorld.HunterSpawn
 
 	self.hunter:init(self.diContainer)
+
+	-- Listen for hunting control events from HuntingController
+	self.eventBus:connect(self.constants.EVENTS.HUNTING_START, function()
+		self:start()
+	end)
+
+	self.eventBus:connect(self.constants.EVENTS.HUNTING_STOP, function()
+		self:stop()
+	end)
 end
 
 function HuntingService:start()
@@ -43,11 +53,13 @@ function HuntingService:start()
 	self.hunter:setToPosition(self.hunterSpawn.Position)
 	self:_chooseTargetBirdType()
 	self:_notifyPlayers()
+	self.eventBus:fire(self.constants.EVENTS.HUNTING_STATUS_CHANGED, {isActive = true})
 end
 
 function HuntingService:stop()
 	self.isActive = false
 	self.hunter:setState(false)
+	self.eventBus:fire(self.constants.EVENTS.HUNTING_STATUS_CHANGED, {isActive = false})
 end
 
 function HuntingService:_chooseTargetBirdType()

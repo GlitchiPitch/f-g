@@ -33,7 +33,7 @@ function Presentation:init()
 		end,
 		[shared.constants.CLIENT_EVENTS.TOGGLE_DIED_SCREEN] = function(eventData)
 			if eventData.state then
-				shared.services.soundService:playSound("YouDied")
+				shared.application.services.soundService:playSound("YouDied")
 			end
 			self.ui:toggleDiedScreen(eventData.state)
 		end,

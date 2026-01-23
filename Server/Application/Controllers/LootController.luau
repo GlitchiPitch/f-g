@@ -11,9 +11,15 @@ function LootController.new(diContainer)
 end
 
 function LootController:init()
-    ---@type ServerApp
-    local application = self.diContainer:resolve("Application")
-    self.lootService = application.services.lootService
+    ---@type Shared
+    local shared = self.diContainer:resolve("Shared")
+    self.eventBus = shared.infrastructure.eventBus
+    self.constants = shared.constants
+
+    -- Listen for loot destroyed events from LootService
+    self.eventBus:connect(self.constants.EVENTS.LOOT_DESTROYED, function(loot)
+        self:onLootDestroyed(loot)
+    end)
 end
 
 function LootController:update()

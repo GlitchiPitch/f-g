@@ -146,6 +146,16 @@
 * \[x] Improve event handling architecture with consolidated event registration
 * \[x] Update UseCases with resetCrafting functionality across client and server
 
+## Completed (v1.17.0)
+
+* \[x] Implement enhanced loot system with event-driven architecture and LootController integration
+* \[x] Add comprehensive event system with controller-service communication channels
+* \[x] Refactor LootService with proper event bus integration and dependency injection
+* \[x] Enhance LootController with event-driven loot destruction handling
+* \[x] Improve player service update methods with proper parameter passing
+* \[x] Streamline sound service integration in presentation layer
+* \[x] Update server services initialization with LootService registration
+
 ## Completed (v1.16.0)
 
 * \[x] Implement shop system with ShopService and ShopUI for NPC/vendor interactions
@@ -172,7 +182,7 @@
 * \[x] Implement recipe reading client event system
 * \[x] Add player bonus system for potion/food effects
 
-## Immediate Tasks (v1.16.0)
+## Immediate Tasks (v1.17.0)
 
 * \[ ] Implement enemy loot drops with item spawning mechanics
 * \[ ] Add loot collection system with player interaction

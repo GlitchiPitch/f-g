@@ -14,4 +14,8 @@ function PlayerRepository.new(diContainer)
 	return self
 end
 
+function PlayerRepository:init()
+	SharedPlayerRepository.init(self)
+end
+
 return PlayerRepository
