@@ -7,10 +7,12 @@ local Constants = {
 		HUNTING_START = "hunting_start",
 		HUNTING_STOP = "hunting_stop",
 		LOOT_DESTROYED = "loot_destroyed",
+		SPAWN_LOOT = "spawn_loot",
 
 		-- Service → Controller events
 		ENEMY_SPAWNED = "enemy_spawned",
 		ENEMY_DIED = "enemy_died",
+		ENEMY_UPDATE = "enemy_update",
 		FOOD_EATEN = "food_eaten",
 		PLAYER_UPDATE = "player_update",
 

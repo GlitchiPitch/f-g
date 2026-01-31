@@ -21,33 +21,28 @@ function EnemyController:init()
 	self.eventBus = shared.eventBus
 	self.constants = shared.constants
 
-	-- Listen for enemy spawn/die events from EnemyService
-	self.eventBus:connect(self.constants.EVENTS.ENEMY_SPAWNED, function(enemy)
-		self:onEnemySpawned(enemy)
-	end)
+	self:_spawnTestEnemies()
 
-	self.eventBus:connect(self.constants.EVENTS.ENEMY_DIED, function(enemy)
-		self:onEnemyDied(enemy)
-	end)
 end
 
 function EnemyController:update(deltaTime)
 	self._deltaTime += deltaTime
 	if self._deltaTime >= self._updateTime then
 		self._deltaTime = 0 -- Reset delta time
-
-		for _, enemy in self.enemies do
-			enemy:update()
-		end
+		self.eventBus:fire(self.constants.EVENTS.ENEMY_UPDATE)
 	end
 end
 
-function EnemyController:onEnemySpawned(enemy)
-	self.enemies[enemy.id] = enemy
-end
 
-function EnemyController:onEnemyDied(enemy)
-	self.enemies[enemy.id] = nil
+function EnemyController:_spawnTestEnemies()
+	local w1SpawnPoints = workspace.Worlds.World1.EnemySpawnPoints:GetChildren()
+	for _, spawnPoint in w1SpawnPoints do
+
+		self.eventBus:fire(self.constants.EVENTS.ENEMY_SPAWNED, {
+			enemyType = "Orc",
+			spawnPoint = spawnPoint.Position,
+		})
+	end
 end
 
 return EnemyController

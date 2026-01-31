@@ -102,6 +102,13 @@ function Enemy:die()
 		return
 	end
 
+	-- Call death callback (handler will handle respawn/removal logic)
+	if self.onDeath then
+		self.attackTrack:Stop()
+		self.attackTrack = nil
+		self.onDeath()
+	end
+
 	local model = self.model
 	self.model = nil
 
@@ -109,13 +116,6 @@ function Enemy:die()
 		task.wait(3) -- Prevents the body from instantly disappearing
 		model:Destroy()
 	end)
-
-	-- Call death callback (handler will handle respawn/removal logic)
-	if self.onDeath then
-		self.attackTrack:Stop()
-		self.attackTrack = nil
-		self.onDeath()
-	end
 end
 
 function Enemy:attack()

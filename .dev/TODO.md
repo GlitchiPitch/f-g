@@ -182,17 +182,24 @@
 * \[x] Implement recipe reading client event system
 * \[x] Add player bonus system for potion/food effects
 
-## Immediate Tasks (v1.17.0)
+## Completed (v1.18.0)
 
-* \[ ] Implement enemy loot drops with item spawning mechanics
-* \[ ] Add loot collection system with player interaction
+* \[x] Implement enemy loot drops with item spawning mechanics
+* \[x] Add loot collection system with player interaction
+* \[x] Integrate loot drops with inventory system
+* \[x] Add item rarity and drop rate mechanics (chance-based system)
+* \[x] Add LootVFX visual effects for loot drops
+* \[x] Implement enemy death loot spawning integration
+
+## Immediate Tasks (v1.18.0)
+
 * \[ ] Implement crafting station objects and proximity detection
 * \[ ] Add crafting UI with recipe selection and ingredient validation
 * \[ ] Implement crafting progress animations and completion effects
 * \[ ] Add server-client eventBus interaction for loot and crafting events
-* \[ ] Integrate loot drops with inventory system
-* \[ ] Add item rarity and drop rate mechanics
 * \[ ] Implement player progression system with crafting skill advancement
+* \[ ] Add loot drop sound effects and audio feedback
+* \[ ] Enhance loot drop positioning with physics-based scattering
 
 ## Completed (v1.13.0)
 

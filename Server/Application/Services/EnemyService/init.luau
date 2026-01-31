@@ -24,6 +24,20 @@ function EnemyService:init()
 	self.Enemy = shared.domain.Entities.Enemy
 	self.eventBus = shared.infrastructure.eventBus
 	self.constants = shared.constants
+
+	self:_setupEventListeners()
+end
+
+function EnemyService:_setupEventListeners()
+	self.eventBus:connect(self.constants.EVENTS.ENEMY_SPAWNED, function(data)
+		self:spawnEnemy(data.enemyType, data.spawnPoint)
+	end)
+	
+	self.eventBus:connect(self.constants.EVENTS.ENEMY_UPDATE, function()
+		for _, enemy in self.enemies do
+			enemy:update()
+		end
+	end)
 end
 
 -- Spawn method
@@ -49,7 +63,7 @@ function EnemyService:spawnEnemy(enemyType: string, spawnpoint: Vector3)
 	end
 
 	local model = enemy:spawn(spawnpoint, self.enemyFolder)
-	self.eventBus:fire(self.constants.EVENTS.ENEMY_SPAWNED, enemy)
+	
 
 	return model
 end
@@ -57,12 +71,16 @@ end
 -- Handle death (custom die method that handles respawn and removal)
 ---@param enemy EnemyEntity
 function EnemyService:handleDeath(enemy)
+	
 	if not enemy.model then
 		return
 	end
 
 	self.eventBus:fire(self.constants.EVENTS.ENEMY_DIED, enemy)
-
+	self.eventBus:fire(self.constants.EVENTS.SPAWN_LOOT, {
+		character = enemy.model,
+	})
+	
 	if enemy.respawnTime then
 		-- Respawn after a set respawn time
 		task.spawn(function()
@@ -82,11 +100,5 @@ function EnemyService:destroy(enemy: any)
 	self.enemies[enemy.id] = nil
 end
 
-function EnemyService:_spawnEnemies()
-	local w1SpawnPoints = workspace.Worlds.World1.EnemySpawnPoints:GetChildren()
-	for _, spawnPoint in w1SpawnPoints do
-		self:spawnEnemy("Orc", spawnPoint.Position)
-	end
-end
 
 return EnemyService

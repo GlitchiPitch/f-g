@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.18.0] - 2026-01-31
+
+### Added
+
+* Complete enemy loot drop system with character-based loot tables
+* Loot collection mechanics with player touch detection and automatic inventory addition
+* LootVFX visual effects for loot drops with positioning and attachment
+* Enemy death loot spawning integration with SPAWN_LOOT event
+* EnemyController test enemy spawning at World1 spawn points
+* Loot pickup delay system (2 seconds) to prevent instant collection
+
+### Changed
+
+* Enhanced EnemyService handleDeath method to trigger loot drops on enemy death
+* Improved Enemy entity death handling with proper attack animation cleanup
+* Updated LootService with comprehensive loot drop logic for enemy characters
+* Enhanced loot positioning with random scatter around enemy death location
+
+### Technical
+
+* Implemented character-based loot tables with chance and amount configuration
+* Added loot item asset retrieval from ItemRepository
+* Enhanced loot collection system with attribute-based pickup prevention
+* Integrated player repository for inventory management on loot pickup
+* Added LootVFX asset to Shared Assets module
+
 ## \[1.17.0] - 2026-01-23
 
 ### Added
@@ -33,16 +59,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Complete shop system with ShopService for NPC/vendor interactions
-* ShopUI component extending _BaseUI with shop interface and close functionality
+* ShopUI component extending \_BaseUI with shop interface and close functionality
 * Static camera mode for shop interactions with tweened camera transitions
 * Enhanced crafting UI methods for item management (addItemForCrafting, addItemForBrewing, resetCrafting)
-* TOGGLE_SHOP client event for shop UI state management
+* TOGGLE\_SHOP client event for shop UI state management
 * Shop camera positioning with CameraPart reference system
 
 ### Changed
 
 * Refactored presentation event handlers to use table-based approach for better maintainability
-* Simplified CameraController by replacing alchemy/craft specific methods with generic _setStaticCamera
+* Simplified CameraController by replacing alchemy/craft specific methods with generic \_setStaticCamera
 * Enhanced event architecture with consolidated client event handling
 
 ### Technical
@@ -58,21 +84,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Reset crafting functionality with item return to inventory mechanics
-* Enhanced UI item management with add/clear functionality in _CraftableUI
+* Enhanced UI item management with add/clear functionality in \_CraftableUI
 * Action button integration for crafting reset operations
 * Event-driven crafting item management with client event broadcasting
 
 ### Changed
 
-* Refactored _CraftableUI with improved item display and management methods
+* Refactored \_CraftableUI with improved item display and management methods
 * Enhanced CraftService with resetCraft method for inventory restoration
 * Improved event handling architecture with consolidated event registration
 * Updated UseCases with resetCrafting functionality across client and server
 
 ### Technical
 
-* Added RESET_CRAFTING remote event for server-client synchronization
-* Implemented ADD_ITEM_FOR_CRAFTING and ADD_ITEM_FOR_BREWING client events
+* Added RESET\_CRAFTING remote event for server-client synchronization
+* Implemented ADD\_ITEM\_FOR\_CRAFTING and ADD\_ITEM\_FOR\_BREWING client events
 * Enhanced UI architecture with action button connection management
 * Improved code quality by removing debug warning statements
 
@@ -80,13 +106,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Modular UI architecture with _BaseUI and _CraftableUI base classes
-* AlchemyUI and CraftUI components extending _CraftableUI for specialized crafting interfaces
+* Modular UI architecture with \_BaseUI and \_CraftableUI base classes
+* AlchemyUI and CraftUI components extending \_CraftableUI for specialized crafting interfaces
 * Enhanced UI inheritance system for better code organization and reusability
 
 ### Changed
 
-* Refactored InventoryUI and RecipeUI to inherit from _BaseUI base class
+* Refactored InventoryUI and RecipeUI to inherit from \_BaseUI base class
 * Improved UI initialization system with integrated AlchemyUI and CraftUI components
 * Enhanced UI architecture with proper inheritance patterns and shared functionality
 
@@ -117,7 +143,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Technical
 
-* Added USE_WEAPON, DRINK_POTION, READ_RECIPE, and EAT_FOOD remote events
+* Added USE\_WEAPON, DRINK\_POTION, READ\_RECIPE, and EAT\_FOOD remote events
 * Implemented weapon validation system ensuring only equipped weapons can be used
 * Enhanced player entity with addBonus method for effect application
 * Added comprehensive type definitions for new consumption mechanics
@@ -156,7 +182,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Extensive item data system with crafting materials (Iron, Steel, Gold, gems, stones, etc.)
 * Alchemy ingredients system with mushrooms, flowers, and natural resources (PurpleFlower, RedMushroom, BlueMushroom, Chamomile, PurpleMushroom)
 * CraftService implementation for client and server with recipe validation and item management
-* New remote events for crafting mechanics (CRAFT_ITEM, ADD_ITEM_FOR_CRAFTING)
+* New remote events for crafting mechanics (CRAFT\_ITEM, ADD\_ITEM\_FOR\_CRAFTING)
 * Enhanced weapon data with crafting recipes, damage types, and bonus effects
 * One-handed and two-handed weapon categories with progressive difficulty scaling
 
@@ -216,14 +242,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Loot system foundation with LootController and LootService for enemy drop mechanics
 * Item assets system with PurpleFlower, RedMushroom, BlueMushroom, Chamomile, and PurpleMushroom
 * Shared Cache system for temporary object management and storage
-* CRAFT_ITEM remote event constant for crafting system integration
+* CRAFT\_ITEM remote event constant for crafting system integration
 * Enhanced InventoryUI with crafting mode support and item management
 
 ### Changed
 
 * Shared Assets module expanded with Items module integration
 * InventoryUI enhanced with craft mode functionality and service integration
-* Server Application updated with CRAFT_ITEM event handling
+* Server Application updated with CRAFT\_ITEM event handling
 * Client and Server UseCases expanded with crafting system support
 * Shared Data enhanced with comprehensive item definitions and models
 
@@ -242,7 +268,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * CraftService for comprehensive crafting mechanics and item management
 * Shared Cache system for object management and temporary storage
 * Enhanced CameraController with alchemy and crafting camera modes
-* TOGGLE_CRAFT client event constant for crafting UI management
+* TOGGLE\_CRAFT client event constant for crafting UI management
 * TargetController blocking functionality for interaction control
 
 ### Changed
@@ -264,7 +290,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * Complete equipment system with item equipping and unequipping mechanics
-* EQUIP_ITEM remote event for client-server equipment synchronization
+* EQUIP\_ITEM remote event for client-server equipment synchronization
 * Enhanced AlchemyService with proper initialization and item management methods
 * InventoryUI mode switching system for inventory, alchemy, and crafting modes
 * Improved InventoryUI with better item management and visual feedback
@@ -288,7 +314,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * SoundService for comprehensive audio management and sound playback
-* CLIENT_EVENTS constants for UI toggle functionality (inventory, alchemy, action button, death screen)
+* CLIENT\_EVENTS constants for UI toggle functionality (inventory, alchemy, action button, death screen)
 * ATTRIBUTES constants for interact type management
 * isAlive() method to Player entity for health and character state checking
 
@@ -307,7 +333,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-* Brew potion use case with BREW_POTION remote event for alchemy mechanics
+* Brew potion use case with BREW\_POTION remote event for alchemy mechanics
 * Action button toggle functionality in UI presentation layer
 * Event-driven action button management in target controller
 
@@ -322,8 +348,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
-* Complex target view toggle methods (_toogleTargetView, _getTargetsInRange, _isTargetInView)
-* Redundant INTERACT_OBJECT_TYPES constants (replaced with simplified TAGS)
+* Complex target view toggle methods (\_toogleTargetView, \_getTargetsInRange, \_isTargetInView)
+* Redundant INTERACT\_OBJECT\_TYPES constants (replaced with simplified TAGS)
 
 ### Technical
 
@@ -502,7 +528,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 * World-based camera system with automatic switching between default and isometric cameras
-* Player data persistence system with PLAYER_UPDATED remote events for real-time synchronization
+* Player data persistence system with PLAYER\_UPDATED remote events for real-time synchronization
 * Client repository infrastructure for player entity management and data caching
 * Enhanced player entity with data serialization methods (fromData, getData, addVars, getVars)
 * Camera controller setDefaultCamera method for dynamic camera mode switching
@@ -511,12 +537,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * CameraController enhanced with world-based camera logic (Butchery world uses default camera, others use isometric)
 * PlayerService now integrates with client repositories and handles player data updates
-* Application layer extended with PLAYER_UPDATED event handling for client-side synchronization
+* Application layer extended with PLAYER\_UPDATED event handling for client-side synchronization
 * Client Infrastructure layer expanded with repositories for better data management architecture
 
 ### Technical
 
-* Added PLAYER_UPDATED remote event constant for client-server data synchronization
+* Added PLAYER\_UPDATED remote event constant for client-server data synchronization
 * Implemented client-side player entity caching and world-based camera switching
 * Enhanced dependency injection with client repository integration
 * Added comprehensive type definitions for client repository components
@@ -527,7 +553,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 * Comprehensive death handling system with world-based player transitions
 * Death screen UI with smooth fade animations
-* PLAYER_DIED remote event for client-server death notifications
+* PLAYER\_DIED remote event for client-server death notifications
 * Enhanced character management in client controllers (CameraController, SprintController)
 * Hunter-specific death mechanics with "Butchery" world destination
 

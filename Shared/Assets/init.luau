@@ -10,6 +10,7 @@ local Assets = {
 	Hunter = script:FindFirstChild("Hunter"),
 	PeckHitbox = script:FindFirstChild("PeckHitbox"),
 	Seed = script:FindFirstChild("Seed"),
+	LootVFX = script:FindFirstChild("LootVFX"),
 }
 
 return Assets
