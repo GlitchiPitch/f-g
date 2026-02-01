@@ -191,6 +191,13 @@
 * \[x] Add LootVFX visual effects for loot drops
 * \[x] Implement enemy death loot spawning integration
 
+## Completed (v1.19.0)
+
+* \[x] Add quest data module with initial Pickup Berries quest
+* \[x] Implement BaseQuestRepository and client/server quest repositories
+* \[x] Register quest services and controllers across client and server
+* \[x] Create QuestUI component with open/close behavior
+
 ## Immediate Tasks (v1.18.0)
 
 * \[ ] Implement crafting station objects and proximity detection

@@ -6,6 +6,7 @@ local RecipeUI = require(script.RecipeUI)
 local AlchemyUI = require(script.AlchemyUI)
 local CraftUI = require(script.CraftUI)
 local ShopUI = require(script.ShopUI)	
+local QuestUI = require(script.QuestUI)
 ---@class UI
 ---@field diContainer DIContainer
 ---@field foodPopup Frame
@@ -17,6 +18,7 @@ local ShopUI = require(script.ShopUI)
 ---@field alchemyUI AlchemyUI
 ---@field craftUI CraftUI
 ---@field shopUI ShopUI
+---@field questUI QuestUI
 ---@field _secondActionButtonConn RBXScriptSignal
 local UI = {}
 UI.__index = UI
@@ -31,6 +33,7 @@ function UI.new(diContainer)
 	self.alchemyUI = AlchemyUI.new(self.diContainer)
 	self.craftUI = CraftUI.new(self.diContainer)
 	self.shopUI = ShopUI.new(self.diContainer)
+	self.questUI = QuestUI.new(self.diContainer)
 	self._secondActionButtonConn = nil
 	return self
 end
@@ -57,6 +60,7 @@ function UI:init()
 	self.craftUI:init()
 	self.alchemyUI:init()
 	self.shopUI:init()
+	self.questUI:init()
 end
 
 function UI:showNotification(message)

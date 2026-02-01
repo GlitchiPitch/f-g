@@ -2,11 +2,13 @@ local RunService = game:GetService("RunService")
 local CameraController = require(script.CameraController)
 local SprintController = require(script.SprintController)
 local TargetController = require(script.TargetController)
+local QuestController = require(script.QuestController)
 ---@class ClientControllers
 ---@field diContainer DIContainer
 ---@field cameraController CameraController
 ---@field sprintController SprintController
 ---@field targetController TargetController
+---@field questController ClientQuestController
 local Controllers = {}
 Controllers.__index = Controllers
 
@@ -18,6 +20,7 @@ function Controllers.new(diContainer)
 	self.cameraController = CameraController.new(self.diContainer)
 	self.sprintController = SprintController.new(self.diContainer)
 	self.targetController = TargetController.new(self.diContainer)
+	self.questController = QuestController.new(self.diContainer)
 	return self
 end
 
@@ -29,12 +32,13 @@ function Controllers:init()
 	self.cameraController:init()
 	self.sprintController:init()
 	self.targetController:init()
-
+	self.questController:init()
 	local function onRender(_)
 		if self.playerService:isAlive() then
 			self.targetController:update()
 			self.cameraController:update()
 			-- self.sprintController:update()
+			self.questController:update()
 		end
 	end
 

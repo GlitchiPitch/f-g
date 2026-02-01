@@ -4,6 +4,7 @@ local Data = {
     Weapons = require(script.Weapons),
     Items = require(script.Items),
     Potions = require(script.Potions),
+    Quest = require(script.Quest),
 }
 
 return Data

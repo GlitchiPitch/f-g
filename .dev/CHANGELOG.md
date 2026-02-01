@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.19.0] - 2026-02-01
+
+### Added
+
+* Quest system foundation with client/server controllers, services, and repositories
+* Quest UI component with open/close behavior and template hookups
+* Initial quest data module with Pickup Berries quest definition
+
+### Changed
+
+* Client and server initialization to register quest components
+* Shared data index to expose quest data
+
+### Technical
+
+* Introduced BaseQuestRepository for shared quest repository structure
+* Updated sourcemap with quest-related modules
+
 ## \[1.18.0] - 2026-01-31
 
 ### Added
