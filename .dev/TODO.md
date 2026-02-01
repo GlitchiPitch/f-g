@@ -198,6 +198,16 @@
 * \[x] Register quest services and controllers across client and server
 * \[x] Create QuestUI component with open/close behavior
 
+## Completed (v1.20.0)
+
+* \[x] Implement quest progress tracking system with automatic updates
+* \[x] Add three quest types: collect_food, kill_enemies, play_time
+* \[x] Integrate quest system with FOOD_EATEN and ENEMY_DIED events
+* \[x] Add server-side quest tick system for play_time tracking
+* \[x] Enhance Quest UI with progress display and formatted status text
+* \[x] Implement client-side quest update handling with remote events
+* \[x] Add quest state synchronization between server and client
+
 ## Immediate Tasks (v1.18.0)
 
 * \[ ] Implement crafting station objects and proximity detection

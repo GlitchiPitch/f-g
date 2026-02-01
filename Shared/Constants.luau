@@ -38,6 +38,7 @@ local Constants = {
 		ADD_ITEM_FOR_BREWING = "AddItemForBrewing",
 		ADD_ITEM_FOR_CRAFTING = "AddItemForCrafting",
 		RESET_CRAFTING = "ResetCrafting",
+		QUEST_UPDATED = "QuestUpdated",
 	},
 	CLIENT_EVENTS = {
 		TOGGLE_DIED_SCREEN = "toggleDiedScreen",
@@ -77,6 +78,7 @@ local Constants = {
 	},
 	ATTRIBUTES = {
 		INTERACT_TYPE = "InteractType",
+		LAST_DAMAGER_USER_ID = "LastDamagerUserId",
 	},
 }
 

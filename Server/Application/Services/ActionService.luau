@@ -33,8 +33,7 @@ function ActionService:peck(playerEntity)
 	hitbox.CFrame = CFrame.new(hitboxPosition)
 	local partsInRadius = workspace:GetPartBoundsInBox(hitbox.CFrame, hitbox.Size)
 	for _, part in partsInRadius do
-		warn(part.Parent.Name)
-		if part.Parent.Name == "Food" then
+		if part.Parent.Name == "Seed" then
 			self.eventBus:fire(self.constants.EVENTS.FOOD_EATEN, {
 				playerEntity = playerEntity,
 				food = part.Parent,
@@ -75,6 +74,7 @@ function ActionService:useWeapon(playerEntity, weapon)
 		if humanoid then
 			local isPlayer = humanoid == playerEntity.player.Character.Humanoid
 			if not isPlayer then
+				humanoid:SetAttribute(self.constants.ATTRIBUTES.LAST_DAMAGER_USER_ID, playerEntity.player.UserId)
 				humanoid:TakeDamage(damage)
 				-- if player has one handed use break for one damaged person
 				-- if two handed not use break

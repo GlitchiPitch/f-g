@@ -45,12 +45,15 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.PLAYER_UPDATED] = function(eventData)
 			self.useCases:updatePlayer(eventData.data)
 		end,
-		[shared.constants.REMOTE_EVENTS.BREW_POTION] = function(eventData)
-			-- Handle brew potion response
-			-- warn("Brew potion result:", eventData.data)
+		[shared.constants.REMOTE_EVENTS.QUEST_UPDATED] = function(eventData)
+			self.services.questService:onQuestUpdated(eventData)
 		end,
-		[shared.constants.REMOTE_EVENTS.ADD_ITEM_FOR_BREWING] = function(eventData)
-			-- warn("Add item for brewing result:", eventData.data)
+		[shared.constants.REMOTE_EVENTS.BREW_POTION] = function(_eventData)
+			-- Handle brew potion response
+			-- warn("Brew potion result:", _eventData.data)
+		end,
+		[shared.constants.REMOTE_EVENTS.ADD_ITEM_FOR_BREWING] = function(_eventData)
+			-- warn("Add item for brewing result:", _eventData.data)
 		end,
 	})
 end

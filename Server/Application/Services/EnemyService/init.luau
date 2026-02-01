@@ -76,7 +76,15 @@ function EnemyService:handleDeath(enemy)
 		return
 	end
 
-	self.eventBus:fire(self.constants.EVENTS.ENEMY_DIED, enemy)
+	local lastDamagerUserId = nil
+	if enemy.humanoid then
+		lastDamagerUserId = enemy.humanoid:GetAttribute(self.constants.ATTRIBUTES.LAST_DAMAGER_USER_ID)
+	end
+
+	self.eventBus:fire(self.constants.EVENTS.ENEMY_DIED, {
+		enemy = enemy,
+		lastDamagerUserId = lastDamagerUserId,
+	})
 	self.eventBus:fire(self.constants.EVENTS.SPAWN_LOOT, {
 		character = enemy.model,
 	})

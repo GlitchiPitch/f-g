@@ -5,6 +5,33 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## \[1.20.0] - 2026-02-01
+
+### Added
+
+* Quest progress tracking system with automatic progress updates
+* Three quest types: collect_food, kill_enemies, and play_time
+* Event-driven quest progress integration (FOOD_EATEN, ENEMY_DIED events)
+* Server-side quest tick system for play_time tracking with 1-second intervals
+* Quest UI progress display with formatted quest status text
+* Client-side quest update handling with pending quest state management
+
+### Changed
+
+* Enhanced QuestService with quest state management and progress tracking
+* Quest UI now displays real-time progress for each quest type
+* ActionService peck method now fires FOOD_EATEN event for quest integration
+* EnemyService death handling integrated with quest system via ENEMY_DIED event
+* QuestController added tick-based update system for play_time quest tracking
+
+### Technical
+
+* Implemented quest state synchronization between server and client
+* Added quest progress increment system with completion detection
+* Enhanced event bus integration for quest progress updates
+* Improved quest UI rendering with dynamic quest frame creation
+* Added quest type-specific progress display formatting
+
 ## \[1.19.0] - 2026-02-01
 
 ### Added
