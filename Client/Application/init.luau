@@ -28,8 +28,8 @@ function Application:init()
 	---@type Shared
 	local shared = self.diContainer:resolve("Shared")
 	shared.remoteEventService:connectToEvents({
-		[shared.constants.REMOTE_EVENTS.HUNTING_STARTED] = function(eventData)
-			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.HUNTING_STARTED, eventData)
+		[shared.constants.REMOTE_EVENTS.HUNTING_STATUS_CHANGED] = function(eventData)
+			shared.eventBus:fire(shared.constants.REMOTE_EVENTS.HUNTING_STATUS_CHANGED, eventData)
 		end,
 		-- [shared.constants.REMOTE_EVENTS.PLAYER_DIED] = function(eventData)
 		-- 	warn("Application:init - PLAYER_DIED", eventData)

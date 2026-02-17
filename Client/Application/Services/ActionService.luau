@@ -35,6 +35,8 @@ function ActionService:init()
 	self.playerService = application.services.playerService
 	self.craftService = application.services.craftService
 	self.shopService = application.services.shopService
+
+	self.remoteEventService = shared.remoteEventService
 end
 
 function ActionService:interactAction()
@@ -46,6 +48,15 @@ function ActionService:interactAction()
 		self.craftService:openCraft(currentTarget)
 	elseif interactType == "Shop" then
 		self.shopService:openShop(currentTarget)
+	elseif interactType == "Teleport" then
+		---@type string
+		local teleportTarget = currentTarget:GetAttribute("TeleportTarget")
+		self.remoteEventService:fireServer({
+			eventName = self.constants.REMOTE_EVENTS.TELEPORT,
+			data = {
+				teleportTarget = teleportTarget,
+			},
+		})
 	end
 end
 

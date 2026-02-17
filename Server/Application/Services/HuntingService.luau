@@ -53,13 +53,15 @@ function HuntingService:start()
 	self.hunter:setToPosition(self.hunterSpawn.Position)
 	self:_chooseTargetBirdType()
 	self:_notifyPlayers()
-	self.eventBus:fire(self.constants.EVENTS.HUNTING_STATUS_CHANGED, {isActive = true})
+	self.eventBus:fire(self.constants.EVENTS.HUNTING_STATUS_CHANGED, { isActive = true })
 end
 
 function HuntingService:stop()
 	self.isActive = false
+	self.targetBird = ""
 	self.hunter:setState(false)
-	self.eventBus:fire(self.constants.EVENTS.HUNTING_STATUS_CHANGED, {isActive = false})
+	self:_notifyPlayers()
+	self.eventBus:fire(self.constants.EVENTS.HUNTING_STATUS_CHANGED, { isActive = false })
 end
 
 function HuntingService:_chooseTargetBirdType()
@@ -100,7 +102,7 @@ end
 
 function HuntingService:_notifyPlayers()
 	self.remoteEventService:fireAllClients({
-		eventName = self.constants.REMOTE_EVENTS.HUNTING_STARTED,
+		eventName = self.constants.REMOTE_EVENTS.HUNTING_STATUS_CHANGED,
 		data = {
 			targetBird = self.targetBird,
 		},

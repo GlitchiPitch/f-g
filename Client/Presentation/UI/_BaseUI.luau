@@ -29,10 +29,9 @@ function _BaseUI:open()
     error("Not implemented")
 end
 
-function _BaseUI:toggle()
-    warn("toggle")
-    self.isOpen = not self.isOpen
-    warn(self.isOpen)
+---@param state boolean
+function _BaseUI:toggle(state)
+    self.isOpen = state
     if self.isOpen then
         self:close()
     else

@@ -11,7 +11,7 @@ FarmController.__index = FarmController
 function FarmController.new(diContainer)
 	local self = setmetatable({}, FarmController)
 	self.diContainer = diContainer
-	self.foodSpawnRate = 10
+	self.foodSpawnRate = 2
 	self.foodSpawnTimer = 0
 
 	return self

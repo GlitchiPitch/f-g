@@ -76,7 +76,7 @@ function PlayerService:_onCharacterAdded(character)
 		character.Parent = currentWorld.Players
 		character:PivotTo(CFrame.new(currentWorld.SpawnPoint.Position))
 	else
-		character.Parent = workspace.Lobby.Players
+		character.Parent = workspace.Worlds.MainWorld.Players
 	end
 
 	if humanoid then

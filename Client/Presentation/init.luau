@@ -22,8 +22,8 @@ function Presentation:init()
 	local shared = self.diContainer:resolve("Shared")
 
 	local eventHandlers = {
-		[shared.constants.REMOTE_EVENTS.HUNTING_STARTED] = function(eventData)
-			self.ui:showNotification(eventData.data.targetBird)
+		[shared.constants.REMOTE_EVENTS.HUNTING_STATUS_CHANGED] = function(eventData)
+			self.ui:showHunterNotification(eventData.data)
 		end,
 		[shared.constants.REMOTE_EVENTS.FOOD_SPAWNED] = function(eventData)
 			self.ui:showNotification(eventData.data.message)

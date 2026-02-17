@@ -20,6 +20,7 @@ local QuestUI = require(script.QuestUI)
 ---@field shopUI ShopUI
 ---@field questUI QuestUI
 ---@field _secondActionButtonConn RBXScriptSignal
+---@field hunterNotification Frame
 local UI = {}
 UI.__index = UI
 
@@ -50,6 +51,7 @@ function UI:init()
 	self.diedFrame = self.diedUI.Frame
 	self.actionButton = self.mainUI.ActionButton
 	self.secondActionButton = self.mainUI.SecondActionButton
+	self.hunterNotification = self.mainUI.HunterNotification
 
 	self.notification = self.mainUI.Notification
 	self.foodPopup = self.mainUI.FoodPopup
@@ -182,10 +184,17 @@ end
 
 ---@param state boolean
 function UI:toggleShop(state)
-	if state then
-		self.shopUI:open()
-	else
-		self.shopUI:close()
+	self.shopUI:toggle(state)
+end
+
+---@class showHuntingData
+---@field targetBird string
+
+---@param data showHuntingData
+function UI:showHunterNotification(data)
+	self.hunterNotification.Visible = data.targetBird ~= ""
+	if self.hunterNotification.Visible then
+		self.hunterNotification.TextLabel.Text = `{data.targetBird}, be careful, the hunter wants to catch you. `
 	end
 end
 

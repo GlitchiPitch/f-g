@@ -5,6 +5,7 @@
 ---@field alchemyService ServerAlchemyService
 ---@field craftService ServerCraftService
 ---@field remoteEventService RemoteEventService
+---@field teleportService TeleportService
 ---@field constants Constants
 local UseCases = {}
 UseCases.__index = UseCases
@@ -30,6 +31,7 @@ function UseCases:init()
 	self.playerRepository = infrastructure.repositories.playerRepository
 	self.alchemyService = application.services.alchemyService
 	self.craftService = application.services.craftService
+	self.teleportService = application.services.teleportService
 end
 
 ---@param player Player
@@ -164,5 +166,15 @@ function UseCases:resetCrafting(player)
 			result = true,
 		},
 	})
+end
+
+---@param player Player
+---@param data table
+function UseCases:teleport(player, data) 
+	local teleportData = string.split(data.teleportTarget, "/")
+	local worldName = teleportData[1]
+	local target = teleportData[2]
+	warn(worldName, target, data)
+	self.teleportService:teleport(player, worldName, target)
 end
 return UseCases

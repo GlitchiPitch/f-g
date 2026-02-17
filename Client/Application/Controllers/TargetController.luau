@@ -99,7 +99,7 @@ function TargetController:_getTargetsClosestCrosshair()
 		-- Check if the hit object is a valid target
 		if hitModel and hitModel ~= self.character then
 			-- Check if the target is within range
-			if game.Players:GetPlayerFromCharacter(hitModel) then
+			if Players:GetPlayerFromCharacter(hitModel) then
 				local distance = (hitModel.PrimaryPart.Position - origin).Magnitude
 				if self.lockOnInfo.lockOnPlayers == true and distance <= self.lockOnInfo.range then
 					return hitModel

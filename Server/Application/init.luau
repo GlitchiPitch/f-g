@@ -1,3 +1,5 @@
+local TeamCreateData = game:GetService("TeamCreateData")
+
 local UseCases = require(script.UseCases)
 local Services = require(script.Services)
 local Controllers = require(script.Controllers)
@@ -28,7 +30,7 @@ function Application:init()
 	---@type Shared
 	local shared = self.diContainer:resolve("Shared")
 	shared.remoteEventService:connectToEvents({
-		[shared.constants.REMOTE_EVENTS.PECK] = function(player, eventData)
+		[shared.constants.REMOTE_EVENTS.PECK] = function(player, _)
 			self.useCases:peck(player)
 		end,
 		[shared.constants.REMOTE_EVENTS.USE_WEAPON] = function(player, eventData)
@@ -49,9 +51,12 @@ function Application:init()
 		[shared.constants.REMOTE_EVENTS.ADD_ITEM_FOR_CRAFTING] = function(player, eventData)
 			self.useCases:addItemForCrafting(player, eventData.data)
 		end,
-		[shared.constants.REMOTE_EVENTS.RESET_CRAFTING] = function(player, eventData)
+		[shared.constants.REMOTE_EVENTS.RESET_CRAFTING] = function(player, _)
 			self.useCases:resetCrafting(player)
 		end,
+		[shared.constants.REMOTE_EVENTS.TELEPORT] = function(player, eventData)
+			self.useCases:teleport(player, eventData.data)
+		end
 	})
 end
 

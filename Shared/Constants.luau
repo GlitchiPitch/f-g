@@ -23,7 +23,7 @@ local Constants = {
 	REMOTE_EVENTS = {
 		USE_WEAPON = "UseWeapon",
 		EQUIP_ITEM = "EquipItem",
-		HUNTING_STARTED = "HuntingStarted",
+		HUNTING_STATUS_CHANGED = "HuntingChanged",
 		PECK = "Peck",
 		FOOD_SPAWNED = "FoodSpawned",
 		FOOD_EATEN = "FoodEaten",
@@ -39,6 +39,8 @@ local Constants = {
 		ADD_ITEM_FOR_CRAFTING = "AddItemForCrafting",
 		RESET_CRAFTING = "ResetCrafting",
 		QUEST_UPDATED = "QuestUpdated",
+
+		TELEPORT = "Teleport", 
 	},
 	CLIENT_EVENTS = {
 		TOGGLE_DIED_SCREEN = "toggleDiedScreen",

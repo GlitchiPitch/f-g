@@ -17,7 +17,7 @@ function PlayerEntity.new(player)
 		level = 1,
 		seeds = 0,
 	}
-	self.currentWorld = "Lobby"
+	self.currentWorld = "MainWorld"
 	self._vars = {}
 	return self
 end
